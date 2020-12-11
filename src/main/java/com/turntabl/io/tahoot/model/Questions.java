@@ -10,10 +10,8 @@ import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "question")
@@ -26,6 +24,13 @@ public class Questions {
     @JsonProperty("question_body")
     private String question_body;
 
+    @JsonProperty("points")
+    @Column(name = "points")
+    private int points;
+
+    @JsonProperty("timer")
+    @Column(name = "timer")
+    private int timer;
 
     @CreationTimestamp
     @CreatedDate
@@ -69,6 +74,21 @@ public class Questions {
         return timestamp;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getTimer() {
+        return timer;
+    }
+
+    public void setTimer(int time) {
+        this.timer = time;
+    }
 
     @Override
     public String toString() {
