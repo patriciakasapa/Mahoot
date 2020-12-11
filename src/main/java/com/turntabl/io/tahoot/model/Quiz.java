@@ -9,8 +9,10 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Entity
+@Table(name = "quiz")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class Quiz {
@@ -23,11 +25,16 @@ public class Quiz {
     @JsonProperty("quiz_name")
     private String quiz_name;
 
+    @Column(name = "game_pin")
+    @JsonProperty("game_pin")
+    private int game_pin = 10000 +new Random().nextInt(90000);
+
     @CreationTimestamp
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created")
     private Date timestamp;
+
 
     @OneToMany(mappedBy = "quiz",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
@@ -59,6 +66,15 @@ public class Quiz {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public int getGame_pin() {
+        return game_pin;
+    }
+
+    public void setGame_pin(int game_pin) {
+        //Random random=new Random();
+        this.game_pin = game_pin;
     }
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "quiz")

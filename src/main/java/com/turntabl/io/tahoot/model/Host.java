@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "host")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class Host {

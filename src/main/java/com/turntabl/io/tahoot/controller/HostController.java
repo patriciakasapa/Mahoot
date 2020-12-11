@@ -1,6 +1,7 @@
 package com.turntabl.io.tahoot.controller;
 
 import com.turntabl.io.tahoot.model.Host;
+import com.turntabl.io.tahoot.model.Quiz;
 import com.turntabl.io.tahoot.repository.HostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HostController {
+
+    Quiz quiz;
 
     @Autowired
     HostRepository hostRepository;
