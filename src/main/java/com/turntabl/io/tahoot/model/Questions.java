@@ -1,5 +1,6 @@
 package com.turntabl.io.tahoot.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
@@ -86,5 +87,21 @@ public class Questions {
 
     public void setAnswer(List<Answers> answer) {
         this.answers = answer;
+    }
+
+
+    @ManyToOne
+    @JoinColumn(name = "quiz_id")
+    private Quiz quiz;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "quiz_id", nullable = false)
+    @JsonBackReference
+    public Quiz getQuiz(){
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz){
+        this.quiz=quiz;
     }
 }
