@@ -10,12 +10,14 @@ import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "question")
-public class Questions {
+public class Questions implements Serializable {
+    private static final long serialVersionUID = -2343243243242432341L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("question_id")

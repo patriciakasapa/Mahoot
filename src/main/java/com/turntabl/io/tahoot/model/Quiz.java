@@ -7,6 +7,7 @@ import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -15,12 +16,14 @@ import java.util.Random;
 @Table(name = "quiz")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE)
-public class Quiz {
+public class Quiz implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "quiz_id")
     @JsonProperty("quiz_id")
-    private int quiz_id;
+    private Long quiz_id;
 
     @JsonProperty("quiz_name")
     private String quiz_name;
@@ -44,11 +47,13 @@ public class Quiz {
     @JoinColumn(name = "host_id")
     private Host host;
 
-    public int getQuiz_id() {
+
+
+    public Long getQuiz_id() {
         return quiz_id;
     }
 
-    public void setQuiz_id(int quiz_id) {
+    public void setQuiz_id(Long quiz_id) {
         this.quiz_id = quiz_id;
     }
 

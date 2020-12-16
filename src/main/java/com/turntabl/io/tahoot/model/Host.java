@@ -10,6 +10,7 @@ import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -17,10 +18,11 @@ import java.util.List;
 @Table(name = "host")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE)
-public class Host {
+public class Host implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int host_id;
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private Long host_id;
 
     @JsonProperty("host_name")
     private String host_name;
@@ -36,11 +38,21 @@ public class Host {
     @Fetch(FetchMode.SELECT)
     private List<Quiz>quiz;
 
-    public int getHost_id() {
+    public Host() {
+    }
+
+    public Host(Long host_id, String host_name, Date timestamp, List<Quiz> quiz) {
+        this.host_id = host_id;
+        this.host_name = host_name;
+        this.timestamp = timestamp;
+        this.quiz = quiz;
+    }
+
+    public Long getHost_id() {
         return host_id;
     }
 
-    public void setHost_id(int host_id) {
+    public void setHost_id(Long host_id) {
         this.host_id = host_id;
     }
 
