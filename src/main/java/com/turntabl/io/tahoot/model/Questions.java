@@ -34,6 +34,21 @@ public class Questions implements Serializable {
     @Column(name = "timer")
     private int timer;
 
+    @JsonProperty("image")
+    @Column(name = "image")
+    private byte[] image;
+
+    @Column(name = "file_name")
+    @JsonProperty("file_name")
+    private String file_name;
+
+    @Column(name = "file_type")
+    @JsonProperty("file_type")
+    private String file_type;
+
+
+
+
     @CreationTimestamp
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
@@ -90,6 +105,30 @@ public class Questions implements Serializable {
 
     public void setTimer(int time) {
         this.timer = time;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getFile_name() {
+        return file_name;
+    }
+
+    public void setFile_name(String file_name) {
+        this.file_name = file_name;
+    }
+
+    public String getFile_type() {
+        return file_type;
+    }
+
+    public void setFile_type(String file_type) {
+        this.file_type = file_type;
     }
 
     @Override
