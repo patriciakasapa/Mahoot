@@ -19,17 +19,20 @@ public class HostController {
     @Autowired
     HostRepository hostRepository;
 
+    @CrossOrigin
     @PostMapping("createhost")
     public String host (@RequestBody Host host){
         hostRepository.save(host);
         return "Host saved";
     }
 
+    @CrossOrigin
     @GetMapping("/gethost")
     public List<Host> findAll() {
         return hostRepository.findAll();
     }
 
+    @CrossOrigin
     @GetMapping("/{host_id}")
     public ResponseEntity<?>findId(@PathVariable("host_id") Long host_id){
 
