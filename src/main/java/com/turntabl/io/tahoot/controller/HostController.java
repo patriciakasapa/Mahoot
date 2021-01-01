@@ -26,7 +26,7 @@ public class HostController {
         return "Host saved";
     }
 
-    @CrossOrigin
+    @CrossOrigin()
     @GetMapping("/gethost")
     public List<Host> findAll() {
         return hostRepository.findAll();
