@@ -16,6 +16,7 @@ public class QuizController {
     @Autowired
     QuizRepository quizRepository;
 
+    
     @PostMapping("/createquiz")
     public String quiz(@RequestBody Quiz quiz){
         quizRepository.save(quiz);
