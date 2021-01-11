@@ -21,7 +21,7 @@ public class Questions implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("question_id")
-    private int question_id;
+    private Long question_id;
     @Column(name = "question_body")
     @JsonProperty("question_body")
     private String question_body;
@@ -65,17 +65,17 @@ public class Questions implements Serializable {
     public Questions() {
     }
 
-    public Questions(int question_id, String question_body, Date timestamp) {
+    public Questions(Long question_id, String question_body, Date timestamp) {
         this.question_id = question_id;
         this.question_body = question_body;
         this.timestamp = timestamp;
     }
 
-    public int getQuestion_id() {
+    public Long getQuestion_id() {
         return question_id;
     }
 
-    public void setQuestion_id(int question_id) {
+    public void setQuestion_id(Long question_id) {
         this.question_id = question_id;
     }
 
