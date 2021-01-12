@@ -32,7 +32,7 @@ public class HostController {
     }
 
     @CrossOrigin
-    @GetMapping("/{host_id}")
+    @GetMapping("host/{host_id}")
     public ResponseEntity<?>findId(@PathVariable("host_id") Long host_id){
 
         Optional<Host>host=null;

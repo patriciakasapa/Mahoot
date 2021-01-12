@@ -93,9 +93,9 @@ public class QuestionController {
 
     @CrossOrigin
     @DeleteMapping("/question/{question_id}")
-    public ResponseEntity <HttpStatus>deleteQuestion (@PathVariable ("question_id") Long question_id){
+    public ResponseEntity <HttpStatus>deleteQuestion (@PathVariable ("question_id") Long question_id, Questions questions){
         try {
-            repository.deleteById(question_id);
+            repository.delete(questions);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
