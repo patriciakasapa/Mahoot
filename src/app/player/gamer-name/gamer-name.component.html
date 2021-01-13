@@ -1,0 +1,64 @@
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Alata' rel='stylesheet'>
+</head>
+
+<div *ngIf="gamerDetails" class="body">
+    <div  class="gamer-details">
+        <p style="margin: 0px 0px 0px 20%;">
+            <mat-form-field appearance="outline">
+              <input matInput [(ngModel)]="roomName" placeholder="Enter Game Pin" required>
+            </mat-form-field>
+        </p>
+    
+        <p style="margin: 0px 0px 0px 20%;">
+            <mat-form-field appearance="outline">
+              <input matInput [(ngModel)]="gamerName" placeholder="Enter Nickname" required>
+            </mat-form-field>
+        </p>
+          
+        <button style="margin: 0px 0px 0px 40%;" mat-raised-button (click)="sendGamerName()" id="enter-button">
+            Enter
+        </button>
+    </div>
+</div>
+
+
+<mat-spinner class="spinner" *ngIf="spinnerDisplay"></mat-spinner>
+
+<div *ngIf="gamePlayContent">
+
+    <div style="height: auto; width: auto;">
+        <span class="spacer"></span>
+            <div class="timer">
+                <p id="timer-count">{{timer}}</p>
+            </div>
+    </div>
+
+    <div class="gameplay-container" *ngFor="let question of gamePlayData">
+        <!-- <div>
+            {{gamerName}}
+        </div> -->
+        
+        <div class="gameplay-question-answers">
+            <div class="gameplay-question">
+                <h1>{{question.question_body}}</h1>
+            </div>
+            
+            <div class="gameplay-answers">
+                <mat-grid-list cols="2" rowHeight="2:1">
+                    <mat-grid-tile (click)="choosenAnswer(i)" class="answer{{i + 1}}" *ngFor="let answer of question.answer; let i = index">
+                        <div [ngClass]="{
+                            'triangle': i === 0,
+                            'diamond': i === 1,
+                            'circle': i === 2,
+                            'square': i === 3 }"></div>
+                            
+                            <div class="answer_body">
+                                {{answer.answer_body}}
+                            </div>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </div>
+    </div>
+</div>

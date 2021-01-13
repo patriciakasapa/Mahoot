@@ -1,0 +1,57 @@
+<button mat-raised-button (click)="gameplayContentShow()">
+    Click Me
+</button>
+
+<p>
+    {{gamePlayData}}
+</p>
+
+<mat-spinner *ngIf="spinnerDisplay"></mat-spinner>
+
+<div class="gameplay-container" *ngFor="let quiz of gamePlayData">
+    <div>
+        {{gamerName}}
+    </div>
+    <div class="gameplay-question-answers" *ngFor="let question of quiz.question">
+        <div class="gameplay-question">
+            <h1>{{question.question_body}}</h1>
+        </div>
+        
+        <div class="gameplay-answers">
+            <mat-grid-list cols="2" rowHeight="2:1">
+                <mat-grid-tile (click)="sendGameChoice()" *ngFor="let answer of question.answers; let i = index">
+                    <div [ngClass]="{
+                        'triangle': i === 0,
+                        'diamond': i === 1,
+                        'circle': i === 2,
+                        'square': i === 3 }"></div>
+                        
+                        <div class="answer_body">
+                            {{answer.answer_body}}
+                        </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+
+    </div>
+</div>
+
+<table *ngIf="leaderBoardDisplay">
+    <tr>
+        <td>
+            Kay
+        </td>
+        <td>
+            2000pts
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            Chima
+        </td>
+        <td>
+            1800pts
+        </td>
+    </tr>
+</table>
