@@ -51,7 +51,7 @@ export class SigninComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
       this.user = userData;
       if (this.user.email.includes(this.domainAddress)) {
-        this.router.navigate(['/gamer-name'])
+        this.router.navigate(['/gamer-gameplay'])
       } else {
         alert("Invalid Account")
       }

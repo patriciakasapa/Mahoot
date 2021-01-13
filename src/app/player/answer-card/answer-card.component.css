@@ -1,0 +1,46 @@
+.answer-card{
+    max-width: 350px;
+    height: 500px;
+    background-color: #65BF39;
+    margin: 10% auto;
+}
+
+.gamer-name {
+    background-color: #56A32F;
+    height: 70px;
+}
+
+.gamer-name p {
+    font-size: 20px;
+    color: white;
+    margin: 7% 0px 0px 35%;
+}
+mat-card-content {
+    color: white;
+    margin: 20% auto;
+}
+
+mat-card-content p {
+    font-size: 25px;
+}
+.correct {
+    color: white;
+    margin: 5% 0px 0px 35%;
+}
+
+
+#answer-feedback {
+    margin: 5% 0px 0px 37%;
+}
+
+#points-value {
+    margin: 15% 0px 0px 5%;
+}
+.points {
+    background-color: #56A32F;
+    height: 70px;
+    width: 250px;
+    width: auto;
+    font-size: 25px;
+    margin: 5% 0px 0px 30%;
+}

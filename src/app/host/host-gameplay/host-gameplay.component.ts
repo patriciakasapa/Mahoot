@@ -31,7 +31,6 @@ export class HostGameplayComponent implements OnInit {
         this.gamePin = quiz.game_pin;
         quiz.questions.forEach((questions: any) => {
           this.questions.push(questions);
-          
         });
       });
     });
@@ -53,16 +52,14 @@ export class HostGameplayComponent implements OnInit {
     },1000);
   }
 
-  start(){
-    
-  }
-
-  // joinGameRoom(){
-  //   this.websocketService.joinGameRoom(this.gamePin.toString());
-  // }
 
   sendQuestion(){
     this.current_question.push(this.questions[this.count])
+    this.current_question.forEach((data: any) => {
+      this.timer = data.timer;
+      this.points = data.points;
+      console.log(this.points);
+    });
     this.websocketService.sendDataToGameRoom(this.gamePin.toString(), this.current_question);
     this.count = this.count + 1;
     this.startButton = false;

@@ -54,31 +54,6 @@
 
             <app-questions *ngIf="questioncontentshow"></app-questions>
 
-            <!-- <mat-horizontal-stepper linear #stepper *ngIf="questioncontentshow">
-              <mat-step [editable]="isEditable">
-                <ng-template matStepLabel>Quiz Name</ng-template>
-                <app-quiz></app-quiz>
-              </mat-step>
-              <mat-step [editable]="isEditable" *ngFor="let question of questions">
-                <ng-template matStepLabel>Quiz Question</ng-template>
-                <app-questions></app-questions>
-                <div>
-                  <button style="margin-left: 5%;" mat-raised-button matStepperPrevious>Back</button>
-                  <button style="margin-left: 5%;" mat-raised-button>Add Question</button>
-                  <button style="margin-left: 80%;" mat-raised-button matStepperNext>Next</button>
-
-                </div>
-              </mat-step>
-              <mat-step>
-                <ng-template matStepLabel>Done</ng-template>
-                <p style="text-align: center;">You are now done!</p>
-                <div>
-                  <button style="margin-left: 5%;" mat-raised-button matStepperPrevious>Back</button>
-                  <button style="margin-left: 80%;" mat-raised-button (click)="Done()" type>Done</button>
-                </div>
-              </mat-step>
-            </mat-horizontal-stepper> -->
-
             <div *ngIf="quiz_cards">
               <mat-card class="quiz-card" *ngFor="let data of host_data; let i = index">
                 <mat-card-content *ngFor="let quiz of data.quiz">

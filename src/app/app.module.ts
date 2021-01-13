@@ -20,7 +20,6 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatSelectModule } from "@angular/material/select";
 import { MatSliderModule } from "@angular/material/slider";
 import { GameComponent } from './host/game/game.component';
-import { GamerNameComponent } from './player/gamer-name/gamer-name.component';
 import { GamerGameplayComponent } from './player/gamer-gameplay/gamer-gameplay.component';
 import { HostGameplayComponent } from './host/host-gameplay/host-gameplay.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -34,6 +33,8 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatProgressSpinnerModule, MatSpinner } from "@angular/material/progress-spinner";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatStepperModule } from "@angular/material/stepper";
+import {  MatSnackBarModule } from '@angular/material/snack-bar';
+import { AnswerCardComponent } from './player/answer-card/answer-card.component';
 
 
 @NgModule({
@@ -43,9 +44,9 @@ import { MatStepperModule } from "@angular/material/stepper";
     QuestionsComponent,
     QuizComponent,
     GameComponent,
-    GamerNameComponent,
     GamerGameplayComponent,
-    HostGameplayComponent
+    HostGameplayComponent,
+    AnswerCardComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +75,8 @@ import { MatStepperModule } from "@angular/material/stepper";
     MatMenuModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSnackBarModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

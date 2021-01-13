@@ -64,7 +64,7 @@
 
                     </mat-tab>
 
-            <mat-tab label="True/False">
+            <!-- <mat-tab label="True/False">
                 <form class="form-container">
                     <mat-form-field class="example-full-width">
                         <mat-label>Click here to start typing your question</mat-label>
@@ -118,7 +118,7 @@
                 
                     </table>
                 </form>
-            </mat-tab>
+            </mat-tab> -->
         </mat-tab-group>
                 
         <div class="buttons">
@@ -127,7 +127,7 @@
             <button style="margin-left: 10%;" class="create-button" mat-raised-button (click)="createQuestion()">Create Question</button>
             <button style="margin-left: 10%;" class="next-button" mat-raised-button matStepperNext>Next Question</button>
             <button style="margin-left: 10%;" mat-raised-button (click)="removeQuestion(i)" class="delete-button">Delete</button>
-            <button style="margin-left: 10%;" mat-raised-button (click)="Done()">Done</button>
+            <button style="margin-left: 10%;" mat-raised-button (click)="Done()" aria-label="Show an example snack-bar">Done</button>
         </div>
     </mat-step>
 

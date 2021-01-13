@@ -1,80 +1,79 @@
 import { Component, OnInit } from '@angular/core';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { Router } from "@angular/router";
+import { GamerNameService } from "src/app/services/gamer-name/gamer-name.service";
 
 
 @Component({
-  selector: 'app-gamer-gameplay',
+  selector: 'app-gamer-name',
   templateUrl: './gamer-gameplay.component.html',
   styleUrls: ['./gamer-gameplay.component.css']
 })
 export class GamerGameplayComponent implements OnInit {
 
-  gamers: string[] = [];
+  timer: number = 0;
+  points: number = 0;
+  reducer: number = 0;
 
+  roomName: string = '';
   gamerName: string = '';
-  
-  gamerChoice: string = '';
+  gamePlayData: any[] = [];  
+  gamerDetails: boolean = true;
+  gamePlayContent: boolean = false;
+  spinnerDisplay: boolean = false;
 
-  gamePlayData: any[] = [];
-
-  constructor(private websocketService: WebsocketService) { }
+  constructor(private websocketService: WebsocketService, private router: Router,
+    private gamerNameService: GamerNameService) { }
 
   ngOnInit(): void {
 
-    // this.websocketService.getGamerName().subscribe((data: string) => {
-    //   this.gamers.push(data);
-    //   this.gamerName = this.gamers[0];
-    //   this.gamers.slice();
-    // });
-
-    // this.websocketService.joinGameRoom('30485');
-    // setInterval(() => {
-    //   if (this.gamePlayData.length < 0) {
-    //     this.websocketService.getGameRoomData().subscribe((quiz: any) => {
-    //       this.gamePlayData.push(quiz);
-    //       console.log(this.gamePlayData);
-    //     });
-    //   } else {
-    //     this.gamePlayData;
-    //     console.log(this.gamePlayData);
-    //   }
-    // },10000);
-
-
-    // this.websocketService.getGameRoomData().subscribe((quiz: any) => {
-    //   this.gamePlayData.push(quiz);
-    // });
     
+    this.websocketService.getGameRoomData().subscribe((question: any) => {
+      this.gamePlayData = question;
+      
+      if (this.gamePlayData.length > 0){
+        // this.gamerNameService.getGamerName();
+        
+        this.spinnerDisplay = false;    
+        this.gamePlayContent = true;
+
+        this.gamePlayData.forEach((question: any) => {
+            this.points = question.points;
+            this.timer = question.timer;
+        });
+
+      this.reducer = (this.points/this.timer);
+        setInterval(() => {
+          if(this.timer > 0) {
+            this.timer--;
+            this.points = parseFloat(((this.points - this.reducer).toFixed(2)));
+          } else {
+            this.timer;
+          }
+        },1000);
+      }
+      });
   }
 
-  sendGameChoice(){
-      this.gamerName
+
+  sendGamerName(){
+    // this.websocketService.sendGamerName(this.gameRoom.data);
+    this.gamerNameService.setGamerName(this.gamerName);
+    this.websocketService.joinGameRoom(this.roomName);
+    this.websocketService.sendDataToGameRoom(this.roomName, this.gamerName);
+    this.gamerDetails = false;
+    this.spinnerDisplay = true;
+    // this.router.navigate(['/gamer-gameplay']);
   }
 
-  //hiding gameplay display
-  spinnerDisplay: boolean = true;
-  gameplayDisplay: boolean = false;
-  leaderBoardDisplay: boolean = false;
+  userAnswer: string = '';
 
-  gameplayContentShow(){
-    if (this.spinnerDisplay == true){
-      this.spinnerDisplay = false;
-      this.gameplayDisplay = true;
-      this.leaderBoardDisplay = false;
-    } else if (this.gameplayDisplay == true){
-      this.spinnerDisplay = false;
-      this.gameplayDisplay = false;
-      this.leaderBoardDisplay = true;
-    } else if (this.leaderBoardDisplay == true){
-      this.spinnerDisplay = true;
-      this.gameplayDisplay = false;
-      this.leaderBoardDisplay = false;
-    }
+  choosenAnswer(index: number){
+    this.gamePlayData.forEach((question: any) => {
+        this.userAnswer = question.answer[index];
+        console.log(this.userAnswer);
+      });
   }
 
-  display(){
-    //this.websocketService.joinGameRoom('115584565');
-    
-  }
 
 }

@@ -1,16 +1,55 @@
+.body {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+	width: 100%;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 * {
 	box-sizing: border-box;
 }
 
+.spinner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+.gamer-details {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	padding: 40px;
+	transform: translate(-50%, -50%);
+	background: #f6f5f7;
+	box-sizing: border-box;
+	box-shadow: 0 15px 25px rgba(0,0,0,.6);
+	border-radius: 10px;
+  }
+  
 
 .gameplay-container {
     background: #FFFFFF;
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
+	height: auto;
+	width: auto;
+	margin: 5% 0px 0px 8%;
 }
 
 .gameplay-question-answers {
@@ -18,13 +57,12 @@
 	border-radius: 10px;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
-	position: relative;
 	overflow: hidden;
+	position: relative;
 	width: 70%;
-	max-width: 100%;
-	min-height: 550px;
-    margin: 3% 15% auto auto;
-    justify-content: center;
+	float: left;
+	height: auto;
+	margin: 0px 0px 0px 15%;
 }
 .gameplay-question {
     height: 10%;
@@ -102,3 +140,23 @@
       transform: scale(0.9);
     }
   }
+
+  .timer {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	float: left;
+	background-color: #864cbf;
+	text-align: center;
+}
+
+#timer-count {
+	margin: 35% 0px 0px 0px;
+	font-family: 'Alata';
+	font-size: 30px;
+	color: white;
+}
+
+.spacer {
+	flex: 0.5 1 auto;
+}

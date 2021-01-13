@@ -9,6 +9,13 @@ import { HostNameService } from 'src/app/services/host-name/host-name.service';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HostDataService } from "src/app/services/host-data/host-data.service";
+import { DOCUMENT } from '@angular/common';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+
 
 interface Timer {
   value: number;
@@ -61,6 +68,8 @@ export class QuestionsComponent implements OnInit {
   constructor(private http: HttpClient,
     private hostNameService: HostNameService,
     private hostDataService: HostDataService,
+    @Inject(DOCUMENT) private document: Document,
+    private _snackBar: MatSnackBar
     ) {
       this.question = new Question()
       this.answer1 = new Answer();
@@ -118,13 +127,45 @@ export class QuestionsComponent implements OnInit {
     this.questions.splice(index,1);
   }
 
-
   //done setting questions
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   Done(){
-    
-    alert("Quiz Created Successfully!");
+    this.question = new Question()
+    this.answer1 = new Answer();
+    this.answer2 = new Answer();
+    this.answer3 = new Answer();
+    this.answer4 = new Answer();
+    this.question.answer.push(this.answer1, this.answer2, this.answer3, this.answer4);
 
-    // this._document.defaultView?.location.reload();
+    this.quiz.questions.length = 0;
+
+    this.host = this.hostDataService.getHostData();
+
+    this.questions.push(this.question);
+    
+    this.host.quiz.forEach((quiz: any) => {
+      
+      this.quiz.quiz_name = quiz.quiz_name;
+      this.quiz.questions.push(this.questions[this.questions.length - 2]);
+      this.quiz.quiz_id = quiz.quiz_id;
+      
+    });
+    this.http.put(this.apiURL + "/quiz/" + this.quiz.quiz_id, this.quiz)
+    .pipe(catchError(this.handleError))
+    .subscribe();
+
+    this._snackBar.open('Quiz Created Successfully!', 'Close', {
+      duration: 10000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      panelClass: ['panelColorChange']
+    });
+
+    setTimeout(() => {
+      this.document.defaultView?.location.reload()
+    }, 5000);
+    
   }
 
   //handling errors
