@@ -6,12 +6,12 @@ import { Injectable } from '@angular/core';
 export class GamerNameService {
 
   gamers: any[] = [];
-  gamerName: string = ''
+  gamerName: string = '';
 
   constructor() { }
 
   setGamerName(gamerName: string){
-    this.gamers.push();
+    this.gamers.push(gamerName);
     this.gamerName = this.gamers[0];
     this.gamers.slice();
   }

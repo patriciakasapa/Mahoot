@@ -10,7 +10,7 @@
     height: 70px;
 }
 
-.gamer-name p {
+.gamer-name span {
     font-size: 20px;
     color: white;
     margin: 7% 0px 0px 35%;
@@ -20,17 +20,20 @@ mat-card-content {
     margin: 20% auto;
 }
 
-mat-card-content p {
+mat-card-content span {
     font-size: 25px;
 }
-.correct {
+.correct, .wrong, .timeout {
     color: white;
-    margin: 5% 0px 0px 35%;
+}
+
+.correct i, .wrong i, .timeout i {
+    margin: 5% 0px 0px 38%;
 }
 
 
 #answer-feedback {
-    margin: 5% 0px 0px 37%;
+    margin: 5% 0px 0px 38%;
 }
 
 #points-value {
@@ -42,5 +45,22 @@ mat-card-content p {
     width: 250px;
     width: auto;
     font-size: 25px;
+    margin: 0% 0px 0px 30%;
+}
+
+.total-score {
+    margin: 18% 0px 0px 0px;
+    background-color: #56A32F;
+    height: 70px;
+}
+
+#total-score {
+    margin: 5% 0px 0px -5%;
+}
+#total-score-point {
     margin: 5% 0px 0px 30%;
+}
+.valid-answer {
+    text-align: center;
+    margin: 5% 0px 0px 0px;
 }
