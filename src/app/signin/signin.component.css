@@ -1,4 +1,4 @@
-/* * {
+ * {
 	box-sizing: border-box;
 }
 
@@ -226,7 +226,7 @@ input {
 }
 
 
-/* @media screen and (max-width: 736px) {
+ @media screen and (max-width: 736px) {
 	
 	p {
 		margin: 0px;
@@ -256,4 +256,4 @@ input {
 		width: 500px;
 		max-width: 100%;
 	}
-} */ 
+} 
