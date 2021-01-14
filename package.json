@@ -3,11 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-<<<<<<< HEAD
-    "start": "ng serve && node index.js",
-=======
-    "start": "node server.js",
->>>>>>> d26cebe4fe5a9532ff581e2109b14b9aabaa3200
+    "start": "ng serve && node index.js && node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
