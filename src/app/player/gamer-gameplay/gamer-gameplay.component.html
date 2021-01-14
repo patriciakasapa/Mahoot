@@ -39,6 +39,10 @@
         <div>
             {{this.gamerAnswer.gamer_name}}
         </div>
+
+        <div>
+            {{points}}
+        </div>
         
         <div class="gameplay-question-answers">
             <div class="gameplay-question">
@@ -68,7 +72,7 @@
 
 <mat-card class="answer-card" *ngIf="correctCard">
     <mat-card-header class="gamer-name">
-        <span>Kay</span>
+        <span>{{gamerAnswer.gamer_name}}</span>
     </mat-card-header>
 
     <mat-card-content class="answer-card-content">
@@ -82,13 +86,13 @@
 
         <mat-card-header style="width: 150px;" class="points">
             <span id="points-value">
-                + {{this.gamerAnswer.points}}
+                + {{pointsGotten}}
             </span>
         </mat-card-header>
 
         <mat-card-header class="total-score">
             <span id="total-score">Total Score</span>
-            <span id="total-score-point">{{this.gamerAnswer.points}}</span>
+            <span id="total-score-point">{{gamerAnswer.points}}</span>
         </mat-card-header>
 
     </mat-card-content>
@@ -98,7 +102,7 @@
 
 <mat-card class="answer-card" style="background-color: #E71749;" *ngIf="wrongCard">
     <mat-card-header class="gamer-name" style="background-color: #C40D3B;">
-        <span>Kay</span>
+        <span>{{gamerAnswer.gamer_name}}</span>
     </mat-card-header>
 
     <mat-card-content class="answer-card-content" style="margin: 10% auto;">
@@ -112,7 +116,7 @@
 
         <mat-card-header style="width: 150px; background-color: #C40D3B;" class="points">
             <span id="points-value">
-                - 1000
+                - {{pointsGotten}}
             </span>
         </mat-card-header>
 
@@ -128,7 +132,7 @@
 
         <mat-card-header class="total-score" style="margin: 5% 0px 0px 0px; background-color: #C40D3B;">
             <span id="total-score">Total Score</span>
-            <span id="total-score-point">0</span>
+            <span id="total-score-point">{{gamerAnswer.points}}</span>
         </mat-card-header>
 
     </mat-card-content>
@@ -138,7 +142,7 @@
 
 <mat-card class="answer-card" style="background-color: #E71749;" *ngIf="timeoutCard">
     <mat-card-header class="gamer-name" style="background-color: #C40D3B;">
-        <span>Kay</span>
+        <span>{{gamerAnswer.gamer_name}}</span>
     </mat-card-header>
 
     <mat-card-content class="answer-card-content" style="margin: 10% auto;">
@@ -162,7 +166,7 @@
 
         <mat-card-header class="total-score" style="background-color: #C40D3B; margin: 20% 0px 0px 0px;">
             <span id="total-score">Total Score</span>
-            <span id="total-score-point">0</span>
+            <span id="total-score-point">{{gamerAnswer.points}}</span>
         </mat-card-header>
 
     </mat-card-content>

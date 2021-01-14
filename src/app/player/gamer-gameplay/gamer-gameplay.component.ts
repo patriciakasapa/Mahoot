@@ -28,6 +28,8 @@ export class GamerGameplayComponent implements OnInit {
   wrongCard: boolean = false;
   timeoutCard: boolean = false;
 
+  wrongAnswerPointsDedcution: number = 0;
+
   //gamer-answer
   gamerAnswer: GamerAnswer = new GamerAnswer();
 
@@ -35,18 +37,23 @@ export class GamerGameplayComponent implements OnInit {
     private gamerNameService: GamerNameService) { }
 
   ngOnInit(): void {
-
-    
     
     this.websocketService.getGameRoomData().subscribe((question: any) => {
       this.gamePlayData = question;
       
       if (this.gamePlayData.length > 0){
         
+        this.correctCard = false;
+        this.wrongCard = false;
+        this.timeoutCard = false;
+
         this.spinnerDisplay = false;    
         this.gamePlayContent = true;
+        this.timer = 0;
+        this.points = 0;
 
         this.gamePlayData.forEach((question: any) => {
+          this.wrongAnswerPointsDedcution = this.points;
             this.points = question.points;
             this.timer = question.timer;
         });
@@ -54,11 +61,20 @@ export class GamerGameplayComponent implements OnInit {
       this.reducer = (this.points/this.timer);
         setInterval(() => {
           if(this.timer > 0) {
-            this.timer--;
+            this.timer = this.timer - 1;
             this.points = parseFloat(((this.points - this.reducer).toFixed(2)));
           } else {
             this.timer;
             this.gamePlayData.length = 0;
+            if (this.correctCard == false && this.wrongCard == false) {
+              this.timeoutCard = true;
+              this.wrongCard = false;
+              this.correctCard = false;
+              this.gamePlayContent = false;
+              this.gamerAnswer.points = this.gamerAnswer.points - this.wrongAnswerPointsDedcution;
+            } else if (this.correctCard == true || this.wrongCard == true) {
+              this.timeoutCard = false;
+            }
           }
         },1000);
       } 
@@ -81,21 +97,32 @@ export class GamerGameplayComponent implements OnInit {
     this.gamerAnswer.gamer_name = this.gamerNameService.getGamerName();
   }
 
-  playerAnswer: any = "";
+  playerAnswer: any;
+  correctAnswer: any;
+  pointsGotten: number = 0;
 
   choosenAnswer(index: number){
     this.gamePlayData.forEach((question: any) => {
         this.playerAnswer = question.answer[index];
-        console.log(this.playerAnswer.is_correct);
-        if (this.playerAnswer.is_correct == true) {
-          this.gamePlayContent = false;
-          this.gamerAnswer.points = this.gamerAnswer.points + this.points;
-          this.correctCard = true;
-        } else if (this.playerAnswer.is_correct == false) {
-          this.gamePlayContent = false;
-          this.wrongCard = true;
-        }
       });
+
+      if (this.playerAnswer.is_correct == true) {
+        this.gamePlayContent = false;
+        this.wrongCard = false;
+        this.timeoutCard = false;
+        this.pointsGotten = this.points;
+        this.gamerAnswer.points = this.gamerAnswer.points + this.pointsGotten;
+        this.correctCard = true;
+      } else if (this.playerAnswer.is_correct == false) {
+        this.pointsGotten = this.points;
+        this.gamerAnswer.points = this.gamerAnswer.points - this.wrongAnswerPointsDedcution;
+        this.gamePlayContent = false;
+        this.correctCard = false;
+        this.timeoutCard = false;
+        this.wrongCard = true;
+      }
+
+      return this.gamerAnswer.points;
   }
 
 
