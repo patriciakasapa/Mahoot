@@ -35,6 +35,13 @@
               "node_modules/pusher-js/dist/web/pusher.min.js"
             ]
           },
+          "budgets": [
+            {
+               "type": "initial",
+               "maximumWarning": "2mb",
+               "maximumError": "5mb"
+            }
+         ],
           "configurations": {
             "production": {
               "fileReplacements": [
@@ -53,8 +60,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",

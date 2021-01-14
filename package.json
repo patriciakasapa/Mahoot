@@ -3,19 +3,35 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+<<<<<<< HEAD
     "start": "ng serve && node index.js",
+=======
+    "start": "node server.js",
+>>>>>>> d26cebe4fe5a9532ff581e2109b14b9aabaa3200
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ngcc"
+    "postinstall": "ng build --output-path angularapp  --aot --prod"
   },
+  "engines": {
+    "node": "v14.0.0",
+    "npm": "6.14.4"
+  },
+  "budgets": [
+    {
+      "type": "any",
+      "error": "2mb"
+    }
+  ],
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.0.1",
     "@angular/cdk": "^11.0.1",
+    "@angular/cli": "~11.0.2",
     "@angular/common": "~11.0.1",
     "@angular/compiler": "~11.0.1",
+    "@angular/compiler-cli": "~11.0.1",
     "@angular/core": "~11.0.1",
     "@angular/forms": "~11.0.1",
     "@angular/material": "^11.0.1",
@@ -31,18 +47,20 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "ng-zorro-antd": "^11.0.1",
+    "path": "^0.12.7",
     "pusher": "^4.0.2",
     "pusher-js": "^7.0.2",
     "rxjs": "~6.6.0",
     "rxjs-compat": "^6.6.3",
     "socket.io-client": "^2.3.0",
     "tslib": "^2.0.0",
+    "typescript": "~4.0.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1100.2",
-    "@angular/cli": "~11.0.2",
-    "@angular/compiler-cli": "~11.0.1",
+    "@angular/cli": "^11.0.6",
+    "@angular/compiler-cli": "^11.0.8",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "@types/socket.io-client": "^1.4.34",
