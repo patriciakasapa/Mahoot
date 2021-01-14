@@ -81,7 +81,7 @@ export class GamerGameplayComponent implements OnInit {
     this.gamerAnswer.gamer_name = this.gamerNameService.getGamerName();
   }
 
-  playerAnswer: any = '';
+  playerAnswer: any = "";
 
   choosenAnswer(index: number){
     this.gamePlayData.forEach((question: any) => {
