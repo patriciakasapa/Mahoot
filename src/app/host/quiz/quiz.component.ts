@@ -48,6 +48,10 @@ export class QuizComponent implements OnInit {
         console.log(data);
       });
 
+    setInterval(() => {
+
+    }, 3000);
+
     this.http.get(this.apiURL + "/gethost")
     .pipe(catchError(this.handleError))
     .subscribe((data: any) => {

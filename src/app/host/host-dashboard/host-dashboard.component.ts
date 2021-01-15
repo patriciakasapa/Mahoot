@@ -8,6 +8,7 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { GamePlayDataService } from "src/app/services/game-play-data/game-play-data.service";
 import { HostNameService } from 'src/app/services/host-name/host-name.service';
 import { Host } from 'src/app/classes/host/host';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 
 @Component({
   selector: 'app-host-dashboard',
@@ -19,10 +20,6 @@ export class HostDashboardComponent implements OnInit {
   //define API
   apiURL = 'https://tahoot-backend.herokuapp.com';
   
-  
-
- 
-
   currentQuiz: any[] = [];
 
   host: Host = new Host();
@@ -33,7 +30,7 @@ export class HostDashboardComponent implements OnInit {
   constructor(private router: Router, public dialog: MatDialog, 
     private questionsService: QuestionsService, private http: HttpClient,
     private websocketService: WebsocketService, private gamePlayDataSerivce: GamePlayDataService,
-    private hostNameService: HostNameService
+    private hostNameService: HostNameService, private authService: AuthService
     ) 
     {
       this.http.get(this.apiURL + "/gethost").subscribe((data: any) => {
@@ -43,6 +40,7 @@ export class HostDashboardComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.authService.isNotLogin();
     this.host.host_name = this.hostNameService.getHostName();
   }
 
@@ -58,7 +56,7 @@ export class HostDashboardComponent implements OnInit {
     }
 
   signOut(): void {
-      this.router.navigate(['/signin']);
+    this.authService.logout();
     }
 
     //hiding and showing question contents

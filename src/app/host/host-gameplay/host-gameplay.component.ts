@@ -19,6 +19,7 @@ export class HostGameplayComponent implements OnInit {
   nextButton: boolean = false;
   startButton: boolean = true;
   current_question: any[] = [];
+  numberOfQuestions: number = 0;
   
 
   constructor(private websocketService: WebsocketService, private gamePlayDataSerivce: GamePlayDataService) { }
@@ -26,6 +27,11 @@ export class HostGameplayComponent implements OnInit {
   ngOnInit(): void {
     this.gamePlayData.push(this.gamePlayDataSerivce.getGamePlayData());
 
+    //keeping track of the number of questions
+    this.numberOfQuestions = this.gamePlayData.length;
+
+  
+    //looping through the array
     this.gamePlayData.forEach((host: any) => {
       host.quiz.forEach((quiz: any) => {
         this.gamePin = quiz.game_pin;
@@ -35,14 +41,13 @@ export class HostGameplayComponent implements OnInit {
       });
     });
 
-    this.reducer = (this.points/this.timer);
+    
     setInterval(() => {
       if(this.timer > 0) {
         this.timer--;
-        this.points = parseFloat(((this.points - this.reducer).toFixed(2)));
+        this.points = parseFloat(((this.points - this.reducer).toFixed(0)));
         if (this.timer == 0){
           this.nextButton = true;
-          this.current_question.pop();
         } else {
           this.nextButton = false;
         }
@@ -54,11 +59,12 @@ export class HostGameplayComponent implements OnInit {
 
 
   sendQuestion(){
+    this.current_question.pop();
     this.current_question.push(this.questions[this.count])
     this.current_question.forEach((data: any) => {
       this.timer = data.timer;
       this.points = data.points;
-      console.log(this.points);
+      this.reducer = (this.points/this.timer);
     });
     this.websocketService.sendDataToGameRoom(this.gamePin.toString(), this.current_question);
     this.count = this.count + 1;

@@ -12,25 +12,13 @@ import * as io from 'socket.io-client';
 })
 export class WebsocketService {
 
-  private url = 'https://tahoot-frontend.herokuapp.com:3000';
+  private url = 'http://localhost:3000';
   public socket;
 
   constructor() { 
     this.socket = io(this.url);
+    this.socket
    }
-
-  //get gamers name
-  // public sendGamerName(gamer_name: string){
-  //   this.socket.emit('gamer-name', gamer_name);   
-  // }
-
-  // public getGamerName = () => {
-  //   return Observable.create((observer: any) => {
-  //       this.socket.on('gamer-name', (gamer_name: any) => {
-  //           observer.next(gamer_name);
-  //       });
-  //   });
-  // }
 
   // join game room
   public joinGameRoom(roomName: string) {

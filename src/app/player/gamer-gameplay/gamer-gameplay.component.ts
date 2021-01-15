@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
-import { Router } from "@angular/router";
 import { GamerNameService } from "src/app/services/gamer-name/gamer-name.service";
 import { GamerAnswer } from "src/app/classes/gamer-answer/gamer-answer";
+import { AuthService } from "src/app/services/authentication/auth.service";
 
 
 @Component({
@@ -16,6 +16,8 @@ export class GamerGameplayComponent implements OnInit {
   points: number = 0;
   reducer: number = 0;
 
+  correctAnswer: string = '';
+
   roomName: string = '';
   gamerName: string = '';
   gamePlayData: any[] = [];  
@@ -28,16 +30,24 @@ export class GamerGameplayComponent implements OnInit {
   wrongCard: boolean = false;
   timeoutCard: boolean = false;
 
-  wrongAnswerPointsDedcution: number = 0;
-
   //gamer-answer
   gamerAnswer: GamerAnswer = new GamerAnswer();
 
-  constructor(private websocketService: WebsocketService, private router: Router,
-    private gamerNameService: GamerNameService) { }
+  constructor(private websocketService: WebsocketService,
+    private gamerNameService: GamerNameService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    
+    this.authService.isNotLogin();
+
+    this.gamerDetails = true;
+    this.gamePlayContent = false;
+    this.spinnerDisplay = false;
+
+    // cards displayed when answer is choosen
+    this.correctCard = false;
+    this.wrongCard = false;
+    this.timeoutCard = false;
+
     this.websocketService.getGameRoomData().subscribe((question: any) => {
       this.gamePlayData = question;
       
@@ -53,16 +63,20 @@ export class GamerGameplayComponent implements OnInit {
         this.points = 0;
 
         this.gamePlayData.forEach((question: any) => {
-          this.wrongAnswerPointsDedcution = this.points;
             this.points = question.points;
             this.timer = question.timer;
+            this.reducer = (this.points/this.timer);
+            question.answer.forEach((answer: any) => {
+              if (answer.is_correct == true) {
+                this.correctAnswer = answer.answer_body;
+              }
+            });
         });
 
-      this.reducer = (this.points/this.timer);
         setInterval(() => {
           if(this.timer > 0) {
             this.timer = this.timer - 1;
-            this.points = parseFloat(((this.points - this.reducer).toFixed(2)));
+            this.points = parseFloat(((this.points - this.reducer).toFixed(0)));
           } else {
             this.timer;
             this.gamePlayData.length = 0;
@@ -71,7 +85,6 @@ export class GamerGameplayComponent implements OnInit {
               this.wrongCard = false;
               this.correctCard = false;
               this.gamePlayContent = false;
-              this.gamerAnswer.points = this.gamerAnswer.points - this.wrongAnswerPointsDedcution;
             } else if (this.correctCard == true || this.wrongCard == true) {
               this.timeoutCard = false;
             }
@@ -98,10 +111,10 @@ export class GamerGameplayComponent implements OnInit {
   }
 
   playerAnswer: any;
-  correctAnswer: any;
   pointsGotten: number = 0;
 
   choosenAnswer(index: number){
+    this.pointsGotten = this.points;
     this.gamePlayData.forEach((question: any) => {
         this.playerAnswer = question.answer[index];
       });
@@ -110,12 +123,11 @@ export class GamerGameplayComponent implements OnInit {
         this.gamePlayContent = false;
         this.wrongCard = false;
         this.timeoutCard = false;
-        this.pointsGotten = this.points;
+        
         this.gamerAnswer.points = this.gamerAnswer.points + this.pointsGotten;
         this.correctCard = true;
       } else if (this.playerAnswer.is_correct == false) {
-        this.pointsGotten = this.points;
-        this.gamerAnswer.points = this.gamerAnswer.points - this.wrongAnswerPointsDedcution;
+        this.gamerAnswer.points = this.gamerAnswer.points - this.pointsGotten;
         this.gamePlayContent = false;
         this.correctCard = false;
         this.timeoutCard = false;

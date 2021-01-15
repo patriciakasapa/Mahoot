@@ -14,6 +14,8 @@ export class GameComponent implements OnInit {
   playerCount: number = 0;
   gamePlayData: any[] = [];
 
+  nextButton: boolean = false;
+
   constructor(private websocketService: WebsocketService, private router: Router, 
     private gamePlayDataService: GamePlayDataService) { }
 
@@ -26,6 +28,11 @@ export class GameComponent implements OnInit {
         this.websocketService.joinGameRoom(quiz.game_pin);
         this.websocketService.getGameRoomData().subscribe((gameRoom: any) => {
         this.gamers.push(gameRoom);
+        if (this.gamers.length > 0) {
+          this.nextButton = true;
+        } else {
+          this.nextButton = false;
+        }
         this.playerCount = this.gamers.length;
         console.log(this.gamers);
       });

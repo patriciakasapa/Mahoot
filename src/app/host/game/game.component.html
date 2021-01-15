@@ -38,7 +38,7 @@
             </div>
 
             <div class="start-game-button">
-                <button (click)="startGame()" mat-raised-button id="start-game">Next</button>
+                <button (click)="startGame()" *ngIf="nextButton" mat-raised-button id="start-game">Next</button>
             </div>
 
         </div>

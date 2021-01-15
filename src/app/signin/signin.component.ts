@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SocialAuthService, GoogleLoginProvider, SocialUser } from "angularx-social-login";
-import { Router } from "@angular/router";
-import { HostNameService } from "src/app/services/host-name/host-name.service";
+import { AuthService } from "src/app/services/authentication/auth.service";
 
 @Component({
   selector: 'app-signin',
@@ -10,12 +8,8 @@ import { HostNameService } from "src/app/services/host-name/host-name.service";
 })
 export class SigninComponent implements OnInit {
 
-  public user: SocialUser = new SocialUser;
-  domainAddress: any = "@turntabl.io";
-
-  constructor(private authService: SocialAuthService,
-    private router:Router,
-    private hostNameService: HostNameService) { }
+  constructor(
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     
@@ -34,30 +28,11 @@ export class SigninComponent implements OnInit {
   }
   //OAuth
   hostSignInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
-      this.user = userData;
-      this.hostNameService.setHostName(this.user.name);
-      if (this.user.email.includes(this.domainAddress)) {
-        this.router.navigate(['/host-dashboard'])
-      } else {
-        alert("Invalid Account")
-      }
-      }, error => {
-        console.log(error)
-    });
+    this.authService.hostSignInWithGoogle();
   }
 
   playerSignInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
-      this.user = userData;
-      if (this.user.email.includes(this.domainAddress)) {
-        this.router.navigate(['/gamer-gameplay'])
-      } else {
-        alert("Invalid Account")
-      }
-      }, error => {
-        console.log(error)
-    });
+    this.authService.playerSignInWithGoogle();
     
   }
 

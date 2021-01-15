@@ -179,6 +179,7 @@
 }
 
 .gamer-name span {
+	font-family: 'Lato';
     font-size: 20px;
     color: white;
     margin: 7% 0px 0px 35%;
@@ -189,7 +190,8 @@
 }
 
 .answer-card-content span {
-    font-size: 25px;
+    font-family: 'Lato';
+    font-size: 20px;
 }
 .correct, .wrong, .timeout {
     color: white;
@@ -212,7 +214,8 @@
     height: 70px;
     width: 250px;
     width: auto;
-    font-size: 25px;
+    font-family: 'Lato';
+    font-size: 20px;
     margin: 0% 0px 0px 25%;
 }
 
