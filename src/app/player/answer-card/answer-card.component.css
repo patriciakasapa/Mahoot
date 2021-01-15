@@ -11,6 +11,7 @@
 }
 
 .gamer-name span {
+    font-family: 'Lato';
     font-size: 20px;
     color: white;
     margin: 7% 0px 0px 35%;
@@ -21,7 +22,8 @@ mat-card-content {
 }
 
 mat-card-content span {
-    font-size: 25px;
+    font-size: 20px;
+    font-family: 'Lato';
 }
 .correct, .wrong, .timeout {
     color: white;
@@ -45,6 +47,7 @@ mat-card-content span {
     width: 250px;
     width: auto;
     font-size: 25px;
+    font-family: 'Lato';
     margin: 0% 0px 0px 30%;
 }
 
@@ -62,5 +65,6 @@ mat-card-content span {
 }
 .valid-answer {
     text-align: center;
+    font-family: 'Lato';
     margin: 5% 0px 0px 0px;
 }
