@@ -12,7 +12,7 @@ import * as io from 'socket.io-client';
 })
 export class WebsocketService {
 
-  private url = 'http://localhost:3000';
+  private url = 'https://tahoot-frontend.herokuapp.com:3000';
   public socket;
 
   constructor() { 
