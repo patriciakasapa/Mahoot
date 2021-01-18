@@ -8,12 +8,12 @@ import * as io from 'socket.io-client';
 export class WebsocketService {
 
   
-  private url = "http://localhost:5000"
+  private url = "http://localhost:3000";
   public socket;
 
   constructor() { 
-    this.socket = io(this.url);
-    this.socket.connect();
+    this.socket = io(this.url, {transports: ['websocket']});
+    
    }
 
   // join game room
