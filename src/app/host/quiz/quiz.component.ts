@@ -3,10 +3,8 @@ import { Router } from "@angular/router";
 import { Host } from 'src/app/classes/host/host';
 import { Quiz } from 'src/app/classes/quiz/quiz';
 import { HostNameService } from 'src/app/services/host-name/host-name.service';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HostDataService } from "src/app/services/host-data/host-data.service";
+import { RequetsService } from "src/app/services/http-requests/requets.service";
 
 
 
@@ -24,9 +22,9 @@ export class QuizComponent implements OnInit {
   host: Host = new Host();
   quiz: Quiz = new Quiz();
 
-  constructor(private http: HttpClient, 
-    private hostNameService: HostNameService,
-    private hostDataService: HostDataService)
+  constructor(private hostNameService: HostNameService,
+    private hostDataService: HostDataService,
+    private requestService: RequetsService)
     {
     
    }
@@ -41,33 +39,19 @@ export class QuizComponent implements OnInit {
     this.host.host_name = this.hostNameService.getHostName();
     this.host.quiz.push(this.quiz);
 
-    this.http.post(this.apiURL + "/createhost", this.host)
-    .pipe(catchError(this.handleError))
-    .subscribe(
-      data => {
-        console.log(data);
-      });
+    // this.http.post(this.apiURL + "/createhost", this.host)
+    // .pipe(catchError(this.handleError))
+    // .subscribe(
+    //   data => {
+    //     console.log(data);
+    //   });
 
-    setInterval(() => {
+    this.requestService.postRequest("/createhost", this.host).subscribe();
 
-    }, 3000);
 
-    this.http.get(this.apiURL + "/gethost")
-    .pipe(catchError(this.handleError))
-    .subscribe((data: any) => {
+    this.requestService.getRequest("/gethost").subscribe((data: any) => {
       this.hostDataService.setHostData(data);
-    })
-  }
-
-  //handling errors
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      console.error(error.error.message)
-    } else {
-      console.error(error.status)
-    }
-
-    return throwError("Error!");
+    });
   }
 
 }

@@ -1,20 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { QuestionsService } from "src/app/services/questions/questions.service";
 import { ViewChild } from '@angular/core';
 import { Question } from "src/app/classes/question/question";
 import { Answer } from "src/app/classes/answer/answer";
 import { Host } from 'src/app/classes/host/host';
 import { HostNameService } from 'src/app/services/host-name/host-name.service';
-import { catchError } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
 import { HostDataService } from "src/app/services/host-data/host-data.service";
 import { DOCUMENT } from '@angular/common';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { RequetsService } from "src/app/services/http-requests/requets.service";
+import { HttpClient } from '@angular/common/http';
+
 
 
 interface Timer {
@@ -65,11 +60,12 @@ export class QuestionsComponent implements OnInit {
   currentEditQuestion: any;
   @ViewChild('stepper') stepper: any;
 
-  constructor(private http: HttpClient,
-    private hostNameService: HostNameService,
+  constructor(private hostNameService: HostNameService,
     private hostDataService: HostDataService,
     @Inject(DOCUMENT) private document: Document,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private requestService: RequetsService,
+    private http: HttpClient
     ) {
       this.question = new Question()
       this.answer1 = new Answer();
@@ -111,9 +107,7 @@ export class QuestionsComponent implements OnInit {
       this.quiz.quiz_id = quiz.quiz_id;
       
     });
-    this.http.put(this.apiURL + "/quiz/" + this.quiz.quiz_id, this.quiz)
-    .pipe(catchError(this.handleError))
-    .subscribe();
+    this.requestService.putRequest("quiz", this.quiz.quiz_id, this.quiz).subscribe();
     this.stepper.selectedIndex = this.questions.length - 1;
   }
 
@@ -125,6 +119,13 @@ export class QuestionsComponent implements OnInit {
   removeQuestion(index: any){
     index = this.questions.indexOf(index, 0);
     this.questions.splice(index,1);
+    this.requestService.getQuiz("quiz", this.quiz.quiz_id).subscribe((quiz: any) => {
+      quiz.questions[index]
+      // this.requestService.deleteRequest("question", quiz.questions[index].question_id).subscribe(() => {
+      //   console.log("Message Deleted!");
+      // });
+    });
+    
   }
 
   //done setting questions
@@ -151,32 +152,14 @@ export class QuestionsComponent implements OnInit {
       this.quiz.quiz_id = quiz.quiz_id;
       
     });
-    this.http.put(this.apiURL + "/quiz/" + this.quiz.quiz_id, this.quiz)
-    .pipe(catchError(this.handleError))
-    .subscribe();
-
+    this.requestService.putRequest("quiz", this.quiz.quiz_id, this.quiz);
     this._snackBar.open('Quiz Created Successfully!', 'Close', {
       duration: 10000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       panelClass: ['panelColorChange']
     });
-
-    setTimeout(() => {
-      this.document.defaultView?.location.reload()
-    }, 5000);
     
-  }
-
-  //handling errors
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      console.error(error.error.message)
-    } else {
-      console.error(error.status)
-    }
-
-    return throwError("Error!");
   }
 
   Answer(index: number){

@@ -1,14 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from "@angular/router";
 import { MatDialog } from '@angular/material/dialog';
-import { QuestionsService } from "src/app/services/questions/questions.service";
-import { throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { GamePlayDataService } from "src/app/services/game-play-data/game-play-data.service";
 import { HostNameService } from 'src/app/services/host-name/host-name.service';
 import { Host } from 'src/app/classes/host/host';
 import { AuthService } from 'src/app/services/authentication/auth.service';
+import { RequetsService } from "src/app/services/http-requests/requets.service";
 
 @Component({
   selector: 'app-host-dashboard',
@@ -16,9 +14,6 @@ import { AuthService } from 'src/app/services/authentication/auth.service';
   styleUrls: ['./host-dashboard.component.css'],
 })
 export class HostDashboardComponent implements OnInit {
-
-  //define API
-  apiURL = 'https://tahoot-backend.herokuapp.com';
   
   currentQuiz: any[] = [];
 
@@ -28,15 +23,16 @@ export class HostDashboardComponent implements OnInit {
   host_data: any;
 
   constructor(private router: Router, public dialog: MatDialog, 
-    private questionsService: QuestionsService, private http: HttpClient,
     private websocketService: WebsocketService, private gamePlayDataSerivce: GamePlayDataService,
-    private hostNameService: HostNameService, private authService: AuthService
+    private hostNameService: HostNameService, private authService: AuthService,
+    private requestService: RequetsService
     ) 
     {
-      this.http.get(this.apiURL + "/gethost").subscribe((data: any) => {
-        this.host_data = data;
-        this.quiz_number = this.host_data.length;
-    });
+        this.requestService.getRequest("/gethost").subscribe((data: any) => {
+              this.host_data = data;
+              this.quiz_number = this.host_data.length;
+          });
+
     }
 
   ngOnInit(): void {
@@ -80,10 +76,6 @@ export class HostDashboardComponent implements OnInit {
     this.quiz_cards = true;
     this.questioncontentshow = false;
     this.questioncontenthide = true;
-  }
-
-  addQuestion(){
-    
   }
 
   //begin the quiz

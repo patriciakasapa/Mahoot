@@ -2,22 +2,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import * as io from 'socket.io-client';
 
-// export class GameRoom{
-//   roomName: string = '';
-//   data: any;
-// }
-
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
 
-  private url = 'http://localhost:3000';
+  
+  private url = "http://localhost:5000"
   public socket;
 
   constructor() { 
     this.socket = io(this.url);
-    this.socket
+    this.socket.connect();
    }
 
   // join game room
