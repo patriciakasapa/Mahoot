@@ -1,13 +1,18 @@
 package com.turntabl.io.tahoot.controller;
 
+//import com.turntabl.io.tahoot.model.Questions;
+import com.turntabl.io.tahoot.model.Questions;
 import com.turntabl.io.tahoot.model.Quiz;
-import com.turntabl.io.tahoot.repository.QuestionsRepository;
 import com.turntabl.io.tahoot.repository.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -23,6 +28,31 @@ public class QuizController {
     public String quiz(@RequestBody Quiz quiz){
         quizRepository.save(quiz);
     return "Quiz created";
+    }
+
+    @CrossOrigin
+    @GetMapping("/quiz/getquiz")
+    public List<Quiz> findAll() {
+        return quizRepository.findAll();
+    }
+
+    @CrossOrigin
+    @GetMapping("/quiz/{quiz_id}")
+    public ResponseEntity<?> findId(@PathVariable("quiz_id") Long quiz_id){
+
+        Optional<Quiz> quiz =null;
+        Map<String,Object> response = new HashMap<>();
+
+        try{
+            quiz = quizRepository.findById(quiz_id);
+        }catch(DataAccessException e){
+            response.put("error", e.getMessage().concat(": "+e.getMostSpecificCause().toString()));
+            new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+//        System.out.println("Patient with id: "+question_id+" / "+question.get().getHost_id());
+
+        return ResponseEntity.ok(quiz);
     }
 
     @CrossOrigin
