@@ -3,10 +3,10 @@
 </head>
 
 <mat-horizontal-stepper linear #stepper>
-    <mat-step [editable]="isEditable">
+    <!-- <mat-step [editable]="isEditable">
         <ng-template matStepLabel>Quiz Name</ng-template>
         <app-quiz></app-quiz>
-      </mat-step>
+      </mat-step> -->
 
       <mat-step [editable]="isEditable" *ngFor="let question of questions; let i = index">
         <mat-tab-group dynamicHeight>
