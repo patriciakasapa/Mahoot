@@ -86,6 +86,7 @@ export class QuestionsComponent implements OnInit {
 
 
   createQuestion(){
+    //creating a new question and adding new answers
     this.question = new Question()
     this.answer1 = new Answer();
     this.answer2 = new Answer();
@@ -93,13 +94,16 @@ export class QuestionsComponent implements OnInit {
     this.answer4 = new Answer();
     this.question.answer.push(this.answer1, this.answer2, this.answer3, this.answer4);
 
+    //resetting quiz.questions array 
     this.quiz.questions.length = 0;
-    //updating the database
+    
     this.host = new Host();
     this.host = this.hostDataService.getHostData();
     
+    //pushing question into questions array
     this.questions.push(this.question);
     
+    //Looping through Host data for quiz name and quiz ID
     this.host.quiz.forEach((quiz: any) => {
       
       this.quiz.quiz_name = quiz.quiz_name;
@@ -107,6 +111,8 @@ export class QuestionsComponent implements OnInit {
       this.quiz.quiz_id = quiz.quiz_id;
       
     });
+
+    //Making a put request
     this.requestService.putRequest("quiz", this.quiz.quiz_id, this.quiz).subscribe();
     this.stepper.selectedIndex = this.questions.length - 1;
   }
@@ -132,6 +138,7 @@ export class QuestionsComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   Done(){
+    //creating a new question and adding new answers
     this.question = new Question()
     this.answer1 = new Answer();
     this.answer2 = new Answer();
@@ -139,12 +146,16 @@ export class QuestionsComponent implements OnInit {
     this.answer4 = new Answer();
     this.question.answer.push(this.answer1, this.answer2, this.answer3, this.answer4);
 
+    //resetting quiz.questions array 
     this.quiz.questions.length = 0;
 
+    //Host data from Database
     this.host = this.hostDataService.getHostData();
 
+    //pushing question into questions array
     this.questions.push(this.question);
     
+    //Looping through Host data for quiz name and quiz ID
     this.host.quiz.forEach((quiz: any) => {
       
       this.quiz.quiz_name = quiz.quiz_name;
@@ -152,6 +163,8 @@ export class QuestionsComponent implements OnInit {
       this.quiz.quiz_id = quiz.quiz_id;
       
     });
+
+    //Making a put request
     this.requestService.putRequest("quiz", this.quiz.quiz_id, this.quiz);
     this._snackBar.open('Quiz Created Successfully!', 'Close', {
       duration: 10000,

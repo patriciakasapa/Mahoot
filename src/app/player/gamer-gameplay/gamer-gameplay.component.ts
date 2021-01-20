@@ -73,23 +73,8 @@ export class GamerGameplayComponent implements OnInit {
             });
         });
 
-        setInterval(() => {
-          if(this.timer > 0) {
-            this.timer = this.timer - 1;
-            this.points = parseFloat(((this.points - this.reducer).toFixed(0)));
-          } else {
-            this.timer;
-            this.gamePlayData.length = 0;
-            if (this.correctCard == false && this.wrongCard == false) {
-              this.timeoutCard = true;
-              this.wrongCard = false;
-              this.correctCard = false;
-              this.gamePlayContent = false;
-            } else if (this.correctCard == true || this.wrongCard == true) {
-              this.timeoutCard = false;
-            }
-          }
-        },1000);
+        this.timerPointsReducer();
+        
       } 
       else {
         this.correctCard = false;
@@ -99,6 +84,26 @@ export class GamerGameplayComponent implements OnInit {
       });
   }
 
+  //timer and points reducer
+  timerPointsReducer(){
+    setInterval(() => {
+      if(this.timer > 0) {
+        this.timer = this.timer - 1;
+        this.points = parseFloat(((this.points - this.reducer).toFixed(0)));
+      } else {
+        this.timer;
+        this.gamePlayData.length = 0;
+        if (this.correctCard == false && this.wrongCard == false) {
+          this.timeoutCard = true;
+          this.wrongCard = false;
+          this.correctCard = false;
+          this.gamePlayContent = false;
+        } else if (this.correctCard == true || this.wrongCard == true) {
+          this.timeoutCard = false;
+        }
+      }
+    }, 1000);
+  }
 
   sendGamerName(){
     //joining game room and sending gamer name to game room

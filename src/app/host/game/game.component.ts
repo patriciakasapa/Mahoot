@@ -44,15 +44,8 @@ export class GameComponent implements OnInit {
   gameSetup: boolean = true;
   hostGameplay: boolean = false;
   startGame(){
-    // this.gamePlayData.forEach((host: any) => {
-    //   host.quiz.forEach((quiz: any) => {
-    //     this.websocketService.sendDataToGameRoom(quiz.game_pin, quiz);
-    //   });
-    // });
     this.gameSetup = false;
     this.hostGameplay = true;
-    //this.router.navigate(['/host-gameplay']);
-    
   }
 
   backToHostDashboard(){

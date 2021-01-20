@@ -34,7 +34,7 @@ import { MatProgressSpinnerModule, MatSpinner } from "@angular/material/progress
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatStepperModule } from "@angular/material/stepper";
 import {  MatSnackBarModule } from '@angular/material/snack-bar';
-import { AnswerCardComponent } from './player/answer-card/answer-card.component';
+import { PodiumComponent } from './podium/podium.component';
 
 
 
@@ -47,7 +47,7 @@ import { AnswerCardComponent } from './player/answer-card/answer-card.component'
     GameComponent,
     GamerGameplayComponent,
     HostGameplayComponent,
-    AnswerCardComponent
+    PodiumComponent
   ],
   imports: [
     BrowserModule,

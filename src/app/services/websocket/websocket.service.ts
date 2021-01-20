@@ -8,11 +8,15 @@ import * as io from 'socket.io-client';
 export class WebsocketService {
 
   
-  private url = "http://localhost:3000";
+  private url = "https://tahoot-websocket.herokuapp.com";
   public socket;
 
   constructor() { 
-    this.socket = io(this.url, {transports: ['websocket']});
+    this.socket = io(this.url, 
+      {transports: ['websocket'],
+      upgrade: true,
+      autoConnect: true
+    });
     
    }
 

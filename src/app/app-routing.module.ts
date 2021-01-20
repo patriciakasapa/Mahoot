@@ -7,7 +7,6 @@ import { QuizComponent } from "./host/quiz/quiz.component";
 import { GameComponent } from "./host/game/game.component";
 import { GamerGameplayComponent } from "./player/gamer-gameplay/gamer-gameplay.component";
 import { HostGameplayComponent } from "./host/host-gameplay/host-gameplay.component";
-import { AnswerCardComponent } from "src/app/player/answer-card/answer-card.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'signin', pathMatch: 'full' },
@@ -17,8 +16,7 @@ const routes: Routes = [
   {path: 'quiz', component: QuizComponent},
   {path: 'game', component: GameComponent},
   {path: 'gamer-gameplay', component: GamerGameplayComponent},
-  {path: 'host-gameplay', component: HostGameplayComponent},
-  {path: 'answer-card', component: AnswerCardComponent}
+  {path: 'host-gameplay', component: HostGameplayComponent}
 ];
 
 @NgModule({
