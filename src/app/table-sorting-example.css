@@ -1,0 +1,13 @@
+table {
+  width: 25%;
+}
+
+
+.mat-column-points{
+  width: 20%;
+}
+.mat-header-cell{
+  background-color: rgb(80, 203, 252);
+  font-size: larger;
+  font-weight: bolder;
+}
