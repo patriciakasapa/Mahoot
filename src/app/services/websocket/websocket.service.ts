@@ -46,17 +46,6 @@ export class WebsocketService {
     return observable;
   }
 
-  // public getGameRoomData = () => {
-  //   return Observable.create((observer: any) => {
-  //     this.socket.on('game-play-data', (gameRoomData: any) => {
-  //       if (gameRoomData) {
-  //         observer.next(gameRoomData);
-  //         console.log(gameRoomData);
-  //       } else {
-  //         observer.console.error('Unable to reach server');
-  //       }
-  //     })
-  //   })
-  // }
+  
 
 }

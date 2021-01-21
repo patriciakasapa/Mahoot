@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { Router } from "@angular/router";
 import { GamePlayDataService } from "src/app/services/game-play-data/game-play-data.service";
+import { AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, AfterViewInit{
 
   gamers: string[] = [];
   playerCount: number = 0;
@@ -18,9 +19,7 @@ export class GameComponent implements OnInit {
 
   constructor(private websocketService: WebsocketService, private router: Router, 
     private gamePlayDataService: GamePlayDataService) { }
-
-  ngOnInit(): void {
-
+  ngAfterViewInit(): void {
     this.gamePlayData.push(this.gamePlayDataService.getGamePlayData());
 
     this.gamePlayData.forEach((host: any) => {
@@ -38,6 +37,9 @@ export class GameComponent implements OnInit {
       });
       });
   });
+  }
+
+  ngOnInit(): void {
     
   }
 

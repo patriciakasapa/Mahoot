@@ -30,9 +30,6 @@ export class Quiz {
 
 
 export class QuestionsComponent implements OnInit {
-
-  //define API
-  apiURL = 'https://tahoot-backend.herokuapp.com';
   
 
   timers: Timer[] = [

@@ -7,6 +7,7 @@ import { HostNameService } from 'src/app/services/host-name/host-name.service';
 import { Host } from 'src/app/classes/host/host';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 import { RequetsService } from "src/app/services/http-requests/requets.service";
+import { EditQuestionsComponent } from "../edit-questions/edit-questions.component";
 
 @Component({
   selector: 'app-host-dashboard',
@@ -102,7 +103,7 @@ export class HostDashboardComponent implements OnInit {
 
   //View Quiz Questions
   viewQuizQuestions(index: number){
-    this.viewQuestions = [];
+    this.viewQuestions.length = 0;
     this.currentQuiz.push(this.host_data[index]);
       this.currentQuiz.forEach((host: any) => {
         host.quiz.forEach((quiz: any) => {
@@ -115,9 +116,17 @@ export class HostDashboardComponent implements OnInit {
       this.questioncontentshow = false;
       this.questioncontenthide = false;
       this.viewQuestion = true;
+      console.log(this.viewQuestions);
+      
     }
 
-  
 
+  //Edit Questions
+  // editQuestion(index: number){
+  //   const dialogRef = this.dialog.open(EditQuestionsComponent, {
+  //     width: 'auto'
+  //   });
 
+  //   dialogRef.afterClosed().subscribe()
+  // }
 }

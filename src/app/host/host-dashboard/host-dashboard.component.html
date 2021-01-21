@@ -78,48 +78,13 @@
               </mat-card>
             </div>
 
-            <!-- <mat-toolbar *ngIf="questioncontentshow">
-              <mat-toolbar-row>
-                  <button class="back-button" (click)="questionContentHide()">
-                      <i class="fas fa-arrow-left fa-1g"></i>
-                  </button>
-          
-                  <button mat-raised-button [mat-dialog-close] cdkFocusInitial class="add-button" (click)="openQuestionsDialog()">Add Question</button>
-          
-                  <button mat-raised-button [mat-dialog-close] cdkFocusInitial class="done-button" (click)="Done()" id="questions-button">Done</button>
-              </mat-toolbar-row>
-          </mat-toolbar> -->
-
-          <!-- <div *ngIf="questioncontenthide">
-            <mat-card class="quiz-card">
-              <mat-card-header>
-                <mat-card-title>{{data.quiz.quiz_name}}</mat-card-title>
-                <mat-card-subtitle>{{data.host_name}}</mat-card-subtitle>
-              </mat-card-header>
-
-              <mat-card-actions class="quiz-card-actions">
-                <button class="share-quiz-button" matTooltip="Share Quiz">
-                  <i class="fas fa-share-alt fa-1g"></i>
-                </button>
-                <button class="add-question-button" matTooltip="Add Quiz Questions" (click)="questionContentShow()">
-                  <i class="fas fa-plus fa-1g"></i>
-                </button>
-                <button class="edit-question-button" matTooltip="Edit Quiz Questions">
-                  <i class="far fa-edit fa-1g"></i>
-                </button>
-                <button (click)="startQuiz()" class="start-quiz-button" matTooltip="Start Quiz">
-                  <i class="fas fa-play fa-1g"></i>
-                </button>
-              </mat-card-actions>
-            </mat-card>
-          </div>              -->
-
           <mat-accordion *ngIf="viewQuestion" class="example-headers-align" multi>
             
             <mat-expansion-panel (opened)="panelOpenState"
                         *ngFor="let question of viewQuestions, let i = index ">
               <mat-expansion-panel-header>
                 <mat-panel-title>
+                  
                  {{i + 1}}: {{question.question_body}}
                 </mat-panel-title>
 

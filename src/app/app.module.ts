@@ -36,6 +36,7 @@ import { MatStepperModule } from "@angular/material/stepper";
 import {  MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { PodiumComponent } from './podium/podium.component';
+import { EditQuestionsComponent } from './host/edit-questions/edit-questions.component';
 
 
 
@@ -48,7 +49,8 @@ import { PodiumComponent } from './podium/podium.component';
     GameComponent,
     GamerGameplayComponent,
     HostGameplayComponent,
-    PodiumComponent
+    PodiumComponent,
+    EditQuestionsComponent
   ],
   imports: [
     BrowserModule,
