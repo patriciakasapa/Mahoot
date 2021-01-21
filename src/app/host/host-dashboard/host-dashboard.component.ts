@@ -122,11 +122,9 @@ export class HostDashboardComponent implements OnInit {
 
 
   //Edit Questions
-  // editQuestion(index: number){
-  //   const dialogRef = this.dialog.open(EditQuestionsComponent, {
-  //     width: 'auto'
-  //   });
-
-  //   dialogRef.afterClosed().subscribe()
-  // }
+  editQuestion(index: number){
+    this.dialog.open(EditQuestionsComponent, {
+      width: '100%'
+    });
+  }
 }

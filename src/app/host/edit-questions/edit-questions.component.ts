@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+
 
 
 interface Timer {
@@ -22,9 +24,13 @@ export class EditQuestionsComponent implements OnInit {
     {value: 30}
   ];
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<EditQuestionsComponent>,) { }
 
   ngOnInit(): void {
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }
