@@ -4,7 +4,7 @@
   <link href='https://fonts.googleapis.com/css?family=Exo 2' rel='stylesheet'>
   <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
   <link href='https://fonts.googleapis.com/css?family=Jockey One' rel='stylesheet'>
-  
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
 </head>
 
@@ -68,7 +68,7 @@
                   <span id="quiz_game_pin">{{quiz.game_pin}}</span>
                 </mat-card-content>
                 <mat-card-actions class="quiz-card-actions">
-                  <button class="view-quiz-button" matTooltip="View Quiz Questions">
+                  <button class="view-quiz-button" (click)="viewQuizQuestions(i)" matTooltip="View Quiz Questions">
                     <i class="far fa-eye fa-1g"></i>
                   </button>
                   <button class="start-quiz-button" (click)="startQuiz(i)" matTooltip="Start Quiz">
@@ -113,6 +113,35 @@
               </mat-card-actions>
             </mat-card>
           </div>              -->
+
+          <mat-accordion *ngIf="viewQuestion" class="example-headers-align" multi>
+            
+            <mat-expansion-panel (opened)="panelOpenState"
+                        *ngFor="let question of viewQuestions, let i = index ">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                 {{i + 1}}: {{question.question_body}}
+                </mat-panel-title>
+
+                <mat-panel-description>
+
+                  <button class="edit-button" matTooltip="Edit Question">
+                    <i class="fas fa-edit fa-1g"></i>
+                  </button>
+
+                  <button class="delete-button" matTooltip="Delete Question">
+                    <i class="fas fa-trash fa-1g"></i>
+                  </button>
+                </mat-panel-description>
+
+                </mat-expansion-panel-header>
+                
+                <p *ngFor="let answer of question.answer, let j = index">
+                 Answer {{j + 1}}: {{answer.answer_body}}
+                </p>
+          </mat-expansion-panel>
+          
+          </mat-accordion>
 
           </mat-sidenav-content>
 </mat-sidenav-container>

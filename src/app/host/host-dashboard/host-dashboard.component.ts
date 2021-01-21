@@ -14,12 +14,18 @@ import { RequetsService } from "src/app/services/http-requests/requets.service";
   styleUrls: ['./host-dashboard.component.css'],
 })
 export class HostDashboardComponent implements OnInit {
-  
+
+  panelOpenState = true;
+  viewQuestion: boolean = false;
+  viewQuestions: any[] = [];
+
   currentQuiz: any[] = [];
 
   host: Host = new Host();
   
   quiz_number: number = 0;
+
+  //Host data from Database
   host_data: any;
 
   constructor(private router: Router, public dialog: MatDialog, 
@@ -64,18 +70,21 @@ export class HostDashboardComponent implements OnInit {
     this.questioncontentshow = true;
     this.questioncontenthide = false;
     this.quiz_cards = false;
+    this.viewQuestion = false;
     }
 
   questionContentHide(){
       this.questioncontentshow = false;
       this.questioncontenthide = true;
       this.quiz_cards = false;
+      this.viewQuestion = false;
   }
 
   showQuizCards(){
     this.quiz_cards = true;
     this.questioncontentshow = false;
     this.questioncontenthide = true;
+    this.viewQuestion = false;
   }
 
   //begin the quiz
@@ -91,7 +100,22 @@ export class HostDashboardComponent implements OnInit {
     this.router.navigate(['/game']);
   }
 
-  
+  //View Quiz Questions
+  viewQuizQuestions(index: number){
+    this.viewQuestions = [];
+    this.currentQuiz.push(this.host_data[index]);
+      this.currentQuiz.forEach((host: any) => {
+        host.quiz.forEach((quiz: any) => {
+         quiz.questions.forEach((question: any) => {
+            this.viewQuestions.push(question);
+           });
+       });
+      });
+      this.quiz_cards = false;
+      this.questioncontentshow = false;
+      this.questioncontenthide = false;
+      this.viewQuestion = true;
+    }
 
   
 
