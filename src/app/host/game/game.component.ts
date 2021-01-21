@@ -19,6 +19,7 @@ export class GameComponent implements OnInit, AfterViewInit{
 
   constructor(private websocketService: WebsocketService, private router: Router, 
     private gamePlayDataService: GamePlayDataService) { }
+    
   ngAfterViewInit(): void {
     this.gamePlayData.push(this.gamePlayDataService.getGamePlayData());
 

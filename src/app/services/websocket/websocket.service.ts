@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
 
 @Injectable({
@@ -12,11 +12,7 @@ export class WebsocketService {
   public socket;
 
   constructor() { 
-    this.socket = io(this.url, 
-      {transports: ['websocket'],
-      upgrade: true,
-      autoConnect: true
-    });
+    this.socket = io(this.url);
     
    }
 
@@ -46,6 +42,17 @@ export class WebsocketService {
     return observable;
   }
 
-  
+  // public getGameRoomData = () => {
+  //   return Observable.create((observer: any) => {
+  //     this.socket.on('game-play-data', (gameRoomData: any) => {
+  //       if (gameRoomData) {
+  //         observer.next(gameRoomData);
+  //         console.log(gameRoomData);
+  //       } else {
+  //         observer.console.error('Unable to reach server');
+  //       }
+  //     })
+  //   })
+  // }
 
 }
