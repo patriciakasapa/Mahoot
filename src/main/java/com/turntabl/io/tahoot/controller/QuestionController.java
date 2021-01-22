@@ -85,6 +85,7 @@ public class QuestionController {
             questions.setImage(question.getImage());
             questions.setFile_name(question.getFile_name());
             questions.setFile_type(question.getFile_type());
+            questions.setAnswer(question.getAnswer());
             return new ResponseEntity<>(repository.save(questions),HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
