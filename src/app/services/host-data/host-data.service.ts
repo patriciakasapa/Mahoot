@@ -12,7 +12,7 @@ export class HostDataService {
 
   setHostData(hostData: any){
     this.currentHostData = hostData.pop();
-    console.log(hostData);
+    console.log(this.currentHostData);
   }
 
   getHostData(){

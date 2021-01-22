@@ -105,7 +105,6 @@ export class GamerGameplayComponent implements OnInit, AfterViewInit {
     this.gamerDetails = false;
     this.spinnerDisplay = true;
     this.gamePlayContent = false;
-    // this.gamePlayData.length = 0;
     this.gamerAnswer.gamer_name = this.gamerNameService.getGamerName();
   }
 
