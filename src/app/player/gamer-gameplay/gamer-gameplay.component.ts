@@ -79,13 +79,12 @@ export class GamerGameplayComponent implements OnInit, AfterViewInit {
 
   //timer and points reducer
   timerPointsReducer(){
-    setInterval(() => {
+    const gameTimerPointsReducer = setInterval(() => {
       if(this.timer > 0) {
         this.timer = this.timer - 1;
         this.points = parseFloat(((this.points - this.reducer).toFixed(0)));
       } else {
-        this.timer;
-        this.gamePlayData.length = 0;
+        clearInterval(gameTimerPointsReducer);
         if (this.correctCard == false && this.wrongCard == false) {
           this.timeoutCard = true;
           this.wrongCard = false;
@@ -106,6 +105,7 @@ export class GamerGameplayComponent implements OnInit, AfterViewInit {
     this.gamerDetails = false;
     this.spinnerDisplay = true;
     this.gamePlayContent = false;
+    // this.gamePlayData.length = 0;
     this.gamerAnswer.gamer_name = this.gamerNameService.getGamerName();
   }
 
