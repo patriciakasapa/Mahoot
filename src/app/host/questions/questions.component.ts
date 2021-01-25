@@ -31,6 +31,10 @@ export class Quiz {
 
 export class QuestionsComponent implements OnInit {
   
+   //hiding and showing question contents
+   questioncontentshow: boolean = false;
+   questioncontenthide: boolean = true;
+   quiz_cards: boolean = false;
 
   timers: Timer[] = [
     {value: 5},
@@ -136,6 +140,10 @@ export class QuestionsComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   Done(){
     //creating a new question and adding new answers
+    this.quiz_cards = true;
+    this.questioncontentshow = false;
+    this.questioncontenthide = true;
+
     this.question = new Question()
     this.answer1 = new Answer();
     this.answer2 = new Answer();
