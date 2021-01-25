@@ -3,10 +3,10 @@
 </head>
 
 <mat-horizontal-stepper linear #stepper>
-    <!-- <mat-step [editable]="isEditable">
+    <mat-step [editable]="isEditable">
         <ng-template matStepLabel>Quiz Name</ng-template>
         <app-quiz></app-quiz>
-      </mat-step> -->
+    </mat-step>
 
       <mat-step [editable]="isEditable" *ngFor="let question of questions; let i = index">
         <mat-tab-group dynamicHeight>
@@ -58,10 +58,10 @@
         </mat-tab-group>
                 
         <div class="buttons">
-            <button mat-raised-button matStepperPrevious>Previous Question</button>
-            <button class="next-button" mat-raised-button matStepperNext>Next Question</button>
-            <button mat-raised-button (click)="removeQuestion(i)" class="delete-button" color="warn">Delete</button>
-            <button mat-raised-button (click)="Done()" aria-label="Show an example snack-bar"><a routerLink="../host-dashboard"></a>Done</button>
+            <button mat-raised-button matStepperPrevious class="button-back button-icons fas fa-arrow-left" color="primary"></button>
+            <button mat-raised-button (click)="removeQuestion(i)" class="button-forward button-icons fas fa-trash" color="warn"></button>
+            <button mat-raised-button (click)="Done()" aria-label="Show an example snack-bar" color="dark">Done</button>
+            <button mat-raised-button matStepperNext class="next-button button-icons fas fa-arrow-right" color="primary"></button>
         </div>
     </mat-step>
 

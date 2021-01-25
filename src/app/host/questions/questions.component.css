@@ -87,3 +87,17 @@
 .panelColorChange {
 	color: #ffffff;
 } 
+
+.button-icons {
+	height: 40px;
+}
+.button-back {
+	margin-right: 50%;
+}
+.button-forward {
+	margin-left: 50%;
+}
+.mat-raised-button.mat-dark {
+  color: #fff;
+  background-color: #092834;
+}

@@ -2,11 +2,6 @@
     box-sizing: border-box;
 }
 
-/* body {
-  display: grid;
-  place-items: center;
-} */
-
 html {
   background-color: #222;
   color: white;
