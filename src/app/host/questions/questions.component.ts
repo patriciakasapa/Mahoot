@@ -170,7 +170,7 @@ export class QuestionsComponent implements OnInit {
     });
 
     //Making a put request
-    this.requestService.putRequest("quiz", this.quiz.quiz_id, this.quiz);
+    this.requestService.putRequest("quiz", this.quiz.quiz_id, this.quiz).subscribe();
     this._snackBar.open('Quiz Created Successfully!', 'Close', {
       duration: 10000,
       horizontalPosition: this.horizontalPosition,
