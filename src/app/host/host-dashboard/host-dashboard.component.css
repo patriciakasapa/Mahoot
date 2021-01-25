@@ -188,27 +188,24 @@ mat-list{
 	height: 40px;
 	width: 40px;
 }
-.start-quiz-button {
+.start-quiz-button, .view-quiz-button, .delete-quiz-button {
 	border: 1px solid black;
 	background-color: white;
 	border-radius: 50%;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0px 0px 0px 30px;
+	margin: 0px 0px 0px 20px;
 	height: 40px;
 	width: 40px;
 }
-.view-quiz-button {
-	border: 1px solid black;
-	background-color: white;
-	border-radius: 50%;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0px 0px 0px 20%;
-	height: 40px;
-	width: 40px;
+.spinner {
+	top: 15%;
+	left: 42%;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #2A79FF!important;
 }
 .edit-button{
 	border: 1px solid black;

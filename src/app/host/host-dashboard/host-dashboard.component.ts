@@ -20,6 +20,8 @@ export class HostDashboardComponent implements OnInit {
   viewQuestion: boolean = false;
   viewQuestions: any[] = [];
 
+  spinnerDisplay: boolean = false;
+
   currentQuiz: any[] = [];
 
   host: Host = new Host();
@@ -27,20 +29,13 @@ export class HostDashboardComponent implements OnInit {
   quiz_number: number = 0;
 
   //Host data from Database
-  host_data: any;
+  host_data: any[] = [];
 
   constructor(private router: Router, public dialog: MatDialog, 
     private websocketService: WebsocketService, private gamePlayDataSerivce: GamePlayDataService,
     private hostNameService: HostNameService, private authService: AuthService,
     private requestService: RequetsService
-    ) 
-    {
-        this.requestService.getRequest("/gethost").subscribe((data: any) => {
-              this.host_data = data;
-              this.quiz_number = this.host_data.length;
-          });
-
-    }
+    ) {    }
 
   ngOnInit(): void {
     this.authService.isNotLogin();
@@ -62,33 +57,39 @@ export class HostDashboardComponent implements OnInit {
     this.authService.logout();
     }
 
-    //hiding and showing question contents
+    //Hiding and showing question contents
     questioncontentshow: boolean = false;
-    questioncontenthide: boolean = true;
+    questioncontenthide: boolean = false;
     quiz_cards: boolean = false;
 
+  
   questionContentShow(){
     this.questioncontentshow = true;
     this.questioncontenthide = false;
     this.quiz_cards = false;
     this.viewQuestion = false;
+    this.spinnerDisplay = false;
     }
 
+  
   questionContentHide(){
       this.questioncontentshow = false;
-      this.questioncontenthide = true;
+      this.questioncontenthide = false;
       this.quiz_cards = false;
       this.viewQuestion = false;
   }
 
+  //Showing Quiz Cards
   showQuizCards(){
     this.quiz_cards = true;
     this.questioncontentshow = false;
     this.questioncontenthide = true;
     this.viewQuestion = false;
+    this.hostDataFromDatabase();
+    this.spinnerDisplay = true;
   }
 
-  //begin the quiz
+  //Begin the quiz
   startQuiz(index: number){
     this.currentQuiz.length = 0;
     this.gamePlayDataSerivce.setGamePlayData(this.host_data[index]);
@@ -105,6 +106,7 @@ export class HostDashboardComponent implements OnInit {
   //View Quiz Questions
   viewQuizQuestions(index: number){
     this.viewQuestions.length = 0;
+    this.currentQuiz.length = 0;
     this.currentQuiz.push(this.host_data[index]);
       this.currentQuiz.forEach((host: any) => {
         host.quiz.forEach((quiz: any) => {
@@ -117,8 +119,43 @@ export class HostDashboardComponent implements OnInit {
       this.questioncontentshow = false;
       this.questioncontenthide = false;
       this.viewQuestion = true;
-      console.log(this.viewQuestions);
-      
+    }
+
+    //Getting host data from database
+    hostDataFromDatabase(){
+      this.host_data.length = 0;
+      this.requestService.getRequest("/gethost").subscribe((data: any) => {
+        data.forEach((element: any) => {
+          if (element.quiz.length !== 0 && this.host.host_name !== "" && element.host_name == this.host.host_name){
+  
+            this.host_data.push(element);
+            this.quiz_number = this.host_data.length;
+          }
+          if (this.host_data.length > 0){
+            this.spinnerDisplay = false;
+            this.quiz_cards = true;
+            this.questioncontenthide =true;
+          }
+          else {
+            this.spinnerDisplay = false;
+            this.quiz_cards = false;
+            this.questioncontenthide = false;
+          }
+        });
+        });
+    }
+
+    //Delete Quiz
+    deleteQuiz(index: number) {
+      this.currentQuiz.length = 0;
+      this.currentQuiz.push(this.host_data[index]);
+      this.currentQuiz.forEach((host: any) => {
+        this.host_data.length = 0;
+        host.quiz.forEach((quiz: any) => {
+          this.requestService.deleteRequest('quiz', quiz.quiz_id).subscribe();
+          this.showQuizCards();
+        });
+      });
     }
 
 
