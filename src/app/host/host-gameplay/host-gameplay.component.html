@@ -6,6 +6,8 @@
 
 <button id="next-button" *ngIf="nextButton" mat-raised-button (click)="sendQuestion()">Next</button>
 
+<button mat-raised-button style="left: 50%; top: 50%;" *ngIf="showPodiumButton" (click)="showPodium()">Show Podium</button>
+
 <div class="gameplay-container" *ngFor="let question of current_question">
     <mat-toolbar>
         <mat-toolbar-row>
@@ -45,3 +47,5 @@
         </div>
     </div>
 </div>
+
+<app-podium *ngIf="podium"></app-podium>

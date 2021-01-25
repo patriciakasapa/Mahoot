@@ -34,7 +34,9 @@ import { MatProgressSpinnerModule, MatSpinner } from "@angular/material/progress
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatStepperModule } from "@angular/material/stepper";
 import {  MatSnackBarModule } from '@angular/material/snack-bar';
-import { AnswerCardComponent } from './player/answer-card/answer-card.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { PodiumComponent } from './podium/podium.component';
+import { EditQuestionsComponent } from './host/edit-questions/edit-questions.component';
 
 
 
@@ -47,7 +49,8 @@ import { AnswerCardComponent } from './player/answer-card/answer-card.component'
     GameComponent,
     GamerGameplayComponent,
     HostGameplayComponent,
-    AnswerCardComponent
+    PodiumComponent,
+    EditQuestionsComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,8 @@ import { AnswerCardComponent } from './player/answer-card/answer-card.component'
     MatProgressSpinnerModule,
     MatTabsModule,
     MatStepperModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

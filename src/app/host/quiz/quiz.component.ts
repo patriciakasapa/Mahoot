@@ -50,6 +50,7 @@ export class QuizComponent implements OnInit {
 
 
     this.requestService.getRequest("/gethost").subscribe((data: any) => {
+      console.log(data);
       this.hostDataService.setHostData(data);
     });
   }

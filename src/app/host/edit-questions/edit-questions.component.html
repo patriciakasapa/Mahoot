@@ -1,0 +1,52 @@
+<form class="form-container">
+    <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Click here to start typing your question</mat-label>
+                <input matInput name="question_body" type="text" id="question-input" required/>
+            </mat-form-field>
+        
+            <table class="form-table-container" cellspacing = "0">
+                <tr>
+                    <td>
+                        <div class="question-timer-slider">
+                            <div class="timer">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Timer</mat-label>
+                                        <mat-select name="timer">
+                                            <mat-option *ngFor="let timer of timers" [value]="timer.value">
+                                            {{timer.value}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                            </div>
+        
+                            <div class="slider">
+                                <mat-slider color="primary" class="mat-slider" type="range" step="500" min="500" max="2000" name="points"></mat-slider>
+                               
+                            </div>
+                        </div>
+                    </td>
+        
+                    <td>
+                        <div class="question-image">
+                            <button id="image-upload" mat-raised-button>Upload Image</button>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td>
+                        <mat-form-field class="answers" appearance="outline">
+                            <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
+                        </mat-form-field>
+                        <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>
+                    </td>
+        
+                </tr>
+        
+            </table>
+            </form>
+            <div mat-dialog-actions>
+                <button mat-button (click)="onNoClick()">Cancel</button>
+                <button mat-button cdkFocusInitial>Done</button>
+              </div>
+              

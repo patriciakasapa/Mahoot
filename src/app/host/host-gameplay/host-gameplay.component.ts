@@ -20,26 +20,27 @@ export class HostGameplayComponent implements OnInit {
   startButton: boolean = true;
   current_question: any[] = [];
   numberOfQuestions: number = 0;
+  showPodiumButton: boolean = false;
+  podium: boolean = false;
   
 
   constructor(private websocketService: WebsocketService, private gamePlayDataSerivce: GamePlayDataService) { }
 
   ngOnInit(): void {
     this.gamePlayData.push(this.gamePlayDataSerivce.getGamePlayData());
-
-    //keeping track of the number of questions
-    this.numberOfQuestions = this.gamePlayData.length;
-
   
-    //looping through the array
+    //looping through the array various questions
     this.gamePlayData.forEach((host: any) => {
       host.quiz.forEach((quiz: any) => {
         this.gamePin = quiz.game_pin;
-        quiz.questions.forEach((questions: any) => {
-          this.questions.push(questions);
+        quiz.questions.forEach((question: any) => {
+          this.questions.push(question);
+          this.numberOfQuestions = this.questions.length;
         });
       });
     });
+
+    
 
     
     setInterval(() => {
@@ -47,7 +48,20 @@ export class HostGameplayComponent implements OnInit {
         this.timer--;
         this.points = parseFloat(((this.points - this.reducer).toFixed(0)));
         if (this.timer == 0){
+          console.log(this.numberOfQuestions);
+          console.log(this.count);
+          console.log(this.count + 1);
+          
+          //keeping track of the number of questions
+          if (this.numberOfQuestions == this.count){
+            this.nextButton = false;
+            this.showPodiumButton = true;
+            this.current_question.pop();
+          }
+        else {
           this.nextButton = true;
+        }
+
         } else {
           this.nextButton = false;
         }
@@ -58,6 +72,7 @@ export class HostGameplayComponent implements OnInit {
   }
 
 
+  //sending question to websocket
   sendQuestion(){
     this.current_question.pop();
     this.current_question.push(this.questions[this.count])
@@ -70,12 +85,19 @@ export class HostGameplayComponent implements OnInit {
     this.count = this.count + 1;
     this.startButton = false;
     this.nextButton = false;
+    this.showPodiumButton = false;
     if (this.startButton == false) {
       this.startButton = false;
     } else {
       this.startButton = false;
     }
     
+  }
+
+  //display Podium after gameplay
+  showPodium(){
+    this.showPodiumButton = false;
+    this.podium = true;
   }
 
 }

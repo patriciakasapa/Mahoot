@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { GamerNameService } from "src/app/services/gamer-name/gamer-name.service";
 import { GamerAnswer } from "src/app/classes/gamer-answer/gamer-answer";
@@ -10,7 +10,7 @@ import { AuthService } from "src/app/services/authentication/auth.service";
   templateUrl: './gamer-gameplay.component.html',
   styleUrls: ['./gamer-gameplay.component.css']
 })
-export class GamerGameplayComponent implements OnInit {
+export class GamerGameplayComponent implements OnInit, AfterViewInit {
 
   timer: number = 0;
   points: number = 0;
@@ -20,7 +20,7 @@ export class GamerGameplayComponent implements OnInit {
 
   roomName: string = '';
   gamerName: string = '';
-  gamePlayData: any[] = [];  
+  gamePlayData: any;  
   gamerDetails: boolean = true;
   gamePlayContent: boolean = false;
   spinnerDisplay: boolean = false;
@@ -36,69 +36,66 @@ export class GamerGameplayComponent implements OnInit {
   constructor(private websocketService: WebsocketService,
     private gamerNameService: GamerNameService, private authService: AuthService) { }
 
+  ngAfterViewInit(): void {
+
+    
+  }
+
   ngOnInit(): void {
     this.authService.isNotLogin();
 
-    this.gamerDetails = true;
-    this.gamePlayContent = false;
-    this.spinnerDisplay = false;
-
-    // cards displayed when answer is choosen
-    this.correctCard = false;
-    this.wrongCard = false;
-    this.timeoutCard = false;
-
     this.websocketService.getGameRoomData().subscribe((question: any) => {
       this.gamePlayData = question;
-      
-      if (this.gamePlayData.length > 0){
-        
-        this.correctCard = false;
-        this.wrongCard = false;
-        this.timeoutCard = false;
 
-        this.spinnerDisplay = false;    
-        this.gamePlayContent = true;
-        this.timer = 0;
-        this.points = 0;
+      const game = setInterval(() => {
+        if (this.gamePlayData.length > 0){
+          clearInterval(game);
+          console.log(this.gamePlayData);
+          this.gameplay();
+        }
+        else {
+          this.correctCard = false;
+          this.wrongCard = false;
+          this.timeoutCard = false;
+          this.gamerDetails = false;
+          this.spinnerDisplay = false;
+          this.gamePlayContent = false;
+        }
+      }, 1000);
+    });
 
-        this.gamePlayData.forEach((question: any) => {
-            this.points = question.points;
-            this.timer = question.timer;
-            this.reducer = (this.points/this.timer);
-            question.answer.forEach((answer: any) => {
-              if (answer.is_correct == true) {
-                this.correctAnswer = answer.answer_body;
-              }
-            });
-        });
+    
 
-        setInterval(() => {
-          if(this.timer > 0) {
-            this.timer = this.timer - 1;
-            this.points = parseFloat(((this.points - this.reducer).toFixed(0)));
-          } else {
-            this.timer;
-            this.gamePlayData.length = 0;
-            if (this.correctCard == false && this.wrongCard == false) {
-              this.timeoutCard = true;
-              this.wrongCard = false;
-              this.correctCard = false;
-              this.gamePlayContent = false;
-            } else if (this.correctCard == true || this.wrongCard == true) {
-              this.timeoutCard = false;
-            }
-          }
-        },1000);
-      } 
-      else {
-        this.correctCard = false;
-        this.wrongCard = false;
-        this.timeoutCard = false;
-      }
-      });
+    // this.gamerDetails = true;
+    // this.gamePlayContent = false;
+    // this.spinnerDisplay = false;
+
+    // // cards displayed when answer is choosen
+    // this.correctCard = false;
+    // this.wrongCard = false;
+    // this.timeoutCard = false;
+
   }
 
+  //timer and points reducer
+  timerPointsReducer(){
+    const gameTimerPointsReducer = setInterval(() => {
+      if(this.timer > 0) {
+        this.timer = this.timer - 1;
+        this.points = parseFloat(((this.points - this.reducer).toFixed(0)));
+      } else {
+        clearInterval(gameTimerPointsReducer);
+        if (this.correctCard == false && this.wrongCard == false) {
+          this.timeoutCard = true;
+          this.wrongCard = false;
+          this.correctCard = false;
+          this.gamePlayContent = false;
+        } else if (this.correctCard == true || this.wrongCard == true) {
+          this.timeoutCard = false;
+        }
+      }
+    }, 1000);
+  }
 
   sendGamerName(){
     //joining game room and sending gamer name to game room
@@ -107,6 +104,7 @@ export class GamerGameplayComponent implements OnInit {
     this.websocketService.sendDataToGameRoom(this.roomName, this.gamerName);
     this.gamerDetails = false;
     this.spinnerDisplay = true;
+    this.gamePlayContent = false;
     this.gamerAnswer.gamer_name = this.gamerNameService.getGamerName();
   }
 
@@ -135,6 +133,44 @@ export class GamerGameplayComponent implements OnInit {
       }
 
       return this.gamerAnswer.points;
+  }
+
+  gameplay(){
+      this.correctCard = false;
+      this.wrongCard = false;
+      this.timeoutCard = false;
+      this.gamerDetails = false;
+      this.spinnerDisplay = false;    
+      this.gamePlayContent = true;
+      this.timer = 0;
+      this.points = 0;
+
+      this.gamePlayData.forEach((question: any) => {
+          this.points = question.points;
+          this.timer = question.timer;
+          this.reducer = (this.points/this.timer);
+          question.answer.forEach((answer: any) => {
+            if (answer.is_correct == true) {
+              this.correctAnswer = answer.answer_body;
+            }
+          });
+      });
+
+      this.timerPointsReducer();
+
+    // if (this.gamePlayData.length > 0){
+        
+      
+      
+    // } 
+    // else {
+      // this.correctCard = false;
+      // this.wrongCard = false;
+      // this.timeoutCard = false;
+      // this.gamerDetails = false;
+      // this.spinnerDisplay = false;
+      // this.gamePlayContent = false;
+    // }
   }
 
 

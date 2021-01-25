@@ -2,6 +2,26 @@
     box-sizing: border-box;
 }
 
+/*Find out*/
+.example-action-buttons {
+	padding-bottom: 20px;
+  }
+  
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+	flex-basis: 0;
+  }
+  
+.example-headers-align .mat-expansion-panel-header-description {
+	justify-content: space-between;
+	align-items: center;
+}
+  
+.example-headers-align .mat-form-field + .mat-form-field {
+	margin-left: 8px;
+}
+/*Find out*/
+
 html {
   background-color: #222;
   color: white;
@@ -22,10 +42,6 @@ body {
 span {
   margin: 0px 0px 0px 5%;
 }
-
-/* .share-icon {
-  margin: 0px 0px 0px 80%;
-} */
 
 .side-navigation {
   width: 100%;
@@ -194,36 +210,24 @@ mat-list{
 	height: 40px;
 	width: 40px;
 }
-
-/* .share-quiz-button {
-  	border: 1px solid #DDDDDD;
+.edit-button{
+	border: 1px solid black;
+	background-color: white;
 	border-radius: 50%;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0px 0px 0px 0px;
 	height: 40px;
 	width: 40px;
 }
 
-.add-question-button {
-	border: 1px solid #DDDDDD;
+.delete-button {
+	border: 1px solid black;
+	background-color: white;
 	border-radius: 50%;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0px 0px 0px 30px;
 	height: 40px;
 	width: 40px;
 }
-.edit-question-button {
-	border: 1px solid #DDDDDD;
-	border-radius: 50%;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0px 0px 0px 30px;
-	height: 40px;
-	width: 40px;
-}
-*/
