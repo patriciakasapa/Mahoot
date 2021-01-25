@@ -10,7 +10,7 @@ import { AuthService } from "src/app/services/authentication/auth.service";
   templateUrl: './gamer-gameplay.component.html',
   styleUrls: ['./gamer-gameplay.component.css']
 })
-export class GamerGameplayComponent implements OnInit, AfterViewInit {
+export class GamerGameplayComponent implements OnInit {
 
   timer: number = 0;
   points: number = 0;
@@ -35,11 +35,6 @@ export class GamerGameplayComponent implements OnInit, AfterViewInit {
 
   constructor(private websocketService: WebsocketService,
     private gamerNameService: GamerNameService, private authService: AuthService) { }
-
-  ngAfterViewInit(): void {
-
-    
-  }
 
   ngOnInit(): void {
     this.authService.isNotLogin();
@@ -157,20 +152,6 @@ export class GamerGameplayComponent implements OnInit, AfterViewInit {
       });
 
       this.timerPointsReducer();
-
-    // if (this.gamePlayData.length > 0){
-        
-      
-      
-    // } 
-    // else {
-      // this.correctCard = false;
-      // this.wrongCard = false;
-      // this.timeoutCard = false;
-      // this.gamerDetails = false;
-      // this.spinnerDisplay = false;
-      // this.gamePlayContent = false;
-    // }
   }
 
 

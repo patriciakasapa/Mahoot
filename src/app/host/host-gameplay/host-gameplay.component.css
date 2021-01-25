@@ -46,14 +46,20 @@
 	color: white;
 }
 
-.points {
+.scoreboard {
+	margin: 3% 0px 0px 5%;
+	color: white;
+	float: left;
+}
+
+/* .points {
 	margin: 8% 0px 0px 10%;
 	height: 100px;
     width: 100px;
 	float: left;
 	background-color: #1368ce;
 	text-align: center;
-}
+} */
 
 #next-button{
 	margin: 0px 0px 0px 2%;

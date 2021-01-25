@@ -1,0 +1,9 @@
+  .mat-column-points{
+    width: 50%;
+  }
+  .mat-header-cell{
+    background-color: #1368ce;
+    font-size: larger;
+    font-weight: bolder;
+    width: 30%;
+  }

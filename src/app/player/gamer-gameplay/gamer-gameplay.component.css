@@ -171,6 +171,7 @@
     height: auto;
     background-color: #65BF39;
     margin: 10% auto;
+    text-align: center;
 }
 
 .gamer-name {
@@ -197,14 +198,9 @@
     color: white;
 }
 
-.correct i, .wrong i, .timeout i {
-    margin: 5% 0px 0px 38%;
-}
-
-
-#answer-feedback {
-    margin: 5% 0px 0px 38%;
-}
+/* #gamer-name {
+    font-family: ;
+} */
 
 #points-value {
     margin: 15% 0px 0px 5%;

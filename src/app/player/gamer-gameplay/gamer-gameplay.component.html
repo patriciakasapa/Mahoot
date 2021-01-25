@@ -37,13 +37,13 @@
     </div>
 
     <div class="gameplay-container" *ngFor="let question of gamePlayData">
-        <div>
-            {{this.gamerAnswer.gamer_name}}
-        </div>
 
-        <div>
-            {{points}}
-        </div>
+        <mat-toolbar>
+            <mat-toolbar-row>
+                <span class="spacer"></span>
+                <span id="gamer-name">{{this.gamerAnswer.gamer_name}}</span>
+            </mat-toolbar-row>
+        </mat-toolbar>
         
         <div class="gameplay-question-answers">
             <div class="gameplay-question">

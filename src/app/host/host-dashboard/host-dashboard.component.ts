@@ -90,6 +90,7 @@ export class HostDashboardComponent implements OnInit {
 
   //begin the quiz
   startQuiz(index: number){
+    this.currentQuiz.length = 0;
     this.gamePlayDataSerivce.setGamePlayData(this.host_data[index]);
 
     this.currentQuiz.push(this.host_data[index]);
