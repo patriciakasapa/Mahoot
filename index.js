@@ -30,11 +30,6 @@ const port = process.env.PORT || 5000;
 
 io.on('connection', (socket) => {
     console.log('User Connected!');
-        
-    // socket.on('gamer-name', (gamerName) => {
-    //     io.emit('gamer-name', gamerName);
-    //         console.log(gamerName)
-    // });
 
     //join game room
     socket.on('game-play-room', (roomName) => {
@@ -45,7 +40,7 @@ io.on('connection', (socket) => {
     socket.on('game-play-data', (roomName, data) => {
         socket.join(roomName);
         socket.to(roomName).emit('game-play-data', data);
-        console.log(data);
+        socket.to(roomName).emit('scoreboard', data);
     });
     
 });
