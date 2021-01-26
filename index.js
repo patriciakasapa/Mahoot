@@ -11,11 +11,10 @@ let server = http.Server(app);
 let socketIO = require('socket.io');
 
 let io = socketIO(server, {
-    origins: ["http://localhost:4200"],
     
     handlePreflightRequest: (req, res) => {
         res.writeHead(200, {
-          "Access-Control-Allow-Origin": "http://localhost:4200",
+          "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "GET,POST",
           "Access-Control-Allow-Headers": "my-custom-header",
           "Access-Control-Allow-Credentials": true
