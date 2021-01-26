@@ -23,9 +23,8 @@
 }
 
 .spinner {
-	position: absolute;
-	top: 50%;
 	left: 50%;
+    top: 40%;
 }
 
 .gamer-details {
@@ -159,10 +158,29 @@
 	color: white;
 }
 
+.timer-after-answer {
+    width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	background-color: #864cbf;
+    text-align: center;
+    margin: 25% 0px 0px 45%;
+}
+
+#timer-count-after-answer{
+    padding: 40% 0px 0px 0px;
+	font-family: 'Alata';
+	font-size: 50px;
+	color: white;
+}
+
 .spacer {
 	flex: 0.5 1 auto;
 }
 
+.gamer-spacer {
+	flex: 0.4 1 auto;
+}
 
 /* answer cards */
 
@@ -170,7 +188,7 @@
     max-width: 350px;
     height: auto;
     background-color: #65BF39;
-    margin: 10% auto;
+    margin: 10% 0px 0px 15%;
     text-align: center;
 }
 
@@ -183,7 +201,7 @@
 	font-family: 'Lato';
     font-size: 20px;
     color: white;
-    margin: 7% 0px 0px 35%;
+    margin: 5% 0px 0px 0px;
 }
 .answer-card-content {
     color: white;
@@ -227,7 +245,12 @@
 #total-score-point {
     margin: 5% 0px 0px 30%;
 }
+
 .valid-answer {
     text-align: center;
     margin: 5% 0px 0px 0px;
+}
+
+.scoreboard {
+    margin: 10% 0px 0px 40%;
 }

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class HostNameService {
 
-  host_name: string = '';
+  host_name = '';
 
   constructor() { }
 

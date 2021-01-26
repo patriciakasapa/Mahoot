@@ -24,7 +24,7 @@ export class EditQuestionsComponent implements OnInit {
     {value: 30}
   ];
 
-  constructor(public dialogRef: MatDialogRef<EditQuestionsComponent>,) { }
+  constructor(public dialogRef: MatDialogRef<EditQuestionsComponent>, ) { }
 
   ngOnInit(): void {
   }

@@ -4,24 +4,8 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {ChangeDetectorRef } from '@angular/core';
 import { ViewChild } from '@angular/core';
-
-
-export interface PeriodicElement {
-  gamer_name: string;
-  points: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { gamer_name: 'Kelvin', points: 10},
-  { gamer_name: 'Ama', points: 50},
-  { gamer_name: 'Edinam', points: 20},
-  { gamer_name: 'Merari', points: 40},
-  { gamer_name: 'Pat', points: 80},
-  { gamer_name: 'Sam', points: 12},
-  { gamer_name: 'David', points: 60},
-  { gamer_name: 'prince', points: 100},
-  { gamer_name: 'Nana', points: 2}
-];
+import { GamerDetails } from 'src/app/classes/gamer-answer/gamer-details';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 
 @Component({
@@ -29,9 +13,25 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './scoreboard.component.html',
   styleUrls: ['./scoreboard.component.css']
 })
-export class ScoreboardComponent implements AfterViewInit {
+export class ScoreboardComponent implements OnInit , AfterViewInit {
 
-  constructor(private cdref: ChangeDetectorRef) { }
+  constructor(private cdref: ChangeDetectorRef,
+              private websocketService: WebsocketService) { }
+
+  gamersDetails: GamerDetails[] = [];
+
+  displayedColumns: string[] = ['gamer_name', 'points'];
+  dataSource = new MatTableDataSource(this.gamersDetails);
+
+  @ViewChild(MatSort) sort: MatSort = new MatSort;
+
+
+  ngOnInit(): void {
+    this.websocketService.getScoresForScoreboard().subscribe((score: any) => {
+      console.log(score);
+      this.gamersDetails.push(score);
+    });
+  }
 
 
   ngAfterViewInit(): void {
@@ -41,13 +41,7 @@ export class ScoreboardComponent implements AfterViewInit {
     this.sort.direction = sortState.direction;
     this.sort.sortChange.emit(sortState);
     this.cdref.detectChanges();
-
   }
-
-  displayedColumns: string[] = ['gamer_name', 'points'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA.slice(0, 5));
-
-  @ViewChild(MatSort) sort: MatSort = new MatSort;
 
 
 }

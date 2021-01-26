@@ -12,7 +12,7 @@ export class RequetsService {
 
   constructor(private http: HttpClient) { }
 
-  //Post Request
+  // Post Request
   postRequest(endpoint: string, data: any): Observable<any>{
     return this.http.post<any>(this.apiURL + endpoint, data)
     .pipe(
@@ -20,39 +20,39 @@ export class RequetsService {
     );
   }
 
-  //Get Request
+  // Get Request
   getRequest(endpoint: string): Observable<any>{
     return this.http.get<any>(this.apiURL + endpoint).pipe(
       catchError(this.handleError)
     );
   }
 
-  //Put Request
+  // Put Request
   putRequest(endpoint: string, id: number, data: any): Observable<any>{
-    return this.http.put<any>(this.apiURL + "/" + endpoint + "/" + id, data)
+    return this.http.put<any>(this.apiURL + '/' + endpoint + '/' + id, data)
     .pipe(
       catchError(this.handleError)
     );
   }
 
-  //Delete Request
+  // Delete Request
   deleteRequest(endpoint: string, id: number): Observable<any>{
-    return this.http.delete<any>(this.apiURL + "/" + endpoint + "/" + id);
+    return this.http.delete<any>(this.apiURL + '/' + endpoint + '/' + id);
   }
 
-  //Get Quizzes
+  // Get Quizzes
   getQuiz(endpoint: string, id: number): Observable<any>{
-    return this.http.get(this.apiURL + "/" + endpoint + "/" + id);
+    return this.http.get(this.apiURL + '/' + endpoint + '/' + id);
   }
 
-  //handling errors
+  // handling errors
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      console.error(error.error.message)
+      console.error(error.error.message);
     } else {
-      console.error(error.status)
+      console.error(error.status);
     }
 
-    return throwError("Error!");
+    return throwError('Error!');
   }
 }
