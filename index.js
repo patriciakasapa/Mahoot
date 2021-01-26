@@ -41,8 +41,8 @@ io.on('connection', (socket) => {
         socket.to(roomName).emit('game-play-data', data);
     });
 
-    //scoreboard
-    socket.on('game-play-data', (roomName, data) => {
+    //scoreboard during gameplay
+    socket.on('scoreboard', (roomName, data) => {
         socket.join(roomName);
         socket.to(roomName).emit('scoreboard', data);
     });
