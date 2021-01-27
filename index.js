@@ -48,9 +48,15 @@ io.on('connection', (socket) => {
     });
 
     //podium after gameplay
-    socket.on('podium', (roomName, data) => {
+    socket.on('podium-state', (roomName, data) => {
         socket.join(roomName);
-        socket.to(roomName).emit('podium', data);
+        socket.to(roomName).emit('podium-state', data);
+    });
+
+    //podium data
+    socket.on('podium-data', (roomName, data) => {
+        socket.join(roomName);
+        socket.to(roomName).emit('podium-data', data);
     });
 
 });
