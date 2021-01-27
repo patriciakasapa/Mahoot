@@ -53,7 +53,7 @@ io.on('connection', (socket) => {
         socket.to(roomName).emit('podium-state', data);
     });
 
-    //podium data
+    //podium data for podium display
     socket.on('podium-data', (roomName, data) => {
         socket.join(roomName);
         socket.to(roomName).emit('podium-data', data);
