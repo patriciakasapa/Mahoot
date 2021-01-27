@@ -47,6 +47,12 @@ io.on('connection', (socket) => {
         socket.to(roomName).emit('scoreboard', data);
     });
 
+    //podium after gameplay
+    socket.on('podium', (roomName, data) => {
+        socket.join(roomName);
+        socket.to(roomName).emit('podium', data);
+    });
+
 });
 
 
