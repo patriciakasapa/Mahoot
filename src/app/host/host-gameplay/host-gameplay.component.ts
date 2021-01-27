@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { GamePlayDataService } from 'src/app/services/game-play-data/game-play-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-host-gameplay',
@@ -13,7 +14,7 @@ export class HostGameplayComponent implements OnInit {
   timer = 0;
   points = 0;
   reducer = 0;
-  gamePin = 0;
+  public gamePin = 0;
   questions: any[] = [];
   count = 0;
   nextButton = false;
@@ -24,7 +25,8 @@ export class HostGameplayComponent implements OnInit {
   podium = false;
 
 
-  constructor(private websocketService: WebsocketService, private gamePlayDataSerivce: GamePlayDataService) { }
+  constructor(private websocketService: WebsocketService, private gamePlayDataSerivce: GamePlayDataService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.gamePlayData.push(this.gamePlayDataSerivce.getGamePlayData());
@@ -98,7 +100,12 @@ export class HostGameplayComponent implements OnInit {
   showPodium(){
     this.showPodiumButton = false;
     this.podium = true;
-    // this.scoreboardComponent.dataSource
+    this.websocketService.sendPodiumState(this.gamePin.toString(), true);
+  }
+
+
+  gameOver(){
+    this.router.navigate(['/host-dashboard']);
   }
 
 }

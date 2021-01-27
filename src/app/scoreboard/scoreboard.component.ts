@@ -6,6 +6,7 @@ import {ChangeDetectorRef } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { GamerDetails } from 'src/app/classes/gamer-details/gamer-details';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
+import { HostGameplayComponent } from 'src/app/host/host-gameplay/host-gameplay.component';
 
 
 @Component({
@@ -16,14 +17,13 @@ import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 export class ScoreboardComponent implements OnInit , AfterViewInit {
 
   constructor(private cdref: ChangeDetectorRef,
-              private websocketService: WebsocketService) { }
+              private websocketService: WebsocketService,
+              private hostGameplayComponent: HostGameplayComponent) { }
 
   gamersDetails: GamerDetails[] = [];
 
   displayedColumns: string[] = ['gamer_name', 'points'];
   public dataSource: any;
-
-  // scoreboard: boolean = false;
 
   @ViewChild(MatSort) sort: MatSort = new MatSort;
 
@@ -31,8 +31,8 @@ export class ScoreboardComponent implements OnInit , AfterViewInit {
   ngOnInit(): void {
     this.websocketService.getScoresForScoreboard().subscribe((score: any) => {
       this.gamersDetails.push(score);
-      // this.scoreboard = true;
       if (this.gamersDetails.length > 0){
+        this.websocketService.sendPodiumData(this.hostGameplayComponent.gamePin.toString(), this.gamersDetails);
         this.dataSource = new MatTableDataSource(this.gamersDetails);
         this.dataSource.sort = this.sort;
         const sortState: Sort = {active: 'points', direction: 'desc'};
@@ -42,12 +42,12 @@ export class ScoreboardComponent implements OnInit , AfterViewInit {
         this.cdref.detectChanges();
       }
     });
-    
+
   }
 
 
   ngAfterViewInit(): void {
-    
+
   }
 
 

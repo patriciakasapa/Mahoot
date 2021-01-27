@@ -5,10 +5,8 @@ import { Answer } from 'src/app/classes/answer/answer';
 import { Host } from 'src/app/classes/host/host';
 import { HostNameService } from 'src/app/services/host-name/host-name.service';
 import { HostDataService } from 'src/app/services/host-data/host-data.service';
-import { DOCUMENT } from '@angular/common';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { RequetsService } from 'src/app/services/http-requests/requets.service';
-import { HttpClient } from '@angular/common/http';
 import { HostDashboardComponent } from '../host-dashboard/host-dashboard.component';
 
 
@@ -34,7 +32,6 @@ export class QuestionsComponent implements OnInit {
 
   constructor(private hostNameService: HostNameService,
               private hostDataService: HostDataService,
-              @Inject(DOCUMENT) private document: Document,
               private _snackBar: MatSnackBar,
               private requestService: RequetsService,
               private hostDashboardComponent: HostDashboardComponent

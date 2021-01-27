@@ -59,4 +59,12 @@
     </div>
 </div>
 
-<app-podium *ngIf="podium"></app-podium>
+<div *ngIf="podium">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span class="spacer"></span>
+            <button mat-raised-button (click)="gameOver()">Game Over</button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <app-podium></app-podium>
+</div>

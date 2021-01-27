@@ -28,7 +28,6 @@ export class GamerGameplayComponent implements OnInit {
   gamePlayContent = false;
   spinnerDisplay = false;
   choosenAnswerTimer = false;
-  // scoreboard = false;
 
   gamersDetails: any[] = [];
 
@@ -42,6 +41,9 @@ export class GamerGameplayComponent implements OnInit {
 
   playerAnswer: any;
   pointsGotten = 0;
+
+  // podium display
+  showPodium = false;
 
   ngOnInit(): void {
     this.authService.isNotLogin();
@@ -64,20 +66,32 @@ export class GamerGameplayComponent implements OnInit {
         }
       }, 1000);
     });
+
+    // monitoring podium channel on the websocket
+    this.websocketService.getPodiumState().subscribe((data: any) => {
+      this.showPodium = data;
+      this.timeoutCard = false;
+      if (this.showPodium == true){
+        this.correctCard = false;
+        this.wrongCard = false;
+        this.gamerDetails = false;
+        this.spinnerDisplay = false;
+        this.gamePlayContent = false;
+      }
+    });
   }
 
   // timer and points reducer
   timerPointsReducer(){
     const gameTimerPointsReducer = setInterval(() => {
-      if(this.timer > 0) {
+      if (this.timer > 0) {
         this.timer = this.timer - 1;
         this.points = parseFloat(((this.points - this.reducer).toFixed(0)));
       } else {
         clearInterval(gameTimerPointsReducer);
         if (this.correctCard == false && this.wrongCard == false) {
-          this.timeoutCard = true;
           this.websocketService.sendScoreForScoreboard(this.roomName, this.gamerAnswer);
-          // this.scoreboard = true;
+          this.timeoutCard = true;
           this.wrongCard = false;
           this.correctCard = false;
           this.gamePlayContent = false;
@@ -105,33 +119,27 @@ export class GamerGameplayComponent implements OnInit {
         this.playerAnswer = question.answer[index];
       });
 
-      if (this.playerAnswer.is_correct == true) {
+    if (this.playerAnswer.is_correct == true) {
         this.gamePlayContent = false;
-        //this.choosenAnswerTimer = true;
         this.gamerAnswer.points = this.gamerAnswer.points + this.pointsGotten;
         this.gamePlayContent = false;
         this.wrongCard = false;
         this.timeoutCard = false;
         this.correctCard = true;
-        // this.scoreboard = true;
       } else if (this.playerAnswer.is_correct == false) {
-        //this.choosenAnswerTimer = true;
         this.gamePlayContent = false;
         this.gamerAnswer.points = this.gamerAnswer.points - this.pointsGotten;
         this.gamePlayContent = false;
         this.correctCard = false;
         this.timeoutCard = false;
         this.wrongCard = true;
-        // this.scoreboard = true;
       }
 
     this.websocketService.sendScoreForScoreboard(this.roomName, this.gamerAnswer);
-    //this.gamersDetails.push(this.gamerAnswer);
     return this.gamerAnswer.points;
   }
 
   gameplay(){
-      // this.scoreboard = false;
       this.correctCard = false;
       this.wrongCard = false;
       this.timeoutCard = false;
@@ -144,7 +152,7 @@ export class GamerGameplayComponent implements OnInit {
       this.gamePlayData.forEach((question: any) => {
           this.points = question.points;
           this.timer = question.timer;
-          this.reducer = (this.points/this.timer);
+          this.reducer = (this.points / this.timer);
           question.answer.forEach((answer: any) => {
             if (answer.is_correct == true) {
               this.correctAnswer = answer.answer_body;

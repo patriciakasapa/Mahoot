@@ -36,6 +36,4 @@ export class SigninComponent implements OnInit {
 
   }
 
-  // 445477872194-pnae5bs7bsm8pubromf5rtpjvur97ao3.apps.googleusercontent.com
-
 }
