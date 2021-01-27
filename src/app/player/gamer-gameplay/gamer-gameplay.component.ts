@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 import { GamerNameService } from 'src/app/services/gamer-name/gamer-name.service';
-import { GamerDetails } from 'src/app/classes/gamer-answer/gamer-details';
+import { GamerDetails } from 'src/app/classes/gamer-details/gamer-details';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 
 
@@ -27,8 +27,10 @@ export class GamerGameplayComponent implements OnInit {
   gamerDetails = true;
   gamePlayContent = false;
   spinnerDisplay = false;
-  choosenAnswerSpinnerDisplay = false;
-  scoreboard = false;
+  choosenAnswerTimer = false;
+  // scoreboard = false;
+
+  gamersDetails: any[] = [];
 
   // cards displayed when answer is choosen
   correctCard = false;
@@ -50,7 +52,6 @@ export class GamerGameplayComponent implements OnInit {
       const game = setInterval(() => {
         if (this.gamePlayData.length > 0){
           clearInterval(game);
-          console.log(this.gamePlayData);
           this.gameplay();
         }
         else {
@@ -68,29 +69,15 @@ export class GamerGameplayComponent implements OnInit {
   // timer and points reducer
   timerPointsReducer(){
     const gameTimerPointsReducer = setInterval(() => {
-      if (this.timer > 0) {
+      if(this.timer > 0) {
         this.timer = this.timer - 1;
         this.points = parseFloat(((this.points - this.reducer).toFixed(0)));
       } else {
         clearInterval(gameTimerPointsReducer);
-        if (this.playerAnswer.is_correct == true) {
-          this.choosenAnswerSpinnerDisplay = false;
-          this.gamePlayContent = false;
-          this.wrongCard = false;
-          this.timeoutCard = false;
-          this.correctCard = true;
-          this.scoreboard = true;
-        } else if (this.playerAnswer.is_correct == false) {
-          this.choosenAnswerSpinnerDisplay = false;
-          this.gamePlayContent = false;
-          this.correctCard = false;
-          this.timeoutCard = false;
-          this.wrongCard = true;
-          this.scoreboard = true;
-        }
         if (this.correctCard == false && this.wrongCard == false) {
           this.timeoutCard = true;
-          this.scoreboard = true;
+          this.websocketService.sendScoreForScoreboard(this.roomName, this.gamerAnswer);
+          // this.scoreboard = true;
           this.wrongCard = false;
           this.correctCard = false;
           this.gamePlayContent = false;
@@ -118,22 +105,33 @@ export class GamerGameplayComponent implements OnInit {
         this.playerAnswer = question.answer[index];
       });
 
-    if (this.playerAnswer.is_correct == true) {
+      if (this.playerAnswer.is_correct == true) {
         this.gamePlayContent = false;
-        this.choosenAnswerSpinnerDisplay = true;
+        //this.choosenAnswerTimer = true;
         this.gamerAnswer.points = this.gamerAnswer.points + this.pointsGotten;
+        this.gamePlayContent = false;
+        this.wrongCard = false;
+        this.timeoutCard = false;
+        this.correctCard = true;
+        // this.scoreboard = true;
       } else if (this.playerAnswer.is_correct == false) {
+        //this.choosenAnswerTimer = true;
+        this.gamePlayContent = false;
         this.gamerAnswer.points = this.gamerAnswer.points - this.pointsGotten;
         this.gamePlayContent = false;
-        this.choosenAnswerSpinnerDisplay = true;
+        this.correctCard = false;
+        this.timeoutCard = false;
+        this.wrongCard = true;
+        // this.scoreboard = true;
       }
 
     this.websocketService.sendScoreForScoreboard(this.roomName, this.gamerAnswer);
+    //this.gamersDetails.push(this.gamerAnswer);
     return this.gamerAnswer.points;
   }
 
   gameplay(){
-      this.scoreboard = false;
+      // this.scoreboard = false;
       this.correctCard = false;
       this.wrongCard = false;
       this.timeoutCard = false;
@@ -146,7 +144,7 @@ export class GamerGameplayComponent implements OnInit {
       this.gamePlayData.forEach((question: any) => {
           this.points = question.points;
           this.timer = question.timer;
-          this.reducer = (this.points / this.timer);
+          this.reducer = (this.points/this.timer);
           question.answer.forEach((answer: any) => {
             if (answer.is_correct == true) {
               this.correctAnswer = answer.answer_body;

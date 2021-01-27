@@ -1,9 +1,4 @@
-<head>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-</head>
-
-<div id="wrapper">
+<div id="wrapper" *ngFor="let data of podiumData">
     <div id="container">
 
         <h1>Rank Podium</h1>
@@ -17,13 +12,13 @@
                         </div>
                         <div class="content">
                             <h2>First</h2>
-                            <h3>Nana</h3>
-                            <p>50000</p>
+                            <h3>{{data.gamer_name}}</h3>
+                            <p>{{data.points}}</p>
                         </div>
                     </div>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a>
                     <div class="container">
                         <div class="image">
@@ -50,7 +45,7 @@
                         </div>
                     </div>
                 </a>
-            </li>
+            </li> -->
         </ol>
 
     </div>

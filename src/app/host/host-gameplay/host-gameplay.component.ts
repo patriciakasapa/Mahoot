@@ -98,6 +98,7 @@ export class HostGameplayComponent implements OnInit {
   showPodium(){
     this.showPodiumButton = false;
     this.podium = true;
+    // this.scoreboardComponent.dataSource
   }
 
 }

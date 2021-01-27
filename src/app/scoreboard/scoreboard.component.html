@@ -1,7 +1,5 @@
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matsort>
-
-
-
+  
     <!-- Name Column -->
     <ng-container matColumnDef="gamer_name">
       <th mat-header-cell *matHeaderCellDef matSortDisabled> Gamer Name </th>
@@ -19,6 +17,6 @@
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+</table>
   
   

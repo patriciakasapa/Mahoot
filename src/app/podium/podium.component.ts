@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ScoreboardComponent } from "src/app/scoreboard/scoreboard.component";
 
 @Component({
   selector: 'app-podium',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PodiumComponent implements OnInit {
 
+  podiumData: any;
+
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

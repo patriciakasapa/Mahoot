@@ -167,7 +167,6 @@ export class QuestionsComponent implements OnInit {
       this.quiz.quiz_name = quiz.quiz_name;
       this.quiz.questions.push(this.questions[this.questions.length - 2]);
       this.quiz.quiz_id = quiz.quiz_id;
-      this.hostDashboardComponent.showQuizCards();
     });
 
     // Making a put request
@@ -178,6 +177,8 @@ export class QuestionsComponent implements OnInit {
       verticalPosition: this.verticalPosition,
       panelClass: ['panelColorChange']
     });
+
+    this.hostDashboardComponent.showQuizCards();
 
   }
 

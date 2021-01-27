@@ -27,7 +27,7 @@
 
 <mat-spinner class="spinner" *ngIf="spinnerDisplay"></mat-spinner>
 
-<div *ngIf="choosenAnswerSpinnerDisplay">
+<div *ngIf="choosenAnswerTimer">
     <span class="spacer"></span>
         <div class="timer-after-answer">
             <p id="timer-count-after-answer">{{timer}}</p>
@@ -76,7 +76,7 @@
     </div>
 </div>
 
-<app-scoreboard class="scoreboard" *ngIf="scoreboard"></app-scoreboard>
+<!-- <app-scoreboard class="scoreboard" *ngIf="scoreboard"></app-scoreboard> -->
 
 <!-- answer cards -->
 

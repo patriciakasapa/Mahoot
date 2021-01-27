@@ -4,7 +4,7 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {ChangeDetectorRef } from '@angular/core';
 import { ViewChild } from '@angular/core';
-import { GamerDetails } from 'src/app/classes/gamer-answer/gamer-details';
+import { GamerDetails } from 'src/app/classes/gamer-details/gamer-details';
 import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 
@@ -21,26 +21,33 @@ export class ScoreboardComponent implements OnInit , AfterViewInit {
   gamersDetails: GamerDetails[] = [];
 
   displayedColumns: string[] = ['gamer_name', 'points'];
-  dataSource = new MatTableDataSource(this.gamersDetails);
+  public dataSource: any;
+
+  // scoreboard: boolean = false;
 
   @ViewChild(MatSort) sort: MatSort = new MatSort;
 
 
   ngOnInit(): void {
     this.websocketService.getScoresForScoreboard().subscribe((score: any) => {
-      console.log(score);
       this.gamersDetails.push(score);
+      // this.scoreboard = true;
+      if (this.gamersDetails.length > 0){
+        this.dataSource = new MatTableDataSource(this.gamersDetails);
+        this.dataSource.sort = this.sort;
+        const sortState: Sort = {active: 'points', direction: 'desc'};
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.sort.sortChange.emit(sortState);
+        this.cdref.detectChanges();
+      }
     });
+    
   }
 
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    const sortState: Sort = {active: 'points', direction: 'desc'};
-    this.sort.active = sortState.active;
-    this.sort.direction = sortState.direction;
-    this.sort.sortChange.emit(sortState);
-    this.cdref.detectChanges();
+    
   }
 
 

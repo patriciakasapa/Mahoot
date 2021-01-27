@@ -8,7 +8,8 @@ import * as io from 'socket.io-client';
 export class WebsocketService {
 
 
-  private url = 'https://tahoot-websocket.herokuapp.com';
+  // private url = 'https://tahoot-websocket.herokuapp.com';
+  private url = 'http://localhost:5000'
   public socket;
 
   constructor() {
