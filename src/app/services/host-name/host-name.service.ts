@@ -5,15 +5,20 @@ import { Injectable } from '@angular/core';
 })
 export class HostNameService {
 
-  host_name = '';
+  localHolder: any;
+  host_name: any = '';
+  collect: any;
 
-  constructor() { }
+  // constructor(private auth: AuthService) {}
 
-  setHostName(host_name: string){
+  setHostName(host_name: any){
     this.host_name = host_name;
   }
 
   getHostName(){
-    return this.host_name;
-  }
+      this.collect = localStorage.getItem('name');
+      this.host_name = JSON.parse (this.collect).name;
+      return this.host_name;
+    }
+
 }
