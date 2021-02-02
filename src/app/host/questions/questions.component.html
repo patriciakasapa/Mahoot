@@ -37,6 +37,7 @@
                         <!-- question image -->
                         <div class="question-image" [(ngModel)]="question.image">
                             <input type="file" id="image-upload" name="image" mat-raised-button value="Upload Image">
+                            <input [(ngModel)]="question.image" type="file" id="image-upload" name="image"/>
                             <button type="file" id="image-upload" name="image" mat-raised-button value="Upload Image" color="primary">Upload Image</button>
                         </div>
                     </div>
