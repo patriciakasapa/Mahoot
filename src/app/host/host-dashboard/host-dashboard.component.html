@@ -49,6 +49,10 @@
 
             <app-questions *ngIf="questioncontentshow"></app-questions>
 
+            <mat-spinner class="spinner" diameter="50"  *ngIf="spinnerDisplay"></mat-spinner>
+
+
+
             <div *ngIf="quiz_cards">
               <mat-card class="quiz-card" *ngFor="let data of host_data; let i = index">
                 <mat-card-content *ngFor="let quiz of data.quiz">
@@ -63,6 +67,9 @@
                   <button class="start-quiz-button" (click)="startQuiz(i)" matTooltip="Start Quiz">
                     <i class="fas fa-play fa-1g"></i>
                   </button>
+                  <button class="delete-quiz-button"  matTooltip="Delete Quiz" (click)="deleteQuiz(i)">
+                    <i class="fa fa-trash" aria-hidden="true" fa-1g ></i>
+                 </button>
                 </mat-card-actions>
               </mat-card>
             </div>

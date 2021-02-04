@@ -5,8 +5,8 @@
 	<div class="form-container player-signin-container">
 		<form>
 			<h1>Player Sign in</h1>
-			<div (click)="playerSignInWithGoogle()" class="social-container">
-				<i class="social" class="fab fa-google"></i>
+			<div (click)="playerSignInWithGoogle()" class="social-container" matTooltip="Sign In">
+				<span style="margin: 50% 0px 0px 0px;"><img src="/assets/turntabl.gif" width="55px"></span>
 			</div>
 		</form>
 	</div>
@@ -14,10 +14,14 @@
 	<div class="form-container host-signin-container">
 		<form>
 			<h1>Host Sign in</h1>
-			<div (click)="hostSignInWithGoogle()" class="social-container">
-				<i class="social" class="fab fa-google"></i>
+			<div (click)="hostSignInWithGoogle()" class="social-container" matTooltip="Sign In">
+				<span style="margin: 50% 0px 0px 0px;"><img src="/assets/turntabl.gif" width="55px"></span>
 			</div>
 		</form>
+	</div>
+
+	<div class="gif-container"> 
+		<img src="/assets/giphy.gif" width="2000px" height="600px"/>
 	</div>
 
 	<div class="overlay-container">

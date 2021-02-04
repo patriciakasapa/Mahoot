@@ -7,13 +7,13 @@ import * as io from 'socket.io-client';
 })
 export class WebsocketService {
 
-  
-  private url = "https://tahoot-websocket.herokuapp.com";
+
+  private url = 'https://tahoot-websocket.herokuapp.com';
   public socket;
 
-  constructor() { 
+  constructor() {
     this.socket = io(this.url);
-    
+
    }
 
   // join game a room
@@ -21,37 +21,91 @@ export class WebsocketService {
     this.socket.emit('game-play-room', roomName);
   }
 
+  // game room data
   public sendDataToGameRoom(roomName: string, data: any) {
     this.socket.emit('game-play-data', roomName, data);
   }
 
   public getGameRoomData(){
-    let observable = new Observable((observer: any) => {
+    const observable = new Observable((observer: any) => {
       this.socket.on('game-play-data', (gameRoomData: any) => {
               if (gameRoomData) {
                 observer.next(gameRoomData);
               } else {
                 observer.console.error('Unable to reach server');
               }
-            })
+            });
       return () => {
         this.socket.disconnect();
-      }
+      };
     });
     return observable;
   }
 
-  // public getGameRoomData = () => {
-  //   return Observable.create((observer: any) => {
-  //     this.socket.on('game-play-data', (gameRoomData: any) => {
-  //       if (gameRoomData) {
-  //         observer.next(gameRoomData);
-  //         console.log(gameRoomData);
-  //       } else {
-  //         observer.console.error('Unable to reach server');
-  //       }
-  //     })
-  //   })
-  // }
+  // scores for scoreboard
+  public sendScoreForScoreboard(roomName: string, data: any){
+    this.socket.emit('scoreboard', roomName, data);
+  }
+
+  public getScoresForScoreboard(){
+    const observable = new Observable((observer: any) => {
+      this.socket.on('scoreboard', (scores: any) => {
+        if (scores){
+          observer.next(scores);
+        } else {
+          observer.console.error('Unable to read server');
+
+        }
+      });
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+    return observable;
+  }
+
+  // state of podium
+  public sendPodiumState(roomName: string, data: any){
+    this.socket.emit('podium-state', roomName, data);
+  }
+
+  public getPodiumState(){
+    const observable = new Observable((observer: any) => {
+      this.socket.on('podium-state', (scores: any) => {
+        if (scores){
+          observer.next(scores);
+        } else {
+          observer.console.error('Unable to read server');
+
+        }
+      });
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+    return observable;
+  }
+
+  // data for podium
+  public sendPodiumData(roomName: string, data: any){
+    this.socket.emit('podium-data', roomName, data);
+  }
+
+  public getPodiumData(){
+    const observable = new Observable((observer: any) => {
+      this.socket.on('podium-data', (scores: any) => {
+        if (scores){
+          observer.next(scores);
+        } else {
+          observer.console.error('Unable to read server');
+
+        }
+      });
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+    return observable;
+  }
 
 }

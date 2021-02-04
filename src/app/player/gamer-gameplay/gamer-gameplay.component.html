@@ -27,7 +27,21 @@
 
 <mat-spinner class="spinner" *ngIf="spinnerDisplay"></mat-spinner>
 
+<div *ngIf="choosenAnswerTimer">
+    <span class="spacer"></span>
+        <div class="timer-after-answer">
+            <p id="timer-count-after-answer">{{timer}}</p>
+        </div>
+</div>
+
 <div *ngIf="gamePlayContent">
+
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span class="spacer"></span>
+            <span id="gamer-name">{{this.gamerAnswer.gamer_name}}</span>
+        </mat-toolbar-row>
+    </mat-toolbar>
 
     <div style="height: auto; width: auto;">
         <span class="spacer"></span>
@@ -37,13 +51,6 @@
     </div>
 
     <div class="gameplay-container" *ngFor="let question of gamePlayData">
-        <div>
-            {{this.gamerAnswer.gamer_name}}
-        </div>
-
-        <div>
-            {{points}}
-        </div>
         
         <div class="gameplay-question-answers">
             <div class="gameplay-question">
@@ -69,10 +76,13 @@
     </div>
 </div>
 
+<!-- <app-scoreboard class="scoreboard" *ngIf="scoreboard"></app-scoreboard> -->
+
 <!-- answer cards -->
 
 <mat-card class="answer-card" *ngIf="correctCard">
     <mat-card-header class="gamer-name">
+        <span class="gamer-spacer"></span>
         <span>{{gamerAnswer.gamer_name}}</span>
     </mat-card-header>
 
@@ -103,6 +113,7 @@
 
 <mat-card class="answer-card" style="background-color: #E71749;" *ngIf="wrongCard">
     <mat-card-header class="gamer-name" style="background-color: #C40D3B;">
+        <span class="gamer-spacer"></span>
         <span>{{gamerAnswer.gamer_name}}</span>
     </mat-card-header>
 
@@ -143,6 +154,7 @@
 
 <mat-card class="answer-card" style="background-color: #E71749;" *ngIf="timeoutCard">
     <mat-card-header class="gamer-name" style="background-color: #C40D3B;">
+        <span class="gamer-spacer"></span>
         <span>{{gamerAnswer.gamer_name}}</span>
     </mat-card-header>
 
@@ -172,5 +184,7 @@
 
     </mat-card-content>
 
-   
 </mat-card>
+
+<!-- podium after gameplay -->
+<app-podium *ngIf="showPodium"></app-podium>

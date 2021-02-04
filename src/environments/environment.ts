@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
   pusher: {
-    key: "0e493e8a2a5acf6f1fce",
-    secret: "afd29cc50e7cbd739726",
-    cluster: "mt1",
+    key: '0e493e8a2a5acf6f1fce',
+    secret: 'afd29cc50e7cbd739726',
+    cluster: 'mt1',
     useTLS: true
   }
 };

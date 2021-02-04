@@ -1,4 +1,4 @@
 export class Host {
-    host_name: string = '';
+    host_name = '';
     quiz: any[] = [];
 }

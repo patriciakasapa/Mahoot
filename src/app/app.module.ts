@@ -11,32 +11,34 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuestionsComponent } from './host/questions/questions.component';
 import { QuizComponent } from './host/quiz/quiz.component';
-import { MatTableModule } from '@angular/material/table'
-import { MatDialogModule } from "@angular/material/dialog";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatButtonModule } from "@angular/material/button";
-import { MatRadioModule } from "@angular/material/radio";
-import { MatSelectModule } from "@angular/material/select";
-import { MatSliderModule } from "@angular/material/slider";
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 import { GameComponent } from './host/game/game.component';
 import { GamerGameplayComponent } from './player/gamer-gameplay/gamer-gameplay.component';
 import { HostGameplayComponent } from './host/host-gameplay/host-gameplay.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from "@angular/material/icon";
-import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatListModule } from "@angular/material/list";
-import { MatCardModule } from "@angular/material/card";
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { MatMenuModule } from "@angular/material/menu";
-import { MatProgressSpinnerModule, MatSpinner } from "@angular/material/progress-spinner";
-import { MatTabsModule } from "@angular/material/tabs";
-import { MatStepperModule } from "@angular/material/stepper";
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatStepperModule } from '@angular/material/stepper';
 import {  MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSortModule } from '@angular/material/sort';
 import { PodiumComponent } from './podium/podium.component';
 import { EditQuestionsComponent } from './host/edit-questions/edit-questions.component';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 
 
@@ -50,7 +52,8 @@ import { EditQuestionsComponent } from './host/edit-questions/edit-questions.com
     GamerGameplayComponent,
     HostGameplayComponent,
     PodiumComponent,
-    EditQuestionsComponent
+    EditQuestionsComponent,
+    ScoreboardComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +84,8 @@ import { EditQuestionsComponent } from './host/edit-questions/edit-questions.com
     MatTabsModule,
     MatStepperModule,
     MatSnackBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSortModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

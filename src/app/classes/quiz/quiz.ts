@@ -1,4 +1,4 @@
 export class Quiz {
-    quiz_name: string = '';
+    quiz_name = '';
     questions: any[] = [];
   }

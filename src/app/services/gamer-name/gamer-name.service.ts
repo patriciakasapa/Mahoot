@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class GamerNameService {
 
   gamers: any[] = [];
-  gamerName: string = '';
+  gamerName = '';
 
   constructor() { }
 

@@ -10,64 +10,64 @@ import { HostNameService } from 'src/app/services/host-name/host-name.service';
 export class AuthService {
 
   user!: SocialUser;
-  domainAddress: any = "@turntabl.io";
+  domainAddress: any = '@turntabl.io';
   localHolder: any;
   type!: string;
 
   constructor(
-    private authService: SocialAuthService, 
+    private authService: SocialAuthService,
     private router: Router,
     private hostNameService: HostNameService) { }
 
     hostSignInWithGoogle(): void{
       this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-      this.authService.authState.subscribe(userData=>{
+      this.authService.authState.subscribe(userData => {
         this.user = userData;
         this.hostNameService.setHostName(this.user.name);
         if (this.user.email.includes(this.domainAddress)) {
-          var details = {name: userData.name, type: 'host'};
-        localStorage.setItem('name', JSON.stringify(details));
-          this.router.navigate(['/host-dashboard'])
+          const details = {name: userData.name, type: 'host'};
+          localStorage.setItem('name', JSON.stringify(details));
+          this.router.navigate(['/host-dashboard']);
         } else {
-          alert("Invalid Account")
+          alert('Invalid Account');
         }
         }, error => {
-          console.log(error)
-      })
+          console.log(error);
+      });
   }
 
   playerSignInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
       this.user = userData;
       if (this.user.email.includes(this.domainAddress)) {
-        var details = {name: userData.name, type: 'player'};
+        const details = {name: userData.name, type: 'player'};
         localStorage.setItem('name', JSON.stringify(details));
-        this.router.navigate(['/gamer-gameplay'])
+        this.router.navigate(['/gamer-gameplay']);
       } else {
-        alert("Invalid Account")
+        alert('Invalid Account');
       }
       }, error => {
-        console.log(error)
+        console.log(error);
     });
-    
+
   }
 
   isNotLogin(){
-    if(localStorage.getItem('name')==null){
+    if (localStorage.getItem('name') == null){
    this.router.navigate(['/signin']);
     }
   }
 
   isLogin(){
     this.localHolder = localStorage.getItem('name');
-    if(this.localHolder!=null){
+    if (this.localHolder != null){
     this.type = JSON.parse(this.localHolder).type;
-      if(this.type=="host"){
+    if (this.type == 'host'){
       this.router.navigate(['host-dashboard']);
-      }else if(this.type=="player"){
+      }else if (this.type == 'player'){
       this.router.navigate(['gamer-gameplay']);
       }
-  
+
        }
   }
   logout(){

@@ -4,7 +4,7 @@
 
 <button mat-raised-button style="left: 50%; top: 50%;" *ngIf="startButton" (click)="sendQuestion()">Start Game</button>
 
-<button id="next-button" *ngIf="nextButton" mat-raised-button (click)="sendQuestion()">Next</button>
+
 
 <button mat-raised-button style="left: 50%; top: 50%;" *ngIf="showPodiumButton" (click)="showPodium()">Show Podium</button>
 
@@ -15,6 +15,13 @@
             <div>
                 <h1>{{question.question_body}}</h1>
             </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span class="spacer"></span>
+            <button *ngIf="nextButton" mat-raised-button (click)="sendQuestion()">Next</button>
         </mat-toolbar-row>
     </mat-toolbar>
 
@@ -41,11 +48,23 @@
                     </mat-grid-list>
             </div>
 
-            <div class="points">
+            <!-- <div class="points">
                 <p id="points-count">{{points}}</p>
-            </div>    
+            </div>     -->
+
+            
+            
         </div>
+        <app-scoreboard class="scoreboard"></app-scoreboard>
     </div>
 </div>
 
-<app-podium *ngIf="podium"></app-podium>
+<div *ngIf="podium">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span class="spacer"></span>
+            <button mat-raised-button (click)="gameOver()">Game Over</button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <app-podium></app-podium>
+</div>

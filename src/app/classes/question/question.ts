@@ -1,6 +1,7 @@
 export class Question{
-    question_body: string = "";
-    points: number = 500;
-    timer: number = 0;
+    question_body = '';
+    points = 500;
+    timer = 0;
     answer: any[] = [];
+    image: any;
   }
