@@ -31,19 +31,22 @@ public class QuestionController {
     QuestionsRepository repository;
 
     @PostMapping("/create")
-    public String questions(@RequestParam("file") MultipartFile file, @RequestParam("question") String q){
+    public String questions(@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam("question") String q){
         System.out.println();
         ObjectMapper mapper = new ObjectMapper();
-
+        
         Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", "turntabl",
-                "api_key", "786764898994284",
-                "api_secret", "tLSFd4GlCjyRNyms2ISLEM48-aY"));
+                "cloud_name", System.getenv("CLOUD_NAME"),
+                "api_key", System.getenv("API_KEY"),
+                "api_secret", System.getenv("API_SECRET")));
+        
         try {
             Questions question = mapper.readValue(q, Questions.class);
-            Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+            if(file != null) {
+                Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
 //            System.out.println(uploadResult.get("secure_url"));
-            question.setImage((String) uploadResult.get("secure_url"));
+                question.setImage((String) uploadResult.get("secure_url"));
+            }
             repository.save(question);
 
 //            return (String) ;
