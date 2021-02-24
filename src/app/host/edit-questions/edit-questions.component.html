@@ -1,4 +1,4 @@
-<form class="form-container">
+<!-- <form class="form-container">
     <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Click here to start typing your question</mat-label>
                 <input matInput name="question_body" type="text" id="question-input" required/>
@@ -49,4 +49,57 @@
                 <button mat-button (click)="onNoClick()">Cancel</button>
                 <button mat-button cdkFocusInitial>Done</button>
               </div>
-              
+               -->
+
+               <form class="form-container">
+                <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Click here to start typing your question</mat-label>
+                            <input matInput [(ngModel)]="question.question_body" name="question_body" type="text" id="question-input" required/>
+                        </mat-form-field>
+                    
+                        <table class="form-table-container" cellspacing = "0">
+                            <tr>
+                                <td>
+                                    <div class="question-timer-slider">
+                                        <div class="timer">
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>Timer</mat-label>
+                                                    <mat-select name="timer" [(ngModel)]="question.timer">
+                                                        <mat-option *ngFor="let timer of timers" [value]="timer.value">
+                                                        {{timer.value}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                        </div>
+                    
+                                        <div class="slider">
+                                            <mat-slider [(ngModel)]="question.points" color="primary" class="mat-slider" type="range" step="500" min="500" max="2000" name="points"></mat-slider>
+                                           
+                                        </div>  
+            
+                                    </div>
+                                </td>
+                    
+                                <td>
+                                    <div class="question-image">
+                                        <button id="image-upload" mat-raised-button>Upload Image</button>
+                                    </div>
+                                </td>
+                            </tr>
+                    
+                            <tr>
+                                <td *ngFor="let answer of question.answer; let j = index">
+                                    <mat-form-field  class="answers" appearance="outline">
+                                        <input matInput [(ngModel)]="answer.answer_body" type="text" name="answer{{j + 1}}" id="answers" placeholder="Answer {{j + 1}}" required>
+                                    </mat-form-field>
+                                    <mat-radio-button color="primary" name="validAnswer" class="radio-button" [(ngModel)]="answer.is_correct"></mat-radio-button>
+                                </td>
+                    
+                            </tr>
+                    
+                        </table>
+                        </form>
+                        <div mat-dialog-actions>
+                            <button mat-button (click)="onNoClick()">Cancel</button>
+                            <button mat-button cdkFocusInitial>Done</button>
+                          </div>
