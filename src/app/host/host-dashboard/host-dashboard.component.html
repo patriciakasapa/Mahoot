@@ -35,7 +35,7 @@
 
           <!-- side bar main content -->
           <mat-sidenav-content class="main-content" [class.main-content-closed] = "slideCheck">
-           
+            <app-quiz-creation></app-quiz-creation>
             <mat-card *ngIf="questioncontenthide" class="quiz-number-card" [class.side-nav-opened] = "slideCheck">
               <span id="quiz-number">
                 Quiz Number

@@ -39,6 +39,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { PodiumComponent } from './podium/podium.component';
 import { EditQuestionsComponent } from './host/edit-questions/edit-questions.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { QuizCreationComponent } from './host/quiz-creation/quiz-creation.component';
 
 
 
@@ -53,7 +54,8 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
     HostGameplayComponent,
     PodiumComponent,
     EditQuestionsComponent,
-    ScoreboardComponent
+    ScoreboardComponent,
+    QuizCreationComponent
   ],
   imports: [
     BrowserModule,

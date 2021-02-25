@@ -125,6 +125,8 @@ export class HostDashboardComponent implements OnInit {
     hostDataFromDatabase(){
       this.host_data.length = 0;
       this.requestService.getRequest('/gethost').subscribe((data: any) => {
+        console.log('get cards', data);
+        
         data.forEach((element: any) => {
           if (element.quiz.length !== 0 && this.host.host_name !== '' && element.host_name == this.host.host_name){
 
