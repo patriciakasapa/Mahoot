@@ -1,10 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-//import { EditQuestionService } from 'src/app/services/edit-question/edit-question.service';
 import { EditQuestionService } from 'src/app/services/edit-question/edit-question.service';
-
-
-
 
 interface Timer {
   value: number;
@@ -19,7 +15,7 @@ interface Timer {
 export class EditQuestionsComponent implements OnInit {
 
   question: any;
-currentQuestion: any[] = [];
+  currentQuestion: any[] = [];
 
   timers: Timer[] = [
     {value: 5},
