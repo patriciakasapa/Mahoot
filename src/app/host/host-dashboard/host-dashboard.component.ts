@@ -8,18 +8,20 @@ import { Host } from 'src/app/classes/host/host';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 import { RequetsService } from 'src/app/services/http-requests/requets.service';
 import { EditQuestionsComponent } from '../edit-questions/edit-questions.component';
+import { EditQuestionService } from 'src/app/services/edit-question/edit-question.service';
 
 @Component({
   selector: 'app-host-dashboard',
-  templateUrl: './host-dashboard.component.html',
+  templateUrl:'./host-dashboard.component.html',
   styleUrls: ['./host-dashboard.component.css'],
 })
 export class HostDashboardComponent implements OnInit {
+  
 
   constructor(private router: Router, public dialog: MatDialog,
               private websocketService: WebsocketService, private gamePlayDataSerivce: GamePlayDataService,
               private hostNameService: HostNameService, private authService: AuthService,
-              private requestService: RequetsService
+              private requestService: RequetsService, private editQuestionService: EditQuestionService
     ) {    }
 
   panelOpenState = true;
@@ -31,6 +33,8 @@ export class HostDashboardComponent implements OnInit {
   currentQuiz: any[] = [];
 
   host: Host = new Host();
+
+  currentQuestion: any[] = [];
 
   quiz_number = 0;
 
@@ -152,17 +156,61 @@ export class HostDashboardComponent implements OnInit {
       this.currentQuiz.forEach((host: any) => {
         this.host_data.length = 0;
         host.quiz.forEach((quiz: any) => {
-          this.requestService.deleteRequest('quiz', quiz.quiz_id).subscribe();
-          this.showQuizCards();
+          this.requestService.deleteRequest('quiz', quiz.quiz_id).subscribe(response =>{
+            console.log(response)
+            this.showQuizCards();
+          });
+          
         });
       });
+
     }
 
-
-  // Edit Questions
+   // Delete Question
+   deleteQuestion(index: number) {
+     console.log("index",index)
+     this.currentQuestion.push(this.host_data[index]);
+      let questionId = this.currentQuestion[0]["quiz"][0]["questions"][index]["question_id"];
+         this.requestService.deleteRequest('question', questionId).subscribe(response => {
+           console.log(response)
+          this.showQuizCards();
+         }, error => {
+            console.log(error)
+         });
+   }
+  //Edit Questions
   editQuestion(index: number){
     this.dialog.open(EditQuestionsComponent, {
       width: '100%'
+    });
+  }
+  //Editng Questions Dailog
+  editQuestionDialog(index: any){
+    this.currentQuiz.push(this.host_data[index]);
+    this.currentQuiz.forEach((host: any) => {
+      host.quiz.forEach((quiz: any) => {
+       quiz.questions.forEach((question: any) => {
+         this.editQuestionService.setQuestion(question);
+          // this.editQuestion.push(qstn_body);
+
+         //this.editQuestion.push(question);
+         });
+     });
+    });
+  // editQuestionDialog(index: any){
+  //   this.currentQuiz.forEach((host: any) => {
+  //     host.quiz.forEach((quiz: any) => {
+  //       this.editQuestionService.setQuestion(quiz.questions[index]);
+  //    });
+  //   });
+
+    const dialogRef = this.dialog.open(EditQuestionsComponent, {
+      width: '80%',
+      height: 'auto',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
     });
   }
 }

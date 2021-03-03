@@ -29,6 +29,8 @@ export class RequetsService {
 
   // Put Request
   putRequest(endpoint: string, id: number, data: any): Observable<any>{
+    console.log('put request', data);
+
     return this.http.put<any>(this.apiURL + '/' + endpoint + '/' + id, data)
     .pipe(
       catchError(this.handleError)

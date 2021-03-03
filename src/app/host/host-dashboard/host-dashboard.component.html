@@ -88,11 +88,11 @@
 
                 <mat-panel-description>
 
-                  <button class="edit-button" matTooltip="Edit Question" (click)="editQuestion(i)">
+                  <button class="edit-button" matTooltip="Edit Question" (click)="editQuestionDialog(i)">
                     <i class="fas fa-edit fa-1g"></i>
                   </button>
 
-                  <button class="delete-button" matTooltip="Delete Question">
+                  <button class="delete-button" matTooltip="Delete Question" (click)="deleteQuestion(i)">
                     <i class="fas fa-trash fa-1g"></i>
                   </button>
                 </mat-panel-description>
