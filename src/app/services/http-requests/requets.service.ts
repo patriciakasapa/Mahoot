@@ -8,14 +8,14 @@ import { Observable, throwError } from 'rxjs';
 })
 export class RequetsService {
 
-  apiURL = 'https://tahoot-backend.herokuapp.com';
-  // apiURL = 'http://localhost:8080'
+  // apiURL = 'https://tahoot-backend.herokuapp.com';
+  apiURL = 'http://localhost:8080'
   
   constructor(private http: HttpClient) { }
 
   // Post Request
   postRequest(endpoint: string, data: any): Observable<any>{
-    return this.http.post<any>(this.apiURL + endpoint, data)
+    return this.http.post<any>(this.apiURL + '/' + endpoint, data)
     .pipe(
       catchError(this.handleError)
     );
@@ -23,7 +23,7 @@ export class RequetsService {
 
   // Get Request
   getRequest(endpoint: string): Observable<any>{
-    return this.http.get<any>(this.apiURL + endpoint).pipe(
+    return this.http.get<any>(this.apiURL + '/' + endpoint).pipe(
       catchError(this.handleError)
     );
   }

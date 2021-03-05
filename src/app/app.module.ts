@@ -40,7 +40,8 @@ import { PodiumComponent } from './podium/podium.component';
 import { EditQuestionsComponent } from './host/edit-questions/edit-questions.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { QuizCreationComponent } from './host/quiz-creation/quiz-creation.component';
-
+import { HostHomeComponent } from './host/host-home/host-home.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { QuizCreationComponent } from './host/quiz-creation/quiz-creation.compon
     PodiumComponent,
     EditQuestionsComponent,
     ScoreboardComponent,
-    QuizCreationComponent
+    QuizCreationComponent,
+    HostHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ import { QuizCreationComponent } from './host/quiz-creation/quiz-creation.compon
     MatStepperModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatSortModule
+    MatSortModule,
+    NgbModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

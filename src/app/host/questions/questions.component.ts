@@ -126,7 +126,7 @@ export class QuestionsComponent implements OnInit {
      // Uploading an image
     formData.append('file', this.image);
 
-    this.requestService.postRequest('/create?', formData).subscribe(data => {
+    this.requestService.postRequest('create?', formData).subscribe(data => {
       console.log('data', data);
       
     })
