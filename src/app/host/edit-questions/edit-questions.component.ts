@@ -8,7 +8,7 @@ interface Timer {
 
 @Component({
   selector: 'app-edit-questions',
-  templateUrl: './edit-questions.component.html',
+  templateUrl:'./edit-questions.component.html',
   styleUrls: ['./edit-questions.component.css']
 })
 

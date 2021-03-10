@@ -7,7 +7,7 @@
             <table class="form-table-container" cellspacing = "0">
                 <tr>
                     <td>
-                        <div class="question-timer-slider">
+                        <div class="question-timer-container">
                             <div class="timer">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Timer</mat-label>
@@ -23,6 +23,7 @@
                                 <mat-slider color="primary" class="mat-slider" type="range" step="500" min="500" max="2000" name="points"></mat-slider>
                                
                             </div>
+                             <!-- slider -->
                         </div>
                     </td>
         
@@ -35,25 +36,28 @@
         
                 <tr>
                     <td>
+                        <div class="field" >
+                            <mat-form-field class="answers" appearance="outline">
+                                <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
+                            </mat-form-field>
+                            <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>
+    
+                       
+                            <mat-form-field class="answers" appearance="outline">
+                                <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
+                            </mat-form-field>
+                            <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>    
+                       
                         <mat-form-field class="answers" appearance="outline">
                             <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
                         </mat-form-field>
                         <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>
-
-                        <mat-form-field class="answers" appearance="outline">
-                            <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
-                        </mat-form-field>
-                        <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>
-
-                        <mat-form-field class="answers" appearance="outline">
-                            <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
-                        </mat-form-field>
-                        <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>
-
-                        <mat-form-field class="answers" appearance="outline">
-                            <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
-                        </mat-form-field>
-                        <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>
+                       
+                            <mat-form-field class="answers" appearance="outline">
+                                <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
+                            </mat-form-field>
+                            <mat-radio-button color="primary" name="validAnswer" yclass="radio-button"></mat-radio-button>
+                    </div>   
                 
                     </td>
         
