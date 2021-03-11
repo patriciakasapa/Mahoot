@@ -129,14 +129,11 @@ export class QuestionsComponent implements OnInit {
     // To reset image to default
     this.imageUrl = "https://cdn.blocktoro.com/wp-content/uploads/2020/06/Money-Heist-Season-5-Plot-Spoilers-and-Storyline-.jpg";
     this.image = "";
-
-    this.requestService.postRequest('create?', formData).subscribe(data => {})
   }
 
   nextQuestion(){
     this.stepper.selectedIndex = this.questions.length - 1;
   }
-
 
   removeQuestion(index: any){
     index = this.questions.indexOf(index, 0);
