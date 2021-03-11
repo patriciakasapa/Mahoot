@@ -130,13 +130,11 @@ export class QuestionsComponent implements OnInit {
       console.log('data', data);
       
     })
-
   }
 
   nextQuestion(){
     this.stepper.selectedIndex = this.questions.length - 1;
   }
-
 
   removeQuestion(index: any){
     index = this.questions.indexOf(index, 0);
