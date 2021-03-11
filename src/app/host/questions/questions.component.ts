@@ -130,7 +130,6 @@ export class QuestionsComponent implements OnInit {
     this.imageUrl = "https://cdn.blocktoro.com/wp-content/uploads/2020/06/Money-Heist-Season-5-Plot-Spoilers-and-Storyline-.jpg";
     this.image = "";
 
-    this.requestService.postRequest('create?', formData).subscribe(data => {})
   }
 
   nextQuestion(){
