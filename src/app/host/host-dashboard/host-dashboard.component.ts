@@ -44,7 +44,7 @@ export class HostDashboardComponent implements OnInit {
     questioncontentshow = false;
     questioncontenthide = false;
     quiz_cards = false;
-    hideHomePage = true;
+    homePage = true;
 
   ngOnInit(): void {
     this.authService.isNotLogin();
@@ -70,7 +70,7 @@ export class HostDashboardComponent implements OnInit {
     this.quiz_cards = false;
     this.viewQuestion = false;
     this.spinnerDisplay = false;
-    this.hideHomePage = false;
+    this.homePage = false;
     }
 
 
@@ -79,7 +79,7 @@ export class HostDashboardComponent implements OnInit {
       this.questioncontenthide = false;
       this.quiz_cards = false;
       this.viewQuestion = false;
-      this.hideHomePage = true;
+      this.homePage = true;
   }
 
   // Showing Quiz Cards
@@ -90,6 +90,7 @@ export class HostDashboardComponent implements OnInit {
     this.viewQuestion = false;
     this.hostDataFromDatabase();
     this.spinnerDisplay = true;
+    this.homePage = false;
   }
 
   // Begin the quiz

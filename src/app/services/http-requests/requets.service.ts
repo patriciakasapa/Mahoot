@@ -8,8 +8,7 @@ import { Observable, throwError } from 'rxjs';
 })
 export class RequetsService {
 
-  // apiURL = 'https://tahoot-backend.herokuapp.com';
-  apiURL = 'http://localhost:8080'
+  apiURL = 'https://tahoot-backend.herokuapp.com';
   
   constructor(private http: HttpClient) { }
 
