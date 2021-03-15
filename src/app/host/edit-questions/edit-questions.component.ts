@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA , MatDialogConfig, MatDialog} from '@angular/material/dialog';
+import { ModalComponentComponent } from 'src/app/modal-component/modal-component.component';
 import { EditQuestionService } from 'src/app/services/edit-question/edit-question.service';
 
 interface Timer {
@@ -14,7 +15,7 @@ interface Timer {
 
 export class EditQuestionsComponent implements OnInit {
 
-  question: any;
+  question: any[] = [];
   currentQuestion: any[] = [];
 
   timers: Timer[] = [
@@ -28,7 +29,12 @@ export class EditQuestionsComponent implements OnInit {
   host_data: any;
 
   constructor(public dialogRef: MatDialogRef<EditQuestionsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private editQuestionService: EditQuestionService) { }
+              @Inject(MAT_DIALOG_DATA) public data: any, 
+              public matDialog: MatDialog,
+              private editQuestionService: EditQuestionService
+    ) { 
+      
+              }
 
   ngOnInit(): void {
   }
@@ -39,6 +45,16 @@ export class EditQuestionsComponent implements OnInit {
   save(): void{
     this.editQuestionService.updateQuestion(this.question)
     .subscribe(() => this.dialogRef.close());
+  }
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = true;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "350px";
+    dialogConfig.width = "600px";
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(ModalComponentComponent, dialogConfig);
   }
 
 }

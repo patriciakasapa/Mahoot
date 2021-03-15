@@ -8,6 +8,7 @@ import { GameComponent } from './host/game/game.component';
 import { GamerGameplayComponent } from './player/gamer-gameplay/gamer-gameplay.component';
 import { HostGameplayComponent } from './host/host-gameplay/host-gameplay.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { ModalComponentComponent } from './modal-component/modal-component.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'signin', pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'game', component: GameComponent},
   {path: 'gamer-gameplay', component: GamerGameplayComponent},
   {path: 'host-gameplay', component: HostGameplayComponent},
-  {path: 'scoreboard', component: ScoreboardComponent}
+  {path: 'scoreboard', component: ScoreboardComponent},
+  {path: 'modal-component', component: ModalComponentComponent}
 ];
 
 @NgModule({

@@ -1,13 +1,13 @@
-.field{
-    /* background-color: blue; */
+/* .field{
     width: 990px;
+
 }
 * {
 	box-sizing: border-box;
 }
 
 .form-container {
-	margin: 20px 50px;
+	margin: 50px 50px;
 }
 
 .question_field {
@@ -15,7 +15,7 @@
 }
 
 .question_field mat-form-field {
-	width: 100%;
+	width: 300%;
 }
 
 .timer-slider-container {
@@ -25,12 +25,19 @@
 }
 
 .timer{
-	width: 40%;
+	width: 60%;
 	padding: 0px;
+	flex-grow: 1;
+    flex-shrink: 1;
+    display: grid;
+    place-content: center;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .timer mat-form-field {
-	width: 30%;
+	width: auto;
+	display: block;
 }
 
 .mat-form-field-wrapper{
@@ -45,7 +52,7 @@
 }
 
 .slider mat-slider {
-	width: 250px;
+	width: 400px;
 }
 
 .options{
@@ -65,6 +72,120 @@
 .choice mat-radio-button {
 	margin-bottom: 15px;
 	margin-left: 5px;
+}
+.mat-tab-body-content {
+	height: 100%;
+	overflow: hidden;
+}
+
+.buttons {
+	text-align: center;
+}
+
+.buttons button{
+	margin: 0 20px;
+}
+
+.panelColorChange {
+	color: #ffffff;
+} 
+.mat-raised-button.mat-dark {
+  color: #fff;
+  background-color: #092834;
+}
+
+.upload-button {
+	text-align: center;
+	margin: 0 20px;
+}
+.question-image{
+	height:100px; 
+	width:160px;
+	display:inline-table;
+}
+
+.file-upload-container {
+    overflow: hidden;
+	align-content: center;
+}
+
+.file-upload-container:hover {
+    cursor: pointer;
+}
+.expand{
+	background-color: aqua;
+	display: flex;
+    flex-direction: row;
+    flex-grow: 0;
+    display:flex;
+    height: 100%;
+    padding: 20px;
+    flex-wrap:initial; 
+    gap: 20px;
+	
+
+  
+} */
+/* .outline{
+	background-color: #fff;
+	width: 30px;
+} */
+
+
+
+* {
+	box-sizing: border-box;
+}
+
+.form-container {
+	margin: 20px 50px;
+}
+
+.question_field {
+	width: 100%;
+}
+
+.question_field mat-form-field {
+	width: 100%;
+}
+
+.timer-slider-container {
+	display: flex;
+	justify-content: start;
+	align-items: flex-start;
+}
+
+.timer{
+	width: 40%;
+	padding: 0px;
+}
+
+.timer mat-form-field {
+	width: 100%;
+}
+
+.mat-form-field-wrapper{
+	padding-bottom: 0;
+}
+
+.slider {
+	width: 40%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.slider mat-slider {
+	width: 250px;
+}
+
+.options{
+	display: grid; 
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.options mat-form-field {
+	width: 90%;
 }
 
 .add-question-btn {
@@ -91,12 +212,6 @@
 .button-icons {
 	height: 40px;
 }
-.button-back {
-	margin-right: 50%;
-}
-.button-forward {
-	margin-left: 50%;
-}
 .mat-raised-button.mat-dark {
   color: #fff;
   background-color: #092834;
@@ -118,4 +233,9 @@
 
 .file-upload-container:hover {
     cursor: pointer;
+}
+.finish{
+	align-items:flex-start;
+	display:flex;
+	justify-content: space-evenly;
 }

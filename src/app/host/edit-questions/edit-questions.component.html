@@ -1,4 +1,4 @@
- <form class="form-container">
+ <!-- <form class="form-container">
     <mat-form-field appearance="outline">
                 <mat-label>Click here to start typing your question</mat-label>
                 <input matInput name="question_body" type="text" id="question-input" required/>
@@ -6,6 +6,7 @@
         
             <table class="form-table-container" cellspacing = "0">
                 <tr>
+                    <div class="expand">
                     <td>
                         <div class="question-timer-container">
                             <div class="timer">
@@ -24,7 +25,7 @@
                                
                             </div>
                              <!-- slider -->
-                        </div>
+                        <!-- </div>
                     </td>
         
                     <td>
@@ -32,10 +33,12 @@
                             <button id="image-upload" mat-raised-button>Upload Image</button>
                         </div>
                     </td>
+                </div>
                 </tr>
-        
+            
                 <tr>
                     <td>
+                
                         <div class="field" >
                             <mat-form-field class="answers" appearance="outline">
                                 <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
@@ -68,7 +71,166 @@
             <div mat-dialog-actions>
                 <button mat-button (click)="onNoClick()">Cancel</button>
                 <button mat-button  (click)="save" cdkFocusInitial>Done</button>
-              </div>
+              </div> -->
+
+<!-- 
+ <mat-horizontal-stepper linear #stepper>
+    <mat-step [editable]="isEditable">
+        <ng-template matStepLabel>Quiz Name</ng-template>
+        <app-quiz></app-quiz>
+    </mat-step>
+
+      <mat-step [editable]="isEditable" *ngFor="let question of questions; let i = index">
+        <mat-tab-group dynamicHeight>
+            <ng-template matStepLabel>
+                Quiz Question {{i + 1 }}
+              </ng-template> -->
+            <!-- <mat-tab label="Multiple Choice Question"> -->
+                <form class="form-container">
+                    <div class="question_field">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Click here to start typing your question</mat-label>
+                            <input matInput name="question_body" type="text" id="question-input" required/>
+                        </mat-form-field>
+                    </div>
+                    <!-- time -->
+                    <div class="timer-slider-container">
+                        <div class="timer">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Timer</mat-label>
+                                <mat-select name="timer">
+                                    <mat-option *ngFor="let timer of timers" [value]="timer.value">
+                                    {{timer.value}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <!-- slider -->
+                        <div class="slider">
+                            <div><mat-slider color="primary" class="mat-slider" type="range" step="500" min="500" max="2000" name="points"></mat-slider></div>
+                            <!-- <div>{{question.points}} pts</div> -->
+                        </div>
+                        <!-- question image -->
+                        <div class="file-upload-container">
+                            <div>
+                                <!-- <img [src]="imageUrl" id="img-preview" class="question-image" /> -->
+                            </div>
+                        <div class="question-image">
+                            <!-- <input style="display: none;" [(ngModel)]="question.image" type="file" (change)="onFileSelected($event)" #fileInput id="image-upload" name="image"/> -->
+                            <button class="upload-button" name="image" mat-raised-button  color="primary">Upload Image</button>
+                        </div>
+                    </div> 
+                </div>
+                <div class="field" >
+                    <mat-form-field class="answers" appearance="outline">
+                        <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
+                    </mat-form-field>
+                    <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>
+
+               
+                    <mat-form-field class="answers" appearance="outline">
+                         <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
+                    </mat-form-field>
+                    <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>    
+               
+                <mat-form-field class="answers" appearance="outline">
+                    <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
+                </mat-form-field>
+                <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>
+               
+                    <mat-form-field class="answers" appearance="outline">
+                        <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
+                    </mat-form-field>
+                    <mat-radio-button color="primary" name="validAnswer" yclass="radio-button"></mat-radio-button>
+            </div> 
+
+                </form>     
+                <div mat-dialog-actions class="finish">
+                    <!-- <button mat-button (click)="save()" cdkFocusInitial>Done</button> -->
+                    <main id="edit-button-holder">
+                        <button mat-raised-button (click)="onNoClick()">Cancel</button>
+                        <button mat-raised-button id="edit-button" (click)="openModal()">Done</button>
+                    </main>
+                  </div>  
+                 
+            
+            <!-- </mat-tab> -->
+        <!-- </mat-tab-group> -->
+                
+        <!-- <div class="buttons">
+            <button mat-raised-button matStepperPrevious class="button-back button-icons" color="primary">
+                <i class="fas fa-long-arrow-alt-left fa-2x"></i>
+            </button>
+
+            <button mat-raised-button (click)="removeQuestion(i)" class="button-forward button-icons" color="warn">
+                <i class="fas fa-trash fa-lg"></i>
+            </button>
+
+            <button mat-raised-button (click)="Done()" aria-label="Show an example snack-bar" color="dark">Done</button>
+            
+            <button mat-raised-button matStepperNext class="next-button button-icons" color="primary">
+                <i class="fas fa-long-arrow-alt-right fa-2x"></i>
+            </button>
+        </div> -->
+    <!-- </mat-step>  -->
+
+<!-- </mat-horizontal-stepper> -->
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                
 
                <!-- <form class="form-container">

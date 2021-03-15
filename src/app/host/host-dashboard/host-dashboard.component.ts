@@ -173,7 +173,7 @@ export class HostDashboardComponent implements OnInit {
       let questionId = this.currentQuestion[0]["quiz"][0]["questions"][index]["question_id"];
          this.requestService.deleteRequest('question', questionId).subscribe(response => {
            console.log(response)
-          this.showQuizCards();
+          // this.showQuizCards();
          }, error => {
             console.log(error)
          });
