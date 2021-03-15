@@ -46,7 +46,7 @@ export class EditQuestionsComponent implements OnInit {
     this.editQuestionService.updateQuestion(this.question)
     .subscribe(() => this.dialogRef.close());
   }
-  openModal() {
+  openModal(index: any) {
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = true;
@@ -55,6 +55,8 @@ export class EditQuestionsComponent implements OnInit {
     dialogConfig.width = "600px";
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(ModalComponentComponent, dialogConfig);
+    this.editQuestionService.updateQuestion(this.question).subscribe(() => this.dialogRef.close());
+    this.question.push(this.question);
   }
 
 }
