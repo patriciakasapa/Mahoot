@@ -239,3 +239,18 @@
 	display:flex;
 	justify-content: space-evenly;
 }
+.example-card {
+	max-width: 400px;
+  }
+  
+  .example-header-image {
+	background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+	background-size: cover;
+  }
+  .card{
+	  display: flex;
+	  align-items: flex-start;
+	  justify-self: unset;
+	  position:absolute;
+	  border-radius:solid;
+  }
