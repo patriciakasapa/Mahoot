@@ -107,19 +107,6 @@ export class QuestionsComponent implements OnInit {
     // pushing question into questions array
     this.questions.push(this.question);    
 
-    // Looping through Host data for quiz name and quiz ID
-    this.host.quiz.forEach((quiz: any) => {
-
-      this.quiz.quiz_name = quiz.quiz_name;
-      this.quiz.questions.push(this.questions[this.questions.length - 2]);
-      this.quiz.quiz_id = quiz.quiz_id;
-
-    });
-
-    // Making a put request
-    this.requestService.putRequest('quiz', this.quiz.quiz_id, this.quiz).subscribe();
-    this.stepper.selectedIndex = this.questions.length - 1;
-    
     const formData = new FormData();
     formData.append('question', JSON.stringify(this.questions[this.questions.length-2]));
 
@@ -129,6 +116,20 @@ export class QuestionsComponent implements OnInit {
     // To reset image to default
     this.imageUrl = "https://cdn.blocktoro.com/wp-content/uploads/2020/06/Money-Heist-Season-5-Plot-Spoilers-and-Storyline-.jpg";
     this.image = "";
+    
+    this.requestService.postRequest('/create?', formData).subscribe(data => {
+      
+    })
+    
+    // Looping through Host data for quiz name and quiz ID
+    this.host.quiz.forEach((quiz: any) => {
+
+      this.quiz.quiz_name = quiz.quiz_name;
+      this.quiz.questions.push(formData);
+      this.quiz.quiz_id = quiz.quiz_id;
+
+    });
+
   }
 
   nextQuestion(){
