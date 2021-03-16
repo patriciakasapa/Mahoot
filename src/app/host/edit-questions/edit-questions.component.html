@@ -73,19 +73,7 @@
                 <button mat-button  (click)="save" cdkFocusInitial>Done</button>
               </div> -->
 
-<!-- 
- <mat-horizontal-stepper linear #stepper>
-    <mat-step [editable]="isEditable">
-        <ng-template matStepLabel>Quiz Name</ng-template>
-        <app-quiz></app-quiz>
-    </mat-step>
 
-      <mat-step [editable]="isEditable" *ngFor="let question of questions; let i = index">
-        <mat-tab-group dynamicHeight>
-            <ng-template matStepLabel>
-                Quiz Question {{i + 1 }}
-              </ng-template> -->
-            <!-- <mat-tab label="Multiple Choice Question"> -->
                 <form class="form-container">
                     <div class="question_field">
                         <mat-form-field appearance="outline" class="example-full-width">
@@ -111,36 +99,21 @@
                             <!-- <div>{{question.points}} pts</div> -->
                         </div>
                         <!-- question image -->
-                        <div class="file-upload-container">
-                            <div>
-                                <!-- <img [src]="imageUrl" id="img-preview" class="question-image" /> -->
-                            </div>
-                        <div class="question-image">
+                        <!-- <div class="file-upload-container"> -->
+                        <!-- <div class="question-image"> -->
                             <!-- <input style="display: none;" [(ngModel)]="question.image" type="file" (change)="onFileSelected($event)" #fileInput id="image-upload" name="image"/> -->
                             <button class="upload-button" name="image" mat-raised-button  color="primary">Upload Image</button>
                             
                             <mat-card class="example-card">
                                 <mat-card-header>
-                                  <div mat-card-avatar class="example-header-image"></div>
-                                  <mat-card-title>Shiba Inu</mat-card-title>
-                                  <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                                </mat-card-header>
-                                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                                <mat-card-content>
-                                  <p>
-                                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                                    bred for hunting.
-                                  </p>
-                                </mat-card-content>
-                                <mat-card-actions>
-                                  <button mat-button>LIKE</button>
-                                  <button mat-button>SHARE</button>
-                                </mat-card-actions>
-                              </mat-card>
+                                  <img [src]="imageUrl" id="img-preview" class="question-image" />
 
-                        </div>
-                    </div> 
+                                </mat-card-header>
+                                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                              </mat-card>
+                        
+                        <!-- </div> -->
+                    <!-- </div>  -->
                 </div>
                 <div class="field" >
                     <mat-form-field class="answers" appearance="outline">
@@ -173,29 +146,6 @@
                         <button mat-raised-button id="edit-button" (click)="openModal()">Done</button>
                     </main>
                   </div>  
-                 
-            
-            <!-- </mat-tab> -->
-        <!-- </mat-tab-group> -->
-                
-        <!-- <div class="buttons">
-            <button mat-raised-button matStepperPrevious class="button-back button-icons" color="primary">
-                <i class="fas fa-long-arrow-alt-left fa-2x"></i>
-            </button>
-
-            <button mat-raised-button (click)="removeQuestion(i)" class="button-forward button-icons" color="warn">
-                <i class="fas fa-trash fa-lg"></i>
-            </button>
-
-            <button mat-raised-button (click)="Done()" aria-label="Show an example snack-bar" color="dark">Done</button>
-            
-            <button mat-raised-button matStepperNext class="next-button button-icons" color="primary">
-                <i class="fas fa-long-arrow-alt-right fa-2x"></i>
-            </button>
-        </div> -->
-    <!-- </mat-step>  -->
-
-<!-- </mat-horizontal-stepper> -->
 
     
 

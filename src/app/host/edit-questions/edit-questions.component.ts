@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA , MatDialogConfig, MatDialog} from '@angu
 import { ModalComponentComponent } from 'src/app/modal-component/modal-component.component';
 import { EditQuestionService } from 'src/app/services/edit-question/edit-question.service';
 
+
 interface Timer {
   value: number;
 }
@@ -17,6 +18,9 @@ export class EditQuestionsComponent implements OnInit {
 
   question: any[] = [];
   currentQuestion: any[] = [];
+  image: any;
+  imageUrl = "https://cdn.blocktoro.com/wp-content/uploads/2020/06/Money-Heist-Season-5-Plot-Spoilers-and-Storyline-.jpg";
+
 
   timers: Timer[] = [
     {value: 5},
