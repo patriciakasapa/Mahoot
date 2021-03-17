@@ -136,7 +136,6 @@ export class QuestionsComponent implements OnInit {
     this.stepper.selectedIndex = this.questions.length - 1;
   }
 
-
   removeQuestion(index: any){
     index = this.questions.indexOf(index, 0);
     this.questions.splice(index, 1);
