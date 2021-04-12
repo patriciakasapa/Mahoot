@@ -3,8 +3,6 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  apiURL: 'https://tahoot-backend.herokuapp.com',
-  // apiURL: 'http://localhost:8080',
   production: false,
   pusher: {
     key: '0e493e8a2a5acf6f1fce',

@@ -9,7 +9,7 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 import { HostDashboardComponent } from './host/host-dashboard/host-dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { QuestionsComponent } from './host/questions/questions.component';
+import { QuestionsComponent } from './host/quiz-creation/questions/questions.component';
 import { QuizComponent } from './host/quiz/quiz.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -30,18 +30,23 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
-import {  MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSortModule } from '@angular/material/sort';
 import { PodiumComponent } from './podium/podium.component';
 import { EditQuestionsComponent } from './host/edit-questions/edit-questions.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { QuizCreationComponent } from './host/quiz-creation/quiz-creation.component';
-import { HostHomeComponent } from './host/host-home/host-home.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NavigationComponent } from './host/navigation/navigation.component';
+import { ToolbarComponent } from './host/toolbar/toolbar.component';
+import { NewQuestionComponent } from './host/quiz-creation/new-question/new-question.component';
+import { QuizOptionComponent } from './host/quiz-creation/quiz-option/quiz-option.component';
+import { ItemTogglerComponent } from './host/quiz-creation/item-toggler/item-toggler.component';
+import { NewOptionComponent } from './host/quiz-creation/new-option/new-option.component';
+
 
 
 @NgModule({
@@ -57,7 +62,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     EditQuestionsComponent,
     ScoreboardComponent,
     QuizCreationComponent,
-    HostHomeComponent
+    NavigationComponent,
+    ToolbarComponent,
+    NewQuestionComponent,
+    QuizOptionComponent,
+    ItemTogglerComponent,
+    NewOptionComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +100,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatSnackBarModule,
     MatExpansionModule,
     MatSortModule,
-    NgbModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
