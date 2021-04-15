@@ -9,14 +9,16 @@
 <!-- main section -->
 <div [ngSwitch]="currentPage" class="mx-2 mt-4">
   <div *ngSwitchCase="'home'">
-    Home
+   <app-host-home [name] = "host.host_name"></app-host-home>
   </div>
   <div *ngSwitchCase="'create'">
     <app-quiz-creation></app-quiz-creation>
   </div>
-  <div *ngSwitchCase="'manage'">Manage Quizzes</div>
+  <div *ngSwitchCase="'manage'">
+    Manage Quizzes
+  </div>
   <div *ngSwitchDefault>
-    Home
+    <app-host-home [name] = "host.host_name"></app-host-home>
   </div>
 </div>
 

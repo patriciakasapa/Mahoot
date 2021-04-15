@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 // import { Router } from '@angular/router';
 // import { MatDialog } from '@angular/material/dialog';
 // import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 // import { GamePlayDataService } from 'src/app/services/game-play-data/game-play-data.service';
-// import { HostNameService } from 'src/app/services/host-name/host-name.service';
+import { HostNameService } from 'src/app/services/host-name/host-name.service';
 import { Host } from 'src/app/classes/host/host';
 import { CurrentHostPage } from '../host.model';
 // import { AuthService } from 'src/app/services/authentication/auth.service';
@@ -24,7 +24,7 @@ export class HostDashboardComponent implements OnInit {
     // public dialog: MatDialog,
     // private websocketService: WebsocketService,
     // private gamePlayDataSerivce: GamePlayDataService,
-    // private hostNameService: HostNameService,
+    private hostNameService: HostNameService,
     // private authService: AuthService,
     // private requestService: RequetsService
   ) { }
@@ -37,8 +37,9 @@ export class HostDashboardComponent implements OnInit {
 
   currentQuiz: any[] = [];
 
-  host: Host = new Host();
-
+  // host: Host = new Host();
+  @Input() public host: Host = new Host();
+  
   quiz_number = 0;
 
   // Host data from Database
@@ -54,7 +55,7 @@ export class HostDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     // this.authService.isNotLogin();
-    // this.host.host_name = this.hostNameService.getHostName();
+    this.host.host_name = this.hostNameService.getHostName();
   }
 
   public toggleCurrentPage(page: CurrentHostPage): void {
