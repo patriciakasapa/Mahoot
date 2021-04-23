@@ -19,6 +19,7 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class Host implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -30,8 +31,8 @@ public class Host implements Serializable {
     @CreationTimestamp
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonProperty("created")
-    @Column(name = "created")
+    @JsonProperty("date_created")
+    @Column(name = "date_created")
     private Date timestamp;
 
     @OneToMany(mappedBy = "host",cascade = CascadeType.ALL,fetch = FetchType.EAGER)

@@ -14,8 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -47,9 +45,8 @@ public class QuestionController {
             Questions question = mapper.readValue(q, Questions.class);
             if(file != null) {
                 Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-//            System.out.println(uploadResult.get("secure_url"));
 
-                question.setImage((String) uploadResult.get("secure_url"));
+                question.setImage_url((String) uploadResult.get("secure_url"));
             }
             repository.save(question);
 
@@ -111,10 +108,10 @@ public class QuestionController {
             questions.setQuestion_body(question.getQuestion_body());
             questions.setPoints(question.getPoints());
             questions.setTimer(question.getTimer());
-            questions.setImage(question.getImage());
-            questions.setFile_name(question.getFile_name());
-            questions.setFile_type(question.getFile_type());
-            questions.setAnswer(question.getAnswer());
+            questions.setImage_url(question.getImage_url());
+//            questions.setFile_name(question.getFile_name());
+//            questions.setFile_type(question.getFile_type());
+            questions.setOption(question.getOption());
             return new ResponseEntity<>(repository.save(questions),HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -58,7 +58,9 @@ public class QuizController {
     @CrossOrigin
     @PutMapping("/quiz/{quiz_id}")
     public ResponseEntity<Quiz> updateQuestion(@PathVariable("quiz_id") Long quiz_id, @RequestBody Quiz quiz){
-        Optional<Quiz> quizData =quizRepository.findById(quiz_id);
+//        public ResponseEntity<Quiz> updateQuestion(@PathVariable("quiz_id") Long quiz_id, @RequestParam(value = "file", required = false) MultipartFile file, @RequestBody string quiz){
+
+            Optional<Quiz> quizData =quizRepository.findById(quiz_id);
 
         if (quizData.isPresent()){
             Quiz quizzes = quizData.get();

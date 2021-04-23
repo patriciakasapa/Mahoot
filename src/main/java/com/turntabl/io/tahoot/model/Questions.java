@@ -21,9 +21,18 @@ public class Questions implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("question_id")
     private Long question_id;
+
+    @Column(name = "question_type")
+    @JsonProperty("question_type")
+    private String question_type;
+
     @Column(name = "question_body")
     @JsonProperty("question_body")
     private String question_body;
+
+    @Column(name = "image_url")
+    @JsonProperty("image_url")
+    private String image_url;
 
     @JsonProperty("points")
     @Column(name = "points")
@@ -33,19 +42,13 @@ public class Questions implements Serializable {
     @Column(name = "timer")
     private int timer;
 
-    @JsonProperty("image")
-    @Column(name = "image")
-//    private byte[] image;
-    private String image;
-
-
-    @Column(name = "file_name")
-    @JsonProperty("file_name")
-    private String file_name;
-
-    @Column(name = "file_type")
-    @JsonProperty("file_type")
-    private String file_type;
+//    @Column(name = "file_name")
+//    @JsonProperty("file_name")
+//    private String file_name;
+//
+//    @Column(name = "file_type")
+//    @JsonProperty("file_type")
+//    private String file_type;
 
 
 
@@ -59,7 +62,7 @@ public class Questions implements Serializable {
     @OneToMany(cascade={CascadeType.ALL})
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name="question_id", referencedColumnName="question_id")
-    private List<Answers> answers;
+    private List<Options> options;
 
 //    {"timestamp":"2021-01-22T12:40:19.070+00:00","answer":[{"answer_id":5,"answer_body":"Tiger",
 //    "is_correct":true},{"answer_id":6,"answer_body":"Edinam","is_correct":false}],"question_id":4,
@@ -68,10 +71,17 @@ public class Questions implements Serializable {
     public Questions() {
     }
 
-    public Questions(Long question_id, String question_body, Date timestamp) {
-        this.question_id = question_id;
+    public Questions(String question_type, String question_body, String image_url, int points, int timer, Date timestamp) {
+        this.question_type = question_type;
         this.question_body = question_body;
+        this.image_url = image_url;
+        this.points = points;
+        this.timer = timer;
         this.timestamp = timestamp;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Long getQuestion_id() {
@@ -82,6 +92,14 @@ public class Questions implements Serializable {
         this.question_id = question_id;
     }
 
+    public String getQuestion_type() {
+        return question_type;
+    }
+
+    public void setQuestion_type(String question_type) {
+        this.question_type = question_type;
+    }
+
     public String getQuestion_body() {
         return question_body;
     }
@@ -90,8 +108,12 @@ public class Questions implements Serializable {
         this.question_body = question_body;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public int getPoints() {
@@ -106,51 +128,57 @@ public class Questions implements Serializable {
         return timer;
     }
 
-    public void setTimer(int time) {
-        this.timer = time;
+    public void setTimer(int timer) {
+        this.timer = timer;
     }
 
-    public String getImage() {
-        return image;
+    public Date getTimestamp() {
+        return timestamp;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public String getFile_name() {
-        return file_name;
+    public List<Options> getOptions() {
+        return options;
     }
 
-    public void setFile_name(String file_name) {
-        this.file_name = file_name;
-    }
-
-    public String getFile_type() {
-        return file_type;
-    }
-
-    public void setFile_type(String file_type) {
-        this.file_type = file_type;
+    public void setOptions(List<Options> options) {
+        this.options= options;
     }
 
     @Override
     public String toString() {
         return "Questions{" +
                 "question_id=" + question_id +
+                ", question_type='" + question_type + '\'' +
                 ", question_body='" + question_body + '\'' +
+                ", image_url='" + image_url + '\'' +
+                ", points=" + points +
+                ", timer=" + timer +
                 ", timestamp=" + timestamp +
+                ", options=" + options +
+                ", quiz=" + quiz +
                 '}';
     }
+//    public String toString() {
+//        return "Questions{" +
+//                "question_id=" + question_id +
+//                ", question_body='" + question_body + '\'' +
+//                ", timestamp=" + timestamp +
+//                '}';
+//    }
+
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "question")
     @JsonManagedReference
-    public List<Answers> getAnswer() {
-        return answers;
+    public List<Options> getOption() {
+        return options;
     }
 
-    public void setAnswer(List<Answers> answer) {
-        this.answers = answer;
+    public void setOption(List<Options> option) {
+        this.options = option;
     }
 
 

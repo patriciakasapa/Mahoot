@@ -28,14 +28,17 @@ public class Quiz implements Serializable {
     @JsonProperty("quiz_name")
     private String quiz_name;
 
-    @Column(name = "game_pin")
-    @JsonProperty("game_pin")
-    private int game_pin = 10000 +new Random().nextInt(90000);
+    @JsonProperty("quiz_description")
+    private String quiz_description;
+
+    @Column(name = "quiz_pin")
+    @JsonProperty("quiz_pin")
+    private int quiz_pin = 10000 +new Random().nextInt(90000);
 
     @CreationTimestamp
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created")
+    @Column(name = "date_created")
     private Date timestamp;
 
 
@@ -65,6 +68,14 @@ public class Quiz implements Serializable {
         this.quiz_name = quiz_name;
     }
 
+    public String getQuiz_description() {
+        return quiz_description;
+    }
+
+    public void setQuiz_description(String quiz_description) {
+        this.quiz_description= quiz_description;
+    }
+
     public Date getTimestamp() {
         return timestamp;
     }
@@ -73,13 +84,13 @@ public class Quiz implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public int getGame_pin() {
-        return game_pin;
+    public int getQuiz_pin() {
+        return quiz_pin;
     }
 
-    public void setGame_pin(int game_pin) {
+    public void setQuiz_pin(int quiz_pin) {
         //Random random=new Random();
-        this.game_pin = game_pin;
+        this.quiz_pin = quiz_pin;
     }
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "quiz")

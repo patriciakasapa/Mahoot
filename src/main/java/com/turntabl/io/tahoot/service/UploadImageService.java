@@ -16,8 +16,8 @@ public class UploadImageService implements UploadImageInterface {
 
         Questions questions = new Questions();
 //            questions.setImage(file.getBytes());
-        questions.setFile_name(file.getOriginalFilename());
-        questions.setFile_type(file.getContentType());
+//        questions.setFile_name(file.getOriginalFilename());
+//        questions.setFile_type(file.getContentType());
         Questions newQuestion = questionsRepository.save(questions);
         return newQuestion;
     }
