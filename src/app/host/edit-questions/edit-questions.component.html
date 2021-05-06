@@ -1,96 +1,10 @@
- <!-- <form class="form-container">
-    <mat-form-field appearance="outline">
-                <mat-label>Click here to start typing your question</mat-label>
-                <input matInput name="question_body" type="text" id="question-input" required/>
-            </mat-form-field>
-        
-            <table class="form-table-container" cellspacing = "0">
-                <tr>
-                    <div class="expand">
-                    <td>
-                        <div class="question-timer-container">
-                            <div class="timer">
-                                    <mat-form-field appearance="outline">
-                                        <mat-label>Timer</mat-label>
-                                        <mat-select name="timer">
-                                            <mat-option *ngFor="let timer of timers" [value]="timer.value">
-                                            {{timer.value}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                            </div>
-        
-                            <div class="slider">
-                                <mat-slider color="primary" class="mat-slider" type="range" step="500" min="500" max="2000" name="points"></mat-slider>
-                               
-                            </div>
-                             <!-- slider -->
-                        <!-- </div>
-                    </td>
-        
-                    <td>
-                        <div class="question-image">
-                            <button id="image-upload" mat-raised-button>Upload Image</button>
-                        </div>
-                    </td>
-                </div>
-                </tr>
-            
-                <tr>
-                    <td>
-                
-                        <div class="field" >
-                            <mat-form-field class="answers" appearance="outline">
-                                <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
-                            </mat-form-field>
-                            <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>
-    
-                       
-                            <mat-form-field class="answers" appearance="outline">
-                                 <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
-                            </mat-form-field>
-                            <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>    
-                       
-                        <mat-form-field class="answers" appearance="outline">
-                            <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
-                        </mat-form-field>
-                        <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>
-                       
-                            <mat-form-field class="answers" appearance="outline">
-                                <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
-                            </mat-form-field>
-                            <mat-radio-button color="primary" name="validAnswer" yclass="radio-button"></mat-radio-button>
-                    </div>   
-                
-                    </td>
-        
-                </tr>
-        
-            </table>
-            </form>
-            <div mat-dialog-actions>
-                <button mat-button (click)="onNoClick()">Cancel</button>
-                <button mat-button  (click)="save" cdkFocusInitial>Done</button>
-              </div> -->
 
-<!-- 
- <mat-horizontal-stepper linear #stepper>
-    <mat-step [editable]="isEditable">
-        <ng-template matStepLabel>Quiz Name</ng-template>
-        <app-quiz></app-quiz>
-    </mat-step>
-
-      <mat-step [editable]="isEditable" *ngFor="let question of questions; let i = index">
-        <mat-tab-group dynamicHeight>
-            <ng-template matStepLabel>
-                Quiz Question {{i + 1 }}
-              </ng-template> -->
-            <!-- <mat-tab label="Multiple Choice Question"> -->
-                <form class="form-container">
-                    <div class="question_field">
+              <form class="form-container">
+                    <div class="question_field" >
+                        <p>Question {{ data["question_body"] }}</p>
                         <mat-form-field appearance="outline" class="example-full-width">
                             <mat-label>Click here to start typing your question</mat-label>
-                            <input matInput name="question_body" type="text" id="question-input" required/>
+                            <input matInput name="question_body" type="text" id="question-input" [(ngModel)] = "data.question_body"  required/>
                         </mat-form-field>
                     </div>
                     <!-- time -->
@@ -98,7 +12,7 @@
                         <div class="timer">
                             <mat-form-field appearance="outline">
                                 <mat-label>Timer</mat-label>
-                                <mat-select name="timer">
+                                <mat-select [(ngModel)]="question.timers" name="timers_{{i}}">
                                     <mat-option *ngFor="let timer of timers" [value]="timer.value">
                                     {{timer.value}}
                                     </mat-option>
@@ -107,50 +21,42 @@
                         </div>
                         <!-- slider -->
                         <div class="slider">
-                            <div><mat-slider color="primary" class="mat-slider" type="range" step="500" min="500" max="2000" name="points"></mat-slider></div>
-                            <!-- <div>{{question.points}} pts</div> -->
+                        <div><mat-slider color="primary" class="mat-slider" [(ngModel)]="question.points" type="range" step="500" min="500" max="2000" name="points_{{i}}"></mat-slider></div>
+                            <div>{{question.points}} pts</div>
                         </div>
                         <!-- question image -->
-                        <div class="file-upload-container">
-                            <div>
-                                <!-- <img [src]="imageUrl" id="img-preview" class="question-image" /> -->
-                            </div>
-                        <div class="question-image">
+                        <!-- <div class="file-upload-container"> -->
+                        <!-- <div class="question-image"> -->
                             <!-- <input style="display: none;" [(ngModel)]="question.image" type="file" (change)="onFileSelected($event)" #fileInput id="image-upload" name="image"/> -->
                             <button class="upload-button" name="image" mat-raised-button  color="primary">Upload Image</button>
                             
                             <mat-card class="example-card">
                                 <mat-card-header>
-                                  <div mat-card-avatar class="example-header-image"></div>
-                                  <mat-card-title>Shiba Inu</mat-card-title>
-                                  <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                                </mat-card-header>
-                                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                                <mat-card-content>
-                                  <p>
-                                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                                    bred for hunting.
-                                  </p>
-                                </mat-card-content>
-                                <mat-card-actions>
-                                  <button mat-button>LIKE</button>
-                                  <button mat-button>SHARE</button>
-                                </mat-card-actions>
-                              </mat-card>
+                                  <img [src]="imageUrl" id="img-preview" class="question-image" />
 
-                        </div>
-                    </div> 
+                                </mat-card-header>
+                                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                              </mat-card>
+                        
+                        <!-- </div> -->
+                    <!-- </div>  -->
                 </div>
-                <div class="field" >
-                    <mat-form-field class="answers" appearance="outline">
-                        <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
+                <div class="option" >
+                    <div *ngFor="let answer of question.answer; let j = index" class="choice">
+                        <mat-form-field class="answers" appearance="outline">
+                            <input matInput type="text" name="answer" id="answers" placeholder="Answer {{j + 1}}" [(ngModel)] = "answer.answer_body" required>
+                        </mat-form-field>
+                        <mat-radio-button color="primary" (click)="Answer(j)" [(ngModel)] = "answer.is_correct" name="validAnswer" class="radio-button"></mat-radio-button>
+    
+                    </div>
+                    <!-- <mat-form-field class="answers" appearance="outline">
+                        <input matInput type="text" name="answer" id="answers" placeholder="Answer" [(ngModel)] = "data.answer[0].answer_body" required>
                     </mat-form-field>
-                    <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>
+                    <mat-radio-button color="primary" [(ngModel)] = "data.answer[0].is_correct" name="validAnswer" class="radio-button"></mat-radio-button>
 
                
                     <mat-form-field class="answers" appearance="outline">
-                         <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
+                         <input matInput type="text" name="answer" id="answers" placeholder="Answer" [(ngModel)] = "data.answer[1].answer_body" required>
                     </mat-form-field>
                     <mat-radio-button color="primary" name="validAnswer" class="radio-button"></mat-radio-button>    
                
@@ -162,7 +68,7 @@
                     <mat-form-field class="answers" appearance="outline">
                         <input matInput type="text" name="answer" id="answers" placeholder="Answer" required>
                     </mat-form-field>
-                    <mat-radio-button color="primary" name="validAnswer" yclass="radio-button"></mat-radio-button>
+                    <mat-radio-button color="primary" name="validAnswer" yclass="radio-button"></mat-radio-button> -->
             </div> 
 
                 </form>     
@@ -173,39 +79,8 @@
                         <button mat-raised-button id="edit-button" (click)="openModal()">Done</button>
                     </main>
                   </div>  
-                 
-            
-            <!-- </mat-tab> -->
-        <!-- </mat-tab-group> -->
-                
-        <!-- <div class="buttons">
-            <button mat-raised-button matStepperPrevious class="button-back button-icons" color="primary">
-                <i class="fas fa-long-arrow-alt-left fa-2x"></i>
-            </button>
-
-            <button mat-raised-button (click)="removeQuestion(i)" class="button-forward button-icons" color="warn">
-                <i class="fas fa-trash fa-lg"></i>
-            </button>
-
-            <button mat-raised-button (click)="Done()" aria-label="Show an example snack-bar" color="dark">Done</button>
-            
-            <button mat-raised-button matStepperNext class="next-button button-icons" color="primary">
-                <i class="fas fa-long-arrow-alt-right fa-2x"></i>
-            </button>
-        </div> -->
-    <!-- </mat-step>  -->
-
-<!-- </mat-horizontal-stepper> -->
 
     
-
-
-
-
-
-
-
-
 
 
 

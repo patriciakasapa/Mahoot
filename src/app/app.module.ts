@@ -39,8 +39,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { PodiumComponent } from './podium/podium.component';
 import { EditQuestionsComponent } from './host/edit-questions/edit-questions.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
-import { ModalComponentComponent } from './modal-component/modal-component.component';
-
+import { QuizCreationComponent } from './host/quiz-creation/quiz-creation.component';
+import { HostHomeComponent } from './host/host-home/host-home.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -49,13 +50,14 @@ import { ModalComponentComponent } from './modal-component/modal-component.compo
     HostDashboardComponent,
     QuestionsComponent,
     QuizComponent,
-    GameComponent,
+    GameComponent, 
     GamerGameplayComponent,
     HostGameplayComponent,
     PodiumComponent,
     EditQuestionsComponent,
     ScoreboardComponent,
-    ModalComponentComponent
+    QuizCreationComponent,
+    HostHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ import { ModalComponentComponent } from './modal-component/modal-component.compo
     MatStepperModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatSortModule
+    MatSortModule,
+    NgbModule
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

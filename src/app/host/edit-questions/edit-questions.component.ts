@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA , MatDialogConfig, MatDialog} from '@angu
 import { ModalComponentComponent } from 'src/app/modal-component/modal-component.component';
 import { EditQuestionService } from 'src/app/services/edit-question/edit-question.service';
 
+
 interface Timer {
   value: number;
 }
@@ -17,6 +18,9 @@ export class EditQuestionsComponent implements OnInit {
 
   question: any[] = [];
   currentQuestion: any[] = [];
+  image: any;
+  imageUrl = "https://cdn.blocktoro.com/wp-content/uploads/2020/06/Money-Heist-Season-5-Plot-Spoilers-and-Storyline-.jpg";
+
 
   timers: Timer[] = [
     {value: 5},
@@ -27,6 +31,8 @@ export class EditQuestionsComponent implements OnInit {
     {value: 30}
   ];
   host_data: any;
+  isEditable = true;
+
 
   constructor(public dialogRef: MatDialogRef<EditQuestionsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, 
@@ -37,6 +43,8 @@ export class EditQuestionsComponent implements OnInit {
               }
 
   ngOnInit(): void {
+    console.log("current question", this.data)
+    console.log("question", this.data["question_body"])
   }
 
   onNoClick(): void {
@@ -56,5 +64,20 @@ export class EditQuestionsComponent implements OnInit {
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(ModalComponentComponent, dialogConfig);
   }
+
+  Answer(index: number){
+    this.question.forEach((question: any) => {
+      question.answer.forEach((answer: any) => {
+        answer.is_correct = false;
+      });
+      if (question.answer[index].is_correct == false) {
+        question.answer[index].is_correct = true;
+      } else {
+        question.answer[index].is_correct = false;
+      }
+    });
+  }
+
+
 
 }
