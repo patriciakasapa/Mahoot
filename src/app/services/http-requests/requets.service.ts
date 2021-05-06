@@ -9,7 +9,8 @@ import { environment } from 'src/environments/environment';
 })
 export class RequetsService {
 
-  apiURL = environment.apiURL;
+ public apiURL!: 'https://tahoot-backend.herokuapp.com';
+  // apiURL = environment.apiURL;
   // apiURL = process.env.apiURL;
   
   constructor(private http: HttpClient) { }
