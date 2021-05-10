@@ -111,6 +111,6 @@ public class Quiz implements Serializable {
     }
 
     public void setHost(Host host){
-        this.host=host;
+        this.host = host;
     }
 }
